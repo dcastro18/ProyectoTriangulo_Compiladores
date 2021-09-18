@@ -1,0 +1,14 @@
+! Contextual error on assign commands
+! Assignment and type incompatibility
+
+let
+   var x: Char;
+   var z: record
+           a: Integer,
+           b: Char
+          end
+in
+begin
+  x:= 'a';
+  z:= {a ~ if ((2*3*4 = 4*3*2)) then 'k' else 'm', b ~ x} !a was declared as integer
+end

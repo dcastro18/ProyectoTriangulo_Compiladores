@@ -1,0 +1,8 @@
+!Call Command successful test
+
+let 
+  var x : Integer
+in 
+begin
+  putint (1 / 2 * 3); ! proc can receive integer expressions
+end

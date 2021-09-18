@@ -1,0 +1,17 @@
+! Vname.Identifier error test
+! Identifier must be a field of Vname
+
+let
+    type Date ~ 
+        record
+            d: Integer,
+            m: Integer,
+            y: Integer
+        end;
+   var bday: Date
+in
+  begin
+    bday.d := 15;
+    bday.m := 10;
+    bday.year := 2000 ! year is not a field of the record type Date
+  end

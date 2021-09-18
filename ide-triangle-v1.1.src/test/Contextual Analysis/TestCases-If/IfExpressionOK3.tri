@@ -1,0 +1,14 @@
+! If Expression successful test
+
+let
+  var c : Boolean;
+  var b : Char;
+  const a ~ 2;
+  var p : Boolean
+in
+begin
+  c := (ord(b) = a);
+  p := 
+    if (c) then true ! c is boolean
+    else false
+end

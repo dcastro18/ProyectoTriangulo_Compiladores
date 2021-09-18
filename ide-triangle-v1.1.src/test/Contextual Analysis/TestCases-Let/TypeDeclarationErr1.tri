@@ -1,0 +1,5 @@
+! Type Declaration Error Test
+
+let
+    var a : array 10 of true ! "true" is not a type identifier
+in

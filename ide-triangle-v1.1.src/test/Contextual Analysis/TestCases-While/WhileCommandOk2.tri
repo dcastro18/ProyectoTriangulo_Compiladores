@@ -1,0 +1,15 @@
+! Ok: while implementation with no contextual errors
+
+let 
+  var x : Integer
+in 
+begin
+  x := 1;
+
+  while \ (x = 99) do ! '\' is the not operator
+  begin
+    putint (1);
+    puteol ();
+    x := x + 1
+  end 
+end

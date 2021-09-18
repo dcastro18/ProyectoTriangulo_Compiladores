@@ -1,0 +1,8 @@
+! Error: proc called with proc 'result' instead of an integer value
+
+let
+  proc F () ~ putint(1) ;
+  proc P (x : Integer) ~
+    putint (x * 2)
+in
+  P (F()) ! Error: procs do not retun values

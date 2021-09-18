@@ -1,0 +1,8 @@
+! Test of call command, it succeeds
+let
+  func F () : Integer ~ 10;
+  proc P () ~ 
+    putint (3 * 2)
+in
+  P()
+

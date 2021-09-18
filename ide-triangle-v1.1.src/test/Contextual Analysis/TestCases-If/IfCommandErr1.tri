@@ -1,0 +1,16 @@
+! Contextual error on if command
+
+let
+  var a: Integer;
+  var b: Char;
+  var c: Boolean
+in
+  begin
+    a:= 120;
+    b:= 'x';
+    c:= (ord(b) = a);
+    if (a + 10) then ! expects boolean expression
+      put('y')
+    else
+      put('n')
+  end

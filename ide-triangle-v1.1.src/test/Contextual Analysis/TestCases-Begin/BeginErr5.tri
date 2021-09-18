@@ -1,0 +1,11 @@
+! Test of begin and let scopes
+! It doesn't run correctly
+
+begin
+    let
+        var i : Char
+    in
+	begin
+       	 putint(i) !i exists here, but putint expects an integer
+	end
+end

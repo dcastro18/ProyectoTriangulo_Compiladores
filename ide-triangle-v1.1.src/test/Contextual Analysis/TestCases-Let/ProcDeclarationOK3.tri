@@ -1,0 +1,8 @@
+! Test of type validation in proc declarations
+! It runs correctly
+
+let
+  proc F (x: Integer) ~ putint(x);
+  proc P (proc x(x: Integer)) ~ ! expects a procedure by reference
+    x(10)
+in

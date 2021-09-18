@@ -1,0 +1,15 @@
+! Error: Procedure called without argument by reference
+
+let
+
+  var a : array 10 of Char;
+
+  var b : array 10 of Integer
+
+in begin
+
+  get (a[8]); ! get expects argument by reference
+
+  putint (b [9])
+
+end

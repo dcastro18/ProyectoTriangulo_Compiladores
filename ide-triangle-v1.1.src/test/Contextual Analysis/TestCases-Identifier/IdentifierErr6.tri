@@ -1,0 +1,12 @@
+! Identifier Error Test
+
+let
+    var a : Char
+in
+    begin
+        let 
+            var a : Integer ! redeclaration in different scope
+        in
+            a := 3;
+        putint(a) ! a is Char in this scope
+    end

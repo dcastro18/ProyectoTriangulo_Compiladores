@@ -1,0 +1,19 @@
+! Test of scopes and types in begin and let command
+! It does not run correctly
+
+let 
+  const y ~ 85 ;
+  var x : Integer
+in 
+  begin
+    x := 25;
+  let
+     var y : Char; 
+     var z : Boolean
+  in
+    begin
+      y := 'z';
+      putint(y); ! putint() expects an integer, in this scope it's the "y" in the second let command which is of type char
+      putint(x)
+    end
+  end

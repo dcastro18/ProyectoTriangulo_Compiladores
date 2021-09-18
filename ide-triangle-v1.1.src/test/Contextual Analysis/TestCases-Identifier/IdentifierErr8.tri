@@ -1,0 +1,10 @@
+! Identifier error test
+
+let
+
+  const a ~ 1
+
+in
+
+  getint(var a) ! a is a constant
+

@@ -1,0 +1,6 @@
+! Error: repeated parameter
+
+let
+  func a(var par1 : Char, var par1 : Integer): Char ~ 'C' ! Got 2 parameters with the same name
+in
+   ! Empty Command

@@ -1,0 +1,5 @@
+! Test of begin variable declaration
+
+begin
+    a:= {d ~ 1, m ~ 1, a ~ 1991}; !contextual error, 'a' is not declared
+end
