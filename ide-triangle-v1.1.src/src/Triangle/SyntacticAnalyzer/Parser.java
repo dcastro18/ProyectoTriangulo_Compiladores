@@ -293,13 +293,6 @@ public class Parser {
       }
       break;
 
-    case Token.BEGIN:
-       Chao
-      acceptIt();
-      commandAST = parseCommand();
-      accept(Token.END);
-      break;
-
     case Token.LET:
       {
         acceptIt();
