@@ -332,8 +332,8 @@ public class Parser {
       
     case Token.REPEAT:
     {
-        
-      
+        acceptIt();
+        commandAST = parseRepeatCases();
       break;
     }
       
@@ -358,6 +358,144 @@ public class Parser {
     }
 
     return commandAST;
+  }
+  
+  Command parseRepeatCases() throws SyntaxError {
+    Command commandAST = null; // in case there's a syntactic error
+
+    SourcePosition commandPos = new SourcePosition();
+    start(commandPos);
+  
+    switch (currentToken.kind) {
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new WhileDoCommand(cAST, eAST, commandPos);
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new UntilDoCommand(cAST, eAST, commandPos);
+            }
+            break;
+            case Token.DO:
+            {   
+                acceptIt();
+                Command cAST = parseCommand();
+                finish(commandPos);
+                commandAST = parseRepeatExpressions(cAST);
+            }
+            break;
+            case Token.FOR:
+            {   
+                acceptIt();
+                Identifier iAST = parseIdentifier();
+                accept(Token.FROM);
+                Expression e1AST = parseExpression();
+                accept(Token.TO);
+                Expression e2AST = parseExpression();
+                finish(commandPos);
+                Declaration dAST = new ForIdentifierExpression(iAST,e1AST,commandPos);
+                commandAST = parseRepeatCommands(dAST, e2AST);
+            }
+            break;
+            default:
+                syntacticError("\"%\" cannot start a loop",
+                currentToken.spelling);
+                break;
+        }
+        return commandAST;
+    }
+        
+      Command parseRepeatExpressions(Command cAST) throws SyntaxError{
+        Command commandAST = null; // in case there's a syntactic error
+        
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
+        
+        switch (currentToken.kind) {
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new DoWhileCommand(cAST, eAST, commandPos);
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new DoUntilCommand(cAST, eAST, commandPos);
+            }
+            break;
+            default:
+                syntacticError("\"%\" not expected after do expression",currentToken.spelling);
+                break;
+
+        }
+        return commandAST;
+    }
+  
+  Command parseRepeatCommands(Declaration dAST, Expression e2AST ) throws SyntaxError{
+        Command commandAST = null; // in case there's a syntactic error
+        
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
+        
+        switch (currentToken.kind) {
+            case Token.DO:
+            {   
+                acceptIt();
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new ForDoCommand(cAST, dAST, e2AST, commandPos);
+            }
+            break;
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                Command c2AST = new WhileDoCommand(cAST, eAST, commandPos);
+                commandAST = new ForWhileCommand(dAST,c2AST,e2AST,commandPos);
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                Command c2AST = new UntilDoCommand(cAST, eAST, commandPos);
+                commandAST = new ForUntilCommand(dAST,c2AST,e2AST,commandPos);
+            }
+            break;
+            default:
+                syntacticError("\"%\" not expected after for expression",currentToken.spelling);
+                break;
+        }
+        return commandAST;
   }
 
 ///////////////////////////////////////////////////////////////////////////////
