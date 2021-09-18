@@ -318,6 +318,7 @@ public class Parser {
       }
       break;
 
+    /*
     case Token.WHILE:
       {
         acceptIt();
@@ -327,20 +328,26 @@ public class Parser {
         finish(commandPos);
         commandAST = new WhileCommand(eAST, cAST, commandPos);
       }
+      break;*/
+      
+    case Token.REPEAT:
+    {
+        
+      
       break;
+    }
       
       
     
-
+    case Token.SKIP: // nuevo
     case Token.SEMICOLON:
     case Token.END:
     case Token.ELSE:
     case Token.IN:
     case Token.EOT:
-    case Token.SKIP: // nuevo
-
+    
       finish(commandPos);
-      commandAST = new EmptyCommand(commandPos);
+      //commandAST = new EmptyCommand(commandPos); // Comando vacio 
       break;
 
     default:
