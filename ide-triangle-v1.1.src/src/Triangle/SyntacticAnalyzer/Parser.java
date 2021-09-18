@@ -294,6 +294,7 @@ public class Parser {
       break;
 
     case Token.BEGIN:
+        Hola;
       acceptIt();
       commandAST = parseCommand();
       accept(Token.END);
