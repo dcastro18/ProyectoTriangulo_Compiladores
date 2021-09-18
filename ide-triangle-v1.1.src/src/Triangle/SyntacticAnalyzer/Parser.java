@@ -375,7 +375,7 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new WhileDoCommand(cAST, eAST, commandPos);
+                //commandAST = new WhileDoCommand(cAST, eAST, commandPos);
             }
             break;
             case Token.UNTIL:
@@ -386,7 +386,7 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new UntilDoCommand(cAST, eAST, commandPos);
+                //commandAST = new UntilDoCommand(cAST, eAST, commandPos);
             }
             break;
             case Token.DO:
@@ -406,8 +406,8 @@ public class Parser {
                 accept(Token.TO);
                 Expression e2AST = parseExpression();
                 finish(commandPos);
-                Declaration dAST = new ForIdentifierExpression(iAST,e1AST,commandPos);
-                commandAST = parseRepeatCommands(dAST, e2AST);
+                //Declaration dAST = new ForIdentifierExpression(iAST,e1AST,commandPos);
+                //commandAST = parseRepeatCommands(dAST, e2AST);
             }
             break;
             default:
@@ -431,7 +431,7 @@ public class Parser {
                 Expression eAST = parseExpression();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new DoWhileCommand(cAST, eAST, commandPos);
+                //commandAST = new DoWhileCommand(cAST, eAST, commandPos);
             }
             break;
             case Token.UNTIL:
@@ -440,7 +440,7 @@ public class Parser {
                 Expression eAST = parseExpression();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new DoUntilCommand(cAST, eAST, commandPos);
+                //commandAST = new DoUntilCommand(cAST, eAST, commandPos);
             }
             break;
             default:
@@ -464,7 +464,7 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new ForDoCommand(cAST, dAST, e2AST, commandPos);
+                //commandAST = new ForDoCommand(cAST, dAST, e2AST, commandPos);
             }
             break;
             case Token.WHILE:
@@ -475,8 +475,8 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                Command c2AST = new WhileDoCommand(cAST, eAST, commandPos);
-                commandAST = new ForWhileCommand(dAST,c2AST,e2AST,commandPos);
+                //Command c2AST = new WhileDoCommand(cAST, eAST, commandPos);
+                //commandAST = new ForWhileCommand(dAST,c2AST,e2AST,commandPos);
             }
             break;
             case Token.UNTIL:
@@ -487,8 +487,8 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                Command c2AST = new UntilDoCommand(cAST, eAST, commandPos);
-                commandAST = new ForUntilCommand(dAST,c2AST,e2AST,commandPos);
+                //Command c2AST = new UntilDoCommand(cAST, eAST, commandPos);
+                //commandAST = new ForUntilCommand(dAST,c2AST,e2AST,commandPos);
             }
             break;
             default:

@@ -4,3 +4,4 @@ let
      a()
 in
   putint(a())
+end
