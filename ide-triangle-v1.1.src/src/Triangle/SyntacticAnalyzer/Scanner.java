@@ -127,10 +127,16 @@ public final class Scanner {
         return Token.CHARLITERAL;
       } else
         return Token.ERROR;
-
+      
+    // Se agrega la condicion del double dot
     case '.':
       takeIt();
-      return Token.DOT;
+      if(currentChar == '.'){
+          takeIt();
+          return Token.DOUBLEDOT;
+      }else{
+        return Token.DOT;
+      }
 
     case ':':
       takeIt();
@@ -171,6 +177,10 @@ public final class Scanner {
     case '{':
       takeIt();
       return Token.LCURLY;
+    
+    case '|':
+      takeIt();
+      return Token.PIPE;
 
     case '}':
       takeIt();

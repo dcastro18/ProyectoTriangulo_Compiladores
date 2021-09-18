@@ -293,12 +293,13 @@ public class Parser {
       }
       break;
 
-    case Token.LET:
+    case Token.LET: // cambio
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
         accept(Token.IN);
-        Command cAST = parseSingleCommand();
+        Command cAST = parseCommand();
+        accept(Token.END);
         finish(commandPos);
         commandAST = new LetCommand(dAST, cAST, commandPos);
       }
@@ -327,12 +328,16 @@ public class Parser {
         commandAST = new WhileCommand(eAST, cAST, commandPos);
       }
       break;
+      
+      
+    
 
     case Token.SEMICOLON:
     case Token.END:
     case Token.ELSE:
     case Token.IN:
     case Token.EOT:
+    case Token.SKIP: // nuevo
 
       finish(commandPos);
       commandAST = new EmptyCommand(commandPos);
