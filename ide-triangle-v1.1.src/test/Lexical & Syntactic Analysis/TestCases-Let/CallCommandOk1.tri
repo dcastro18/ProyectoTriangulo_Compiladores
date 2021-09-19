@@ -5,3 +5,4 @@ let
     putint (x * 2)
 in
   P() ! contextual error: there's no parameters
+end

@@ -61,6 +61,13 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatInCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand; //Se agrego el import RepeatWhileDo
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -120,6 +127,34 @@ public class LayoutVisitor implements Visitor {
   public Object visitWhileCommand(WhileCommand ast, Object obj) {
     return layoutBinary("WhileCom.", ast.E, ast.C);
   }
+  
+  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {  //Se agrego el método visitRepeatWhileDo()
+      return layoutBinary("RepeatWhileCom", ast.E, ast.C);
+  }
+  
+  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {  //Se agrego el método visitRepeatUntilDo()
+      return layoutBinary("RepeatUntilCom", ast.E, ast.C);
+  }
+  
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
+      return layoutBinary("RepeatDoWhileCom", ast.C, ast.E);
+  }
+  
+  public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { //Se agrego el metodo visitRepeatDoUntilCommand()
+      return layoutBinary("RepeatDoUntilCom", ast.C, ast.E);
+  }
+  
+  public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
+      return layoutTernary("RepeatInCom", ast.I, ast.E, ast.C);
+  }
+  
+  public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
+      return layoutQuaternary("RepeatForRangeCom", ast.I, ast.E1, ast.E2, ast.C);
+  }
+  
+   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+       return layour
+   }
 
 
   // Expressions

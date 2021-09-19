@@ -24,8 +24,14 @@ public interface Visitor {
   public abstract Object visitLetCommand(LetCommand ast, Object o);
   public abstract Object visitSequentialCommand(SequentialCommand ast, Object o);
   public abstract Object visitWhileCommand(WhileCommand ast, Object o);
-
-
+  public abstract Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o); //Se añadio el método visitRepeatWhileDo()
+  public abstract Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o); //Se añadio el método visitRepeatUntilDo()
+  public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o); //Se añadio el método visitRepeatDoWhileCommand()
+  public abstract Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o); //Se añadio el método visitRepeatDoUntilCommand()
+  public abstract Object visitRepeatInCommand(RepeatInCommand ast, Object o); //Se añadio el método visitRepeatInCommand()
+  public abstract Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o); //Se añadio el método visitRepeatForRangeCommand()
+  public abstract Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o); //Se añadio el método visitRepeatForRangeWhileCommand();
+  
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
   public abstract Object visitBinaryExpression(BinaryExpression ast, Object o);
