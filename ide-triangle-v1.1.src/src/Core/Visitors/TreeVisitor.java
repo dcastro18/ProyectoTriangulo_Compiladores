@@ -47,11 +47,14 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
@@ -139,12 +142,22 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
-      return(createTernary("Repeat In Command", ast.I, ast.E, ast.C));
+      return(createBinary("Repeat In Command", ast.D, ast.C));
     }
     
     public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) {
-        return(createQuaternary("Repeat For Range Command", ast.I, ast.E1, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
+        return(createTernary("Repeat For Range Command", ast.D, ast.E, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
     }
+    
+    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) {
+        return(createQuaternary("Repeat For Range While Command", ast.D, ast.E1, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeWhileCommand()
+    }
+    
+    public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) {
+        return(createQuaternary("Repeat For Range Until Command", ast.D, ast.E1, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeUntilCommand()
+    }
+    
+
     
     // </editor-fold>
     
@@ -228,6 +241,11 @@ public class TreeVisitor implements Visitor {
     public Object visitVarDeclaration(VarDeclaration ast, Object obj) {
         return(createBinary("Variable Declaration", ast.I, ast.T));
     }
+    
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object obj) { //Se agrego el metodo visitForRangeIdentifierExpression()
+        return(createBinary("For Range Identifier Expression Declaration", ast.I, ast.E));
+    }
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">

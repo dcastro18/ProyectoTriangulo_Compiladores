@@ -37,6 +37,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -65,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
@@ -366,12 +368,13 @@ public class Parser {
     return commandAST;
   }
   
-  //1. Se añadio la función parseRepeatCases()
-  //
-  //
-  //
-  //
-  //
+//************************METODOS DE COMANDO NUEVOS*****************************
+
+  
+//******************************************************************************
+// Comparación de REPEATS
+//******************************************************************************
+  
   Command parseRepeatCases() throws SyntaxError {
     Command commandAST = null; // in case there's a syntactic error
 
@@ -405,23 +408,15 @@ public class Parser {
             {   
                 acceptIt();
                 Command cAST = parseCommand();
-                commandAST = parseRepeatExpressions(cAST); //Comparar UNTIL y WHILE
+                commandAST = parseRepeatDo(cAST); //Comparar UNTIL y WHILE
             }
             break;
             case Token.FOR:
             {   
                 acceptIt();
                 Identifier iAST = parseIdentifier();
-                commandAST = parseRepeatBrackets(iAST); //Comparar IN y := (BECOMES)
+                commandAST = parseRepeatRangeIn(iAST); //Comparar IN y := (BECOMES)
                 
-                
-                /*accept(Token.FROM);
-                Expression e1AST = parseExpression();
-                accept(Token.TO);
-                Expression e2AST = parseExpression();
-                finish(commandPos);*/
-                //Declaration dAST = new ForIdentifierExpression(iAST,e1AST,commandPos);
-                //commandAST = parseRepeatCommands(dAST, e2AST);
             }
             break;
             default:
@@ -431,8 +426,12 @@ public class Parser {
         }
         return commandAST;
     }
+  
+//******************************************************************************
+// Comparación de WHILE, UNTIL de REPEAT DO
+//******************************************************************************
         
-      Command parseRepeatExpressions(Command cAST) throws SyntaxError{
+    Command parseRepeatDo(Command cAST) throws SyntaxError{
         Command commandAST = null; // in case there's a syntactic error
         
         SourcePosition commandPos = new SourcePosition();
@@ -464,9 +463,12 @@ public class Parser {
         }
         return commandAST;
     }
-   //_________________________________________________________________________________________________________
+    
+//******************************************************************************
+// Comparación de := y IN de REPEAT FOR RANGE y IN
+//******************************************************************************
       
- Command parseRepeatBrackets(Identifier iAST) throws SyntaxError{
+    Command parseRepeatRangeIn(Identifier iAST) throws SyntaxError{
         Command commandAST = null; // in case there's a syntactic error
         
         SourcePosition commandPos = new SourcePosition();
@@ -480,11 +482,8 @@ public class Parser {
                 Expression e1AST = parseExpression();
                 accept(Token.DOUBLEDOT);
                 Expression e2AST = parseExpression();
-                commandAST = parseRepeatCommands(iAST, e1AST, e2AST);
-                /*Command cAST = parseCommand();
-                accept(Token.END);
-                finish(commandPos);*/
-                //commandAST = new ForDoCommand(cAST, dAST, e2AST, commandPos);
+                commandAST = parseRepeatRange(iAST, e1AST, e2AST);
+                
             }
             break;
             case Token.IN:
@@ -495,9 +494,9 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new RepeatInCommand(iAST, eAST, cAST, commandPos); //Metodo agregado al AST
-                //Command c2AST = new WhileDoCommand(cAST, eAST, commandPos);
-                //commandAST = new ForWhileCommand(dAST,c2AST,e2AST,commandPos);
+                Declaration InVarDecl = new ForRangeIdentifierExpression(iAST, eAST, commandPos);
+                commandAST = new RepeatInCommand(InVarDecl, cAST, commandPos); //Metodo agregado al AST
+
             }
             break;
             
@@ -506,12 +505,13 @@ public class Parser {
                 break;
         }
         return commandAST;
-  }
+    }
   
-  //_________________________________________________________________________________________________________
-  //_________________________________________________________________________________________________________
-   //_________________________________________________________________________________________________________
-  Command parseRepeatCommands(Identifier iAST, Expression e1AST, Expression e2AST) throws SyntaxError{
+//******************************************************************************
+// Comparación de DO, WHILE, UNTIL de REPEAT FOR RANGE
+//******************************************************************************
+ 
+  Command parseRepeatRange(Identifier iAST, Expression e1AST, Expression e2AST) throws SyntaxError{
         Command commandAST = null; // in case there's a syntactic error
         
         SourcePosition commandPos = new SourcePosition();
@@ -524,7 +524,8 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new RepeatForRangeCommand(iAST, e1AST, e2AST, cAST, commandPos);
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeCommand(RangeVarDecl, e2AST, cAST, commandPos);
             }
             break;
             case Token.WHILE:
@@ -535,21 +536,22 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                commandAST = new RepeatForRangeWhileCommand(iAST, e1AST, e2AST, e3AST, cAST, commandPos);
-                //Command c2AST = new WhileDoCommand(cAST, eAST, commandPos);
-                //commandAST = new ForWhileCommand(dAST,c2AST,e2AST,commandPos);
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeWhileCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
             }
             break;
             case Token.UNTIL:
             {   
                 acceptIt();
-                Expression eAST = parseExpression();
+                Expression e3AST = parseExpression();
                 accept(Token.DO);
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                //Command c2AST = new UntilDoCommand(cAST, eAST, commandPos);
-                //commandAST = new ForUntilCommand(dAST,c2AST,e2AST,commandPos);
+                
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeWhileCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
+
             }
             break;
             default:

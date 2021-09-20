@@ -62,11 +62,13 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
@@ -187,7 +189,13 @@ public final class Checker implements Visitor {
   
   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
     return null;
-   }
+  }
+  
+  public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el método visitRepeatForRangeUntilCommand()
+    return null;
+  }
+  
+
 
   // Expressions
 
@@ -386,6 +394,10 @@ public final class Checker implements Visitor {
                             ast.I.spelling, ast.position);
 
     return null;
+  }
+  
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método
+      return null;
   }
 
   // Array Aggregates

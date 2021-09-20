@@ -47,11 +47,13 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
@@ -177,15 +179,22 @@ public class TableVisitor implements Visitor {
     }
     
     public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el método visitRepeatInCommand() al AST
-        ast.I.visit(this, null);
-        ast.E.visit(this, null);
+        ast.D.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);
     }
     
     public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el método visitRepeatForRangeCommand() al AST
-        ast.I.visit(this, null);
+        ast.D.visit(this, null);
+        ast.E.visit(this, null);
+        ast.C.visit(this, null);
+        
+        return(null);
+    }
+    
+    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+        ast.D.visit(this, null);
         ast.E1.visit(this, null);
         ast.E2.visit(this, null);
         ast.C.visit(this, null);
@@ -193,15 +202,16 @@ public class TableVisitor implements Visitor {
         return(null);
     }
     
-    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
-        ast.I.visit(this, null);
+    public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el método visitRepeatForRangeUntilCommand()
+        ast.D.visit(this, null);
         ast.E1.visit(this, null);
         ast.E2.visit(this, null);
-        ast.E3.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);
     }
+    
+
     
     
     
@@ -371,6 +381,13 @@ public class TableVisitor implements Visitor {
       } catch (NullPointerException e) { }
       
       ast.T.visit(this, null);
+      return(null);
+  }
+  
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método visitForRangeIdentifierExpression()
+      ast.I.visit(this, null);
+      ast.E.visit(this, null);
+        
       return(null);
   }
   

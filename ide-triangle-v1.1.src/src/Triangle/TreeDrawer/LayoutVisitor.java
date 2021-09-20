@@ -59,11 +59,13 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
@@ -145,16 +147,22 @@ public class LayoutVisitor implements Visitor {
   }
   
   public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
-      return layoutTernary("RepeatInCom", ast.I, ast.E, ast.C);
+      return layoutBinary("RepeatInCom", ast.D, ast.C);
   }
   
   public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
-      return layoutQuaternary("RepeatForRangeCom", ast.I, ast.E1, ast.E2, ast.C);
+      return layoutTernary("RepeatForRangeCom", ast.D, ast.E, ast.C);
   }
   
-   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
-       return layour
-   }
+  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+      return layoutQuaternary("RepeatForRangeWhileCom", ast.D, ast.E1, ast.E2, ast.C);
+  }
+  
+  public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) {
+      return layoutQuaternary("RepeatForRangeUntilCom", ast.D, ast.E1, ast.E2, ast.C);
+  }
+   
+
 
 
   // Expressions
@@ -236,6 +244,9 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método visitForRangeIdentifierExpression()
+    return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
+  }
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object obj) {

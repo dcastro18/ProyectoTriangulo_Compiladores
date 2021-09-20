@@ -31,6 +31,7 @@ public interface Visitor {
   public abstract Object visitRepeatInCommand(RepeatInCommand ast, Object o); //Se añadio el método visitRepeatInCommand()
   public abstract Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o); //Se añadio el método visitRepeatForRangeCommand()
   public abstract Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o); //Se añadio el método visitRepeatForRangeWhileCommand();
+  public abstract Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o); //Se añadio el método visitRepeatForRangeUntilCommand()
   
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
@@ -54,6 +55,7 @@ public interface Visitor {
   public abstract Object visitTypeDeclaration(TypeDeclaration ast, Object o);
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
+  public abstract Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o); //Se añadio el método
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);

@@ -11,20 +11,19 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Keila
  */
-public class RepeatInCommand extends Command {
- 
-    public RepeatInCommand (Declaration dAST, Command cAST, SourcePosition thePosition) {
+public class ForRangeIdentifierExpression extends Declaration {
+    
+    public ForRangeIdentifierExpression (Identifier iAST, Expression eAST, SourcePosition thePosition) {
         super (thePosition);
-        D = dAST;
-        C = cAST;
+        I = iAST;
+        E = eAST;
     }
     
     public Object visit(Visitor v, Object o) {
-        return v.visitRepeatInCommand(this, o);
+        return v.visitForRangeIdentifierExpression(this, o);
     }
     
-    public Declaration D;
-    public Command C;
-    
-    
+    public Identifier I;
+    public Expression E;
+        
 }
