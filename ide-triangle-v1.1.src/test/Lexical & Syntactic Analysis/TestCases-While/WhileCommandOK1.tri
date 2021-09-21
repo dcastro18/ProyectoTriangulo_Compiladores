@@ -1,8 +1,8 @@
 ! Test of while command, it runs correctly
 
-while true do
-   begin
+repeat do
       putint(5)
-   end
+    while true
+end
 
 
