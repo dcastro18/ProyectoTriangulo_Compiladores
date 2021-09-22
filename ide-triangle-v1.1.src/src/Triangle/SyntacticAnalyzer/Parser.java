@@ -301,7 +301,7 @@ public class Parser {
       }
       break;
 
-    case Token.LET: //Se a馻dio el comando LET
+    case Token.LET: //Se a锟絘dio el comando LET
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
@@ -372,7 +372,7 @@ public class Parser {
 
   
 //******************************************************************************
-// Comparaci髇 de REPEATS
+// Comparaci锟絥 de REPEATS
 //******************************************************************************
   
   Command parseRepeatCases() throws SyntaxError {
@@ -428,7 +428,7 @@ public class Parser {
     }
   
 //******************************************************************************
-// Comparaci髇 de WHILE, UNTIL de REPEAT DO
+// Comparaci锟絥 de WHILE, UNTIL de REPEAT DO
 //******************************************************************************
         
     Command parseRepeatDo(Command cAST) throws SyntaxError{
@@ -465,7 +465,7 @@ public class Parser {
     }
     
 //******************************************************************************
-// Comparaci髇 de := y IN de REPEAT FOR RANGE y IN
+// Comparaci锟絥 de := y IN de REPEAT FOR RANGE y IN
 //******************************************************************************
       
     Command parseRepeatRangeIn(Identifier iAST) throws SyntaxError{
@@ -508,7 +508,7 @@ public class Parser {
     }
   
 //******************************************************************************
-// Comparaci髇 de DO, WHILE, UNTIL de REPEAT FOR RANGE
+// Comparaci锟絥 de DO, WHILE, UNTIL de REPEAT FOR RANGE
 //******************************************************************************
  
   Command parseRepeatRange(Identifier iAST, Expression e1AST, Expression e2AST) throws SyntaxError{
@@ -792,20 +792,63 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+//
+//******************************************************************************
+// Modificaci贸n de Declaration
+//******************************************************************************
+//
+  
   Declaration parseDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
-    declarationAST = parseSingleDeclaration();
+    declarationAST = parseCompoundDeclaration();
     while (currentToken.kind == Token.SEMICOLON) {
       acceptIt();
-      Declaration d2AST = parseSingleDeclaration();
+      Declaration d2AST = parseCompoundDeclaration();
       finish(declarationPos);
       declarationAST = new SequentialDeclaration(declarationAST, d2AST,
         declarationPos);
     }
     return declarationAST;
+  }
+  
+//
+//******************************************************************************
+// Creaci贸n del m茅todo de Declaration
+//******************************************************************************
+//
+  
+  Declaration parseCompoundDeclaration() throws SyntaxError{
+    Declaration declarationAST = null; // in case there's a syntactic error
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    switch (currentToken.kind){
+        case Token.RECURSIVE:
+            {
+                acceptIt();
+                declarationAST = parseProcFuncS();
+                accept (Token.END);
+                finish(declarationPos);
+                
+
+            }
+            break;
+        
+        case Token.LOCAL:
+            {
+                acceptIt();
+                Declaration d1AST = parseDeclaration();
+                accept(Token.IN);
+                Declaration d2AST = parseDeclaration();
+                accept(Token.END);
+                finish(declarationPos);
+            }
+        
+    }
+    
   }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
@@ -846,7 +889,8 @@ public class Parser {
         FormalParameterSequence fpsAST = parseFormalParameterSequence();
         accept(Token.RPAREN);
         accept(Token.IS);
-        Command cAST = parseSingleCommand();
+        Command cAST = parseCommand();          // Se modific贸
+        accept(Token.END);                      // Se modific贸
         finish(declarationPos);
         declarationAST = new ProcDeclaration(iAST, fpsAST, cAST, declarationPos);
       }
