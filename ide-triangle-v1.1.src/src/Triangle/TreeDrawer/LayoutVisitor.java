@@ -61,6 +61,7 @@ import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;  //Se agrego el import
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
@@ -249,6 +250,21 @@ public class LayoutVisitor implements Visitor {
   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
     return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
   }
+  
+  public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
+        return layoutBinary("VarExpressionDeclaration", ast.I, ast.E); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+        return layoutBinary("LocalDeclaration", ast.D1, ast.D2); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
+        return layoutBinary("ProcFuncSDeclaration", ast.D1, ast.D2); //To change body of generated methods, choose Tools | Templates.
+    }
+
+  
+  
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object obj) {
@@ -591,14 +607,5 @@ public class LayoutVisitor implements Visitor {
     return r;
   }
 
-    @Override
-    public Object visitVarExpressionDeclaration(VarExpressionDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitLocalDeclaration(LocalDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

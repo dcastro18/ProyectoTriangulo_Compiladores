@@ -60,6 +60,7 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
@@ -823,7 +824,7 @@ public class Parser {
 //
   
   Declaration parseCompoundDeclaration() throws SyntaxError{
-    Declaration declarationAST = null; // in case there's a syntactic error
+    Declaration declarationAST = null; // in case there's a syntactic error the user see this
 
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
@@ -847,6 +848,14 @@ public class Parser {
                 accept(Token.END);
                 finish(declarationPos);
                 declarationAST = new LocalDeclaration(d1AST, d2AST, declarationPos);
+            }
+            break;
+        
+        case Token.FUNC:
+            {
+                declarationAST = parseSingleDeclaration();
+                finish(declarationPos);
+                
             }
             break;
     }
@@ -905,7 +914,22 @@ public class Parser {
   }
   
   Declaration parseProcFuncS() throws SyntaxError{
-      
+    Declaration dAST = null;
+    
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    
+    Declaration procAST1 = parseProcFunc();
+    accept(Token.PIPE);    
+    Declaration procAST2 = parseProcFunc();
+    dAST = new ProcFuncSDeclaration(procAST1, procAST2, declarationPos);
+    while (currentToken.kind == Token.PIPE){
+        acceptIt();
+        procAST1 = parseProcFunc();
+        finish(declarationPos);
+        dAST = new ProcFuncSDeclaration(procAST1, dAST, declarationPos);
+    }
+    return dAST;
   }
   
   Declaration parseSingleDeclaration() throws SyntaxError {

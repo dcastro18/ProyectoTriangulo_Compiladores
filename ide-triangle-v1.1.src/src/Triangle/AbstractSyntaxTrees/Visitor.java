@@ -115,6 +115,8 @@ public interface Visitor {
 
     public Object visitLocalDeclaration(LocalDeclaration aThis, Object o);
 
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration aThis, Object o);
+
     
 
 }
