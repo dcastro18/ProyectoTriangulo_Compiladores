@@ -50,6 +50,7 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -85,6 +86,7 @@ import Triangle.AbstractSyntaxTrees.TypeDenoter;
 import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -833,7 +835,6 @@ public class Parser {
                 accept (Token.END);
                 finish(declarationPos);
                 
-
             }
             break;
         
@@ -845,12 +846,68 @@ public class Parser {
                 Declaration d2AST = parseDeclaration();
                 accept(Token.END);
                 finish(declarationPos);
+                declarationAST = new LocalDeclaration(d1AST, d2AST, declarationPos);
             }
-        
+            break;
     }
+    return declarationAST;
     
   }
 
+  Declaration parseProcFunc() throws SyntaxError{
+      Declaration dAST = null;
+      
+      SourcePosition declarationPos = new SourcePosition();
+      start(declarationPos);
+      
+          switch (currentToken.kind) {
+
+      case Token.PROC:
+      {
+        acceptIt();
+        Identifier iAST = parseIdentifier();
+        accept(Token.LPAREN);
+        FormalParameterSequence fpsAST = parseFormalParameterSequence();
+        accept(Token.RPAREN);
+        accept(Token.IS);
+        Command cAST = parseCommand();
+        accept(Token.END);
+        finish(declarationPos);
+        dAST = new ProcDeclaration(iAST, fpsAST, cAST, declarationPos);
+      }
+      break;
+      
+      case Token.FUNC:
+      {
+        acceptIt();
+        Identifier iAST = parseIdentifier();
+        accept(Token.LPAREN);
+        FormalParameterSequence fpsAST = parseFormalParameterSequence();
+        accept(Token.RPAREN);
+        accept(Token.COLON);
+        TypeDenoter tAST = parseTypeDenoter();
+        accept(Token.IS);
+        Expression eAST = parseExpression();
+        finish(declarationPos);
+        dAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
+          declarationPos);
+      }
+      break;
+      
+      default:
+      syntacticError("\"%\" cannot start a declaration",
+        currentToken.spelling);
+      break;
+
+    }
+    return dAST;
+
+  }
+  
+  Declaration parseProcFuncS() throws SyntaxError{
+      
+  }
+  
   Declaration parseSingleDeclaration() throws SyntaxError {
     Declaration declarationAST = null; // in case there's a syntactic error
 
@@ -870,16 +927,29 @@ public class Parser {
       }
       break;
 
-    case Token.VAR:
+    case Token.VAR:  // Se modificó, se añadió un caso nuevo
       {
         acceptIt();
         Identifier iAST = parseIdentifier();
-        accept(Token.COLON);
-        TypeDenoter tAST = parseTypeDenoter();
-        finish(declarationPos);
-        declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
-      }
-      break;
+        switch (currentToken.kind){
+            case Token.COLON:
+            {
+                acceptIt();
+                TypeDenoter tAST = parseTypeDenoter();
+                finish(declarationPos);
+                declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+            }
+            break;
+            case Token.BECOMES:
+            {
+                acceptIt();
+                Expression eAST = parseExpression();
+                finish(declarationPos);
+                declarationAST = new VarExpressionDeclaration(iAST, eAST, declarationPos);
+            }
+            break;
+        }
+       }
 
     case Token.PROC:
       {

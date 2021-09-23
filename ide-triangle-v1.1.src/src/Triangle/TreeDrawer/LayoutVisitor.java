@@ -60,6 +60,7 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;  //Se agrego el import
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
@@ -85,6 +86,7 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;  //Se agrego el import VarExpressionDeclaration
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -130,15 +132,15 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("WhileCom.", ast.E, ast.C);
   }
   
-  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {  //Se agrego el método visitRepeatWhileDo()
+  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {  //Se agrego el mï¿½todo visitRepeatWhileDo()
       return layoutBinary("RepeatWhileCom", ast.E, ast.C);
   }
   
-  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {  //Se agrego el método visitRepeatUntilDo()
+  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {  //Se agrego el mï¿½todo visitRepeatUntilDo()
       return layoutBinary("RepeatUntilCom", ast.E, ast.C);
   }
   
-  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoWhileCommand()
       return layoutBinary("RepeatDoWhileCom", ast.C, ast.E);
   }
   
@@ -154,7 +156,7 @@ public class LayoutVisitor implements Visitor {
       return layoutTernary("RepeatForRangeCom", ast.D, ast.E, ast.C);
   }
   
-  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeWhileCommand()
       return layoutQuaternary("RepeatForRangeWhileCom", ast.D, ast.E1, ast.E2, ast.C);
   }
   
@@ -244,7 +246,7 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el mï¿½todo visitForRangeIdentifierExpression()
     return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
   }
 
@@ -588,5 +590,15 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
+    @Override
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitLocalDeclaration(LocalDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
