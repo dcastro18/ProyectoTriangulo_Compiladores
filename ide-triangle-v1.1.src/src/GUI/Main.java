@@ -51,7 +51,8 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main.
      */
-    public Main() {        
+    public Main() { 
+        
         //try {
           //  UIManager.setLookAndFeel(new LookAndFeel());            
         //} catch (Exception e) { }

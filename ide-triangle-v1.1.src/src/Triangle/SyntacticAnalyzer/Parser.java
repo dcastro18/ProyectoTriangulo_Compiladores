@@ -318,7 +318,7 @@ public class Parser {
         acceptIt();
         Expression eAST = parseExpression();
         accept(Token.THEN);
-        Command c1AST = parseSingleCommand();
+        Command c1AST = parseCommand();
         accept(Token.ELSE);
         Command c2AST = parseSingleCommand();
         finish(commandPos);
@@ -348,15 +348,21 @@ public class Parser {
       
     
     case Token.SKIP: // nuevo
-    case Token.SEMICOLON:
+    {
+        acceptIt();
+        finish(commandPos);
+        commandAST = new EmptyCommand(commandPos);
+      break;
+    }
+      
+    /*case Token.SEMICOLON: quitar
     case Token.END:
     case Token.ELSE:
     case Token.IN:
-    case Token.EOT:
+    case Token.EOT:*/
     
-      finish(commandPos);
-      //commandAST = new EmptyCommand(commandPos); // Comando vacio 
-      break;
+      
+      // // Comando vacio 
 
     default:
       syntacticError("\"%\" cannot start a command",
