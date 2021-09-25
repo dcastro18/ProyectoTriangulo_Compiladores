@@ -1033,6 +1033,98 @@ public class Parser {
     return declarationAST;
   }
 
+  
+///////////////////////////////////////////////////////////////////////////////
+//
+// CASES
+//
+///////////////////////////////////////////////////////////////////////////////
+
+ Declaration parseCases() throws SyntaxError{
+    Declaration declarationAST = null; // in case there's a syntactic error the user see this
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    
+    parseCase();
+    while(){
+        parseCase();
+    }
+    if (currentToken.kind == Token.LCURLY){
+        acceptIt();
+        parseElseCase();
+        accept(Token.RBRACKET);
+    }
+    
+    return declarationAST;
+     
+ }
+  
+ Declaration parseCase() throws SyntaxError{
+    Declaration declarationAST = null; // in case there's a syntactic error the user see this
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    
+    if(currentToken.kind == Token.WHEN){
+        acceptIt();
+        switch (currentToken.kind){
+            case parseCaseLiteral():
+            {
+                parseCaseLiteral()
+            }
+            break;
+            case Token.RANGE:
+            {
+                
+            }
+            break;
+        }
+        accept(Token.THEN);
+        parseCommand();
+    }
+    
+    return declarationAST;
+ }
+  
+  Declaration parseElseCase() throws SyntaxError{
+    Declaration declarationAST = null; // in case there's a syntactic error the user see this
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    
+    if(currentToken.kind == Token.ELSE){
+        parseCommand();
+    }
+    
+    return declarationAST;
+     
+ }
+  
+   Declaration parseCaseLiteral() throws SyntaxError{
+    Declaration declarationAST = null; // in case there's a syntactic error the user see this
+
+    SourcePosition declarationPos = new SourcePosition();
+    start(declarationPos);
+    
+    switch (currentToken.kind){
+        case Token.INTLITERAL:
+        {
+            parseIntegerLiteral();
+        }
+        break;
+        case Token.CHARLITERAL:
+        {
+            parseCharacterLiteral();
+        }
+        break;
+    
+    }
+    
+    return declarationAST;
+ }
+  
+  
 ///////////////////////////////////////////////////////////////////////////////
 //
 // PARAMETERS
