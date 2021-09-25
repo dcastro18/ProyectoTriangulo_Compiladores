@@ -319,10 +319,23 @@ public class Parser {
         Expression eAST = parseExpression();
         accept(Token.THEN);
         Command c1AST = parseCommand();
+        Expression eAST2 = null;
+        Command c2AST = null;
+        Command c3AST = null;
+        while (currentToken.kind == Token.PIPE)
+        {
+            acceptIt(); 
+            eAST2 = parseExpression();
+            accept(Token.THEN);
+            c2AST = parseCommand();
+            c3AST = c2AST;
+        }
+       
         accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
+        c3AST = parseCommand();
+        accept(Token.END);
         finish(commandPos);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c3AST, commandPos);
       }
       break;
 
