@@ -328,6 +328,8 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
+      
+     
 
     /*
     case Token.WHILE:
@@ -811,8 +813,7 @@ public class Parser {
       acceptIt();
       Declaration d2AST = parseCompoundDeclaration();
       finish(declarationPos);
-      declarationAST = new SequentialDeclaration(declarationAST, d2AST,
-        declarationPos);
+      declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);
     }
     return declarationAST;
   }
@@ -835,7 +836,7 @@ public class Parser {
                 declarationAST = parseProcFuncS();
                 accept (Token.END);
                 finish(declarationPos);
-                
+                //declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
             }
             break;
         
@@ -851,13 +852,15 @@ public class Parser {
             }
             break;
         
+
+        case Token.CONST:
+        case Token.VAR:
         case Token.FUNC:
-            {
-                declarationAST = parseSingleDeclaration();
-                finish(declarationPos);
-                
-            }
-            break;
+        case Token.PROC:
+        case Token.TYPE:
+        {
+            declarationAST = parseSingleDeclaration();
+        }
     }
     return declarationAST;
     
@@ -869,7 +872,7 @@ public class Parser {
       SourcePosition declarationPos = new SourcePosition();
       start(declarationPos);
       
-          switch (currentToken.kind) {
+      switch (currentToken.kind) {
 
       case Token.PROC:
       {
@@ -898,8 +901,7 @@ public class Parser {
         accept(Token.IS);
         Expression eAST = parseExpression();
         finish(declarationPos);
-        dAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
-          declarationPos);
+        dAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,declarationPos);
       }
       break;
       
@@ -916,18 +918,22 @@ public class Parser {
   Declaration parseProcFuncS() throws SyntaxError{
     Declaration dAST = null;
     
+    Declaration procAST1 = null;
+    Declaration procAST2 = null;
+    
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     
-    Declaration procAST1 = parseProcFunc();
-    accept(Token.PIPE);    
-    Declaration procAST2 = parseProcFunc();
-    dAST = new ProcFuncSDeclaration(procAST1, procAST2, declarationPos);
+    
+    procAST1 = parseProcFunc();
+    finish(declarationPos);
+   
     while (currentToken.kind == Token.PIPE){
-        acceptIt();
-        procAST1 = parseProcFunc();
+        accept(Token.PIPE); 
+        start(declarationPos);
+        procAST2 = parseProcFunc();
         finish(declarationPos);
-        dAST = new ProcFuncSDeclaration(procAST1, dAST, declarationPos);
+        dAST = new ProcFuncSDeclaration(procAST1, procAST2, declarationPos);
     }
     return dAST;
   }
