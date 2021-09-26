@@ -85,7 +85,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * Generates DefaultMutableTreeNodes, used to draw a JTree.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Prez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class TreeVisitor implements Visitor {
       
@@ -125,19 +125,19 @@ public class TreeVisitor implements Visitor {
         return(createBinary("While Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el método visitRepeatWhileDo()
+    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el mtodo visitRepeatWhileDo()
         return(createBinary("Repeat While Do Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el método visitRepeatUntilDo()
+    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el mtodo visitRepeatUntilDo()
         return(createBinary("Repeat Until Do Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el mtodo visitRepeatDoWhileCommand()
         return(createBinary("Repeat Do While Command", ast.C, ast.E));
     }
     
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el método visitRepeatDoUntilCommand()
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el mtodo visitRepeatDoUntilCommand()
         return(createBinary("Repeat Do Until Command", ast.C, ast.E));
     }
     
