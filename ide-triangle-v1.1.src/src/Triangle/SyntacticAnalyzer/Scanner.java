@@ -14,6 +14,11 @@
 
 package Triangle.SyntacticAnalyzer;
 
+import Triangle.HTMLWriter.HTMLWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public final class Scanner {
 
@@ -23,6 +28,10 @@ public final class Scanner {
   private char currentChar;
   private StringBuffer currentSpelling;
   private boolean currentlyScanningToken;
+  
+  // New implementation
+  private String comment = "";          
+  private HTMLWriter htmlWriter;
 
   private boolean isLetter(char c) {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
@@ -44,7 +53,11 @@ public final class Scanner {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-  public Scanner(SourceFile source) {
+  public Scanner(SourceFile source, HTMLWriter htmlWriter )  {
+    // New implementation
+    this.htmlWriter = htmlWriter;
+    htmlWriter.createHTMLFile();
+    
     sourceFile = source;
     currentChar = sourceFile.getSource();
     debug = false;
@@ -69,17 +82,32 @@ public final class Scanner {
     switch (currentChar) {
     case '!':
       {
+        comment += currentChar;         // Add comment - MODIFIED
         takeIt();
-        while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT))
+        while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT)){
+          comment += currentChar;       // Add comment - MODIFIED
           takeIt();
-        if (currentChar == SourceFile.EOL)
+        }
+        if (currentChar == SourceFile.EOL){
+          comment += currentChar;       // Add comment - MODIFIED
           takeIt();
+        }
+        htmlWriter.writeComment(comment);   //Write the comment
+        comment = "";                       // Restart the comment field
       }
       break;
 
     case ' ': case '\n': case '\r': case '\t':
+        {
+            try {
+                htmlWriter.writeSpace(currentChar);   // Add space in html file
+            } catch (IOException ex) {
+                Logger.getLogger(Scanner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
       takeIt();
       break;
+
     }
   }
 
@@ -194,6 +222,10 @@ public final class Scanner {
       return Token.ERROR;
     }
   }
+  
+  public void finish() {
+      htmlWriter.closeHTMLFile();
+  }
 
   public Token scan () {
     Token tok;
@@ -217,6 +249,16 @@ public final class Scanner {
 
     pos.finish = sourceFile.getCurrentLine();
     tok = new Token(kind, currentSpelling.toString(), pos);
+    
+    // New implementation
+    if(tok.kind >= 4 && tok.kind <= 30){
+        htmlWriter.writeReservedWord(tok.spelling);     // Write reserved word
+    }else if(tok.kind == 0 || tok.kind == 1 ){
+        htmlWriter.writeLiteralWord(tok.spelling);      // Write literal
+    }else{
+        htmlWriter.writeNormalWord(tok.spelling);       // Write normal word
+    }
+    
     if (debug)
       System.out.println(tok);
     return tok;

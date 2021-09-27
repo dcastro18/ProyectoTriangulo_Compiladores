@@ -321,11 +321,24 @@ public class Parser {
         acceptIt();
         Expression eAST = parseExpression();
         accept(Token.THEN);
-        Command c1AST = parseSingleCommand();
+        Command c1AST = parseCommand();
+        Expression eAST2 = null;
+        Command c2AST = null;
+        Command c3AST = null;
+        while (currentToken.kind == Token.PIPE)
+        {
+            acceptIt(); 
+            eAST2 = parseExpression();
+            accept(Token.THEN);
+            c2AST = parseCommand();
+            c3AST = c2AST;
+        }
+       
         accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
+        c3AST = parseCommand();
+        accept(Token.END);
         finish(commandPos);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c3AST, commandPos);
       }
       break;
       
@@ -353,15 +366,21 @@ public class Parser {
       
     
     case Token.SKIP: // nuevo
-    case Token.SEMICOLON:
+    {
+        acceptIt();
+        finish(commandPos);
+        commandAST = new EmptyCommand(commandPos);
+      break;
+    }
+      
+    /*case Token.SEMICOLON: quitar
     case Token.END:
     case Token.ELSE:
     case Token.IN:
-    case Token.EOT:
+    case Token.EOT:*/
     
-      finish(commandPos);
-      //commandAST = new EmptyCommand(commandPos); // Comando vacio 
-      break;
+      
+      // // Comando vacio 
 
     default:
       syntacticError("\"%\" cannot start a command",

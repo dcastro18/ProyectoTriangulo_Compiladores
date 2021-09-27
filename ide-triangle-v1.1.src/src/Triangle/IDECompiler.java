@@ -13,6 +13,8 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
+import Triangle.HTMLWriter.HTMLWriter;
+import java.io.IOException;
 
 
 
@@ -21,7 +23,7 @@ import Triangle.CodeGenerator.Encoder;
  * to get to the ASTs in order to draw them in the IDE without modifying the
  * original Triangle code.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class IDECompiler {
 
@@ -45,8 +47,9 @@ public class IDECompiler {
                            " **********");
         
         System.out.println("Syntactic Analysis ...");
+        HTMLWriter htmlWriter = new HTMLWriter(sourceName);
         SourceFile source = new SourceFile(sourceName);
-        Scanner scanner = new Scanner(source);
+        Scanner scanner = new Scanner(source, htmlWriter);
         report = new IDEReporter();
         Parser parser = new Parser(scanner, report);
         boolean success = false;
