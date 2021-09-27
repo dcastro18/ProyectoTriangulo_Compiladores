@@ -518,7 +518,6 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitAnyTypeDenoter(AnyTypeDenoter ast, Object obj) {
         writeLineXML("<AnyTypeDenoter/>");
         return null;
-//    return(createNullary("any"));
     }
     
     public Object visitArrayTypeDenoter(ArrayTypeDenoter ast, Object obj) {
@@ -527,25 +526,21 @@ public class XMLWriterVisitor implements Visitor {
         ast.T.visit(this, null);
         writeLineXML("</ArrayTypeDenoter>");
         return null;
-//return(createBinary("Array Type Denoter", ast.IL, ast.T));
     }
     
     public Object visitBoolTypeDenoter(BoolTypeDenoter ast, Object obj) {
         writeLineXML("<BoolTypeDenoter/>");
         return null;
-//return(createNullary("bool"));
     }
     
     public Object visitCharTypeDenoter(CharTypeDenoter ast, Object obj) {
         writeLineXML("<CharTypeDenoter/>");
         return null;
-//return(createNullary("char"));
     }
     
     public Object visitErrorTypeDenoter(ErrorTypeDenoter ast, Object obj) {
         writeLineXML("<ErrorTypeDenoter/>");
         return null;
-//return(createNullary("error"));
     }
     
     public Object visitSimpleTypeDenoter(SimpleTypeDenoter ast, Object obj) {
@@ -553,13 +548,11 @@ public class XMLWriterVisitor implements Visitor {
         ast.I.visit(this, null);
         writeLineXML("</SimpleTypeDenoter>");
         return null;
-//return(createUnary("Simple Type Denoter", ast.I));
     }
     
     public Object visitIntTypeDenoter(IntTypeDenoter ast, Object obj) {
         writeLineXML("<IntTypeDenoter/>");
         return null;
-//return(createNullary("int"));
     }
     
     public Object visitRecordTypeDenoter(RecordTypeDenoter ast, Object obj) {
@@ -567,7 +560,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.FT.visit(this, null);
         writeLineXML("</RecordTypeDenoter>");
         return null;
-//return(createUnary("Record Type Denoter", ast.FT));
     }
     
     public Object visitMultipleFieldTypeDenoter(MultipleFieldTypeDenoter ast, Object obj) {
@@ -577,7 +569,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.FT.visit(this, null);
         writeLineXML("</MultipleFieldTypeDenoter>");
         return null;
-//return(createTernary("Multiple Field Type Denoter", ast.I, ast.T, ast.FT));
     }
     
     public Object visitSingleFieldTypeDenoter(SingleFieldTypeDenoter ast, Object obj) {
@@ -586,7 +577,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.T.visit(this, null);
         writeLineXML("</SingleFieldTypeDenoter>");
         return null;
-//return(createBinary("Single Field Type Denoter", ast.I, ast.T));
     }
     
     
@@ -594,36 +584,31 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitCharacterLiteral(CharacterLiteral ast, Object obj) {
         writeLineXML("<CharacterLiteral value=\"" + ast.spelling + "\"/>");
         return null;
-//return(createNullary(ast.spelling));
     }
     
     public Object visitIdentifier(Identifier ast, Object obj) {
         writeLineXML("<Identifier value=\"" + ast.spelling + "\"/>");
         return null;
-//return(createNullary(ast.spelling));
     }
     
     public Object visitIntegerLiteral(IntegerLiteral ast, Object obj) {
         writeLineXML("<IntegerLiteral value=\"" + ast.spelling + "\"/>");
         return null;
-//return(createNullary(ast.spelling));
     }
     
     public Object visitOperator(Operator ast, Object obj) {
         writeLineXML("<Operator value=\"" + transformOperator(ast.spelling) + "\"/>");
         return null;
-//return(createNullary(ast.spelling));
     }
 
     
 // Values or Variable Names
     public Object visitDotVname(DotVname ast, Object obj) {
         writeLineXML("<DotVname>");
-        ast.V.visit(this, null);
         ast.I.visit(this, null);
+        ast.V.visit(this, null);
         writeLineXML("</DotVname>");
         return null;
-//return(createBinary("Dot Vname", ast.I, ast.V));
     }
     
     public Object visitSimpleVname(SimpleVname ast, Object obj) {
@@ -631,7 +616,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.I.visit(this, null);
         writeLineXML("</SimpleVname>");
         return null;
-//return(createUnary("Simple Vname", ast.I));
     }
     
     public Object visitSubscriptVname(SubscriptVname ast, Object obj) {
@@ -640,7 +624,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.E.visit(this, null);
         writeLineXML("</SubscriptVname>");
         return null;
-//return(createBinary("Subscript Vname", ast.V, ast.E));
     }
     
 //Programs
@@ -649,7 +632,6 @@ public class XMLWriterVisitor implements Visitor {
         ast.C.visit(this, null);
         writeLineXML("</Program>");
         return null;
-//return(createUnary("Program", ast.C));
     }
     
     private void writeLineXML(String line) {
