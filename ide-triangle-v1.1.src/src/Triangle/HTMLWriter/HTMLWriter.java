@@ -23,24 +23,31 @@ public class HTMLWriter {
         this.fileName = (fileName.substring(0, fileName.length()-4))+".html";
     }
     
-    public void createHTMLFile() throws IOException{
-        file = new FileWriter(fileName);
-        
-        // HTML Header and style
-        file.write("<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "\t<head>\n"
-                + "\t\t<style>\n"
-                + "\t\t\tp{font-size: 1em; font-family: \"Courier New\", monospaced;}\n"
-                + "\t\t\t.literal{color : #004080;}\n"
-                + "\t\t\t.comment{color: #009933;}\n"
-                + "\t\t\t.reservedword {font-weight:bold;}\n"
-                + "\t\t</style>\n"
-                + "\t<body>\n");
+    public void createHTMLFile() {
+        try {
+            file = new FileWriter(fileName);
+            // HTML Header and style
+            file.write("<!DOCTYPE html>\n"
+                    + "<html>\n"
+                    + "\t<head>\n"
+                    + "\t\t<style>\n"
+                    + "\t\t\tp{font-size: 1em; font-family: \"Courier New\", monospaced;}\n"
+                    + "\t\t\t.literal{color : #004080;}\n"
+                    + "\t\t\t.comment{color: #009933;}\n"
+                    + "\t\t\t.reservedword {font-weight:bold;}\n"
+                    + "\t\t</style>\n"
+                    + "\t<body>\n");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void writeComment(String comment) throws IOException{
-        file.write("<span class='comment'>"+comment+"</span><br></br>");
+    public void writeComment(String comment) {
+        try {
+            file.write("<span class='comment'>"+comment+"</span><br></br>");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void writeSpace(char currentChar) throws IOException {
@@ -61,21 +68,37 @@ public class HTMLWriter {
             }
     }
 
-    public void writeReservedWord(String spelling) throws IOException {
-        file.write("<span class='reservedword'>"+spelling+"</span>");
+    public void writeReservedWord(String spelling)  {
+        try {
+            file.write("<span class='reservedword'>"+spelling+"</span>");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void writeLiteralWord(String spelling) throws IOException {
-        file.write("<span class='literal'>"+spelling+"</span>");
+    public void writeLiteralWord(String spelling) {
+        try {
+            file.write("<span class='literal'>"+spelling+"</span>");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void writeNormalWord(String spelling) throws IOException {
-        file.write("<span>"+spelling+"</span>");
+    public void writeNormalWord(String spelling)  {
+        try {
+            file.write("<span>"+spelling+"</span>");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public void closeHTMLFile() throws IOException {
-        file.write("\t</body>\n"
-                + "\t<head>\n");
+    public void closeHTMLFile()  {
+        try {
+            file.write("\t</body>\n"
+                    + "\t<head>\n");
+        } catch (IOException ex) {
+            Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

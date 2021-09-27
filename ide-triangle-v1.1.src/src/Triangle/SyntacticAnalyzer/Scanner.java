@@ -15,6 +15,9 @@
 package Triangle.SyntacticAnalyzer;
 
 import Triangle.HTMLWriter.HTMLWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public final class Scanner {
@@ -50,7 +53,7 @@ public final class Scanner {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-  public Scanner(SourceFile source, HTMLWriter htmlWriter ) {
+  public Scanner(SourceFile source, HTMLWriter htmlWriter )  {
     // New implementation
     this.htmlWriter = htmlWriter;
     htmlWriter.createHTMLFile();
@@ -95,9 +98,16 @@ public final class Scanner {
       break;
 
     case ' ': case '\n': case '\r': case '\t':
-      htmlWriter.writeSpace(currentChar);   // Add space in html file
+        {
+            try {
+                htmlWriter.writeSpace(currentChar);   // Add space in html file
+            } catch (IOException ex) {
+                Logger.getLogger(Scanner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
       takeIt();
       break;
+
     }
   }
 
@@ -213,7 +223,7 @@ public final class Scanner {
     }
   }
   
-  public void finish(){
+  public void finish() {
       htmlWriter.closeHTMLFile();
   }
 
