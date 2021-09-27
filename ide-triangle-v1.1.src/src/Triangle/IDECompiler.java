@@ -48,7 +48,6 @@ public class IDECompiler {
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
         
-        String filesDestination = sourceName.substring(0, sourceName.length() - 4);
         
         Scanner scanner = new Scanner(source);
         report = new IDEReporter();
@@ -79,8 +78,7 @@ public class IDECompiler {
         if (success)
         {
             System.out.println("Compilation was successful.");
-//            System.out.println("\nXml file destination: "+filesDestination);
-            XMLWriterTree writerXML = new XMLWriterTree(filesDestination);
+            XMLWriterTree writerXML = new XMLWriterTree(sourceName);
             writerXML.writer(rootAST);
         }
         else

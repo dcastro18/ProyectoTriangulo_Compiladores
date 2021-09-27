@@ -15,21 +15,20 @@ import java.io.IOException;
  */
 public class XMLWriterTree {
     
-    private String fileName;
+    private String filesDestination;
     
-    public XMLWriterTree(String fileName) {
-        this.fileName = fileName;
+    public XMLWriterTree(String sourceName) {
+        this.filesDestination = sourceName.substring(0, sourceName.length() - 4);
     }
     
     public void writer(Program ast) {
         //Preparar el archivo para escribir
         try {
-            FileWriter fileWriter = new FileWriter(fileName+".xml");
+            FileWriter fileWriter = new FileWriter(filesDestination+".xml");
             
             
             //Encabezado XML
             fileWriter.write("<?xml version=\"1.0\" standalone=\"yes\"?>\n");
-System.out.println(fileWriter);
             XMLWriterVisitor layout = new XMLWriterVisitor(fileWriter);
             
             ast.visit(layout, null);
