@@ -9,6 +9,7 @@ if('b' = 'c') then
 | ('b' = 'c') then
   putint(11)
 | ('b' = 'c') then
+  putint(11)
 else
    putint(12)
 end

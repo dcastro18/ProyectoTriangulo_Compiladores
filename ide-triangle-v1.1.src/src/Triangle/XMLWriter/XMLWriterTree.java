@@ -26,10 +26,12 @@ public class XMLWriterTree {
         try {
             FileWriter fileWriter = new FileWriter(fileName+".xml");
             
+            
             //Encabezado XML
             fileWriter.write("<?xml version=\"1.0\" standalone=\"yes\"?>\n");
-
+System.out.println(fileWriter);
             XMLWriterVisitor layout = new XMLWriterVisitor(fileWriter);
+            
             ast.visit(layout, null);
             
             fileWriter.close();

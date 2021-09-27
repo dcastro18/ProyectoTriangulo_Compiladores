@@ -80,7 +80,7 @@ public class XMLWriterVisitor implements Visitor {
       
     private FileWriter fileWriter;
     
-    XMLWriterVisitor(FileWriter filewriter) {
+    XMLWriterVisitor(FileWriter fileWriter) {
         this.fileWriter = fileWriter;
     }
 
