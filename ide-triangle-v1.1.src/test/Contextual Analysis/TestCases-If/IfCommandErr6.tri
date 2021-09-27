@@ -1,0 +1,11 @@
+! If Command error test
+
+let
+  var a : Integer
+in;
+
+if ( a = true ) ! a is not declared
+then
+    put('t')
+else
+    put('f')

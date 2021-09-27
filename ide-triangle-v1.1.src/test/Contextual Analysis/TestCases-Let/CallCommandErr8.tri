@@ -1,0 +1,8 @@
+! Error: proc called with func result instead of an integer variable reference
+
+let
+  func F () : Integer ~ 10;
+  proc P (var x : Integer) ~
+    putint (x * 2)
+in
+  P (F()) ! Error: P expects an integer variable reference, not the result of a function

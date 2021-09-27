@@ -13,6 +13,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
+import Triangle.XMLWriter.XMLWriterTree;
 
 
 
@@ -46,13 +47,19 @@ public class IDECompiler {
         
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
+        
+        
         Scanner scanner = new Scanner(source);
         report = new IDEReporter();
         Parser parser = new Parser(scanner, report);
         boolean success = false;
         
         rootAST = parser.parseProgram();
+//        System.out.println("\nHtml file destination: "+filesDestination);
+//        HTMLGenerator writerHTML = new HTMLGenerator(source2);
+//        writerHTML.generateHTML(filesDestination);
         if (report.numErrors == 0) {
+
             //System.out.println("Contextual Analysis ...");
             //Checker checker = new Checker(report);
             //checker.check(rootAST);
@@ -61,18 +68,23 @@ public class IDECompiler {
                 //Encoder encoder = new Encoder(report);
                 //encoder.encodeRun(rootAST, false);
                 
-                //if (report.numErrors == 0) {
+                if (report.numErrors == 0) {
                   //  encoder.saveObjectProgram(sourceName.replace(".tri", ".tam"));
-                  //  success = true;
-                //}
+                    success = true;
+                }
             }
         }
 
         if (success)
+        {
             System.out.println("Compilation was successful.");
+            XMLWriterTree writerXML = new XMLWriterTree(sourceName);
+            writerXML.writer(rootAST);
+        }
         else
+        {
             System.out.println("Compilation was unsuccessful.");
-        
+        }
         return(success);
     }
       

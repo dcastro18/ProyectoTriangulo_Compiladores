@@ -1,0 +1,9 @@
+! Test of while command
+! It doesn't run correctly
+
+while
+    if (a>1) !a is not declared
+    then 3 > 1
+    else 3 < 1
+do
+    putint(1)

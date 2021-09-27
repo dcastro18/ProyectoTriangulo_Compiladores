@@ -1,0 +1,7 @@
+! Vname error test
+
+let
+    var x : Integer
+in
+    x := 3;
+    x := 2 ! Let is single-command, here x is outside the scope 

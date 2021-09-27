@@ -37,6 +37,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -62,6 +63,13 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatInCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -293,7 +301,7 @@ public class Parser {
       }
       break;
 
-    case Token.LET: // cambio
+    case Token.LET: //Se añadio el comando LET
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
@@ -305,16 +313,29 @@ public class Parser {
       }
       break;
 
-    case Token.IF:
+    case Token.IF: 
       {
         acceptIt();
         Expression eAST = parseExpression();
         accept(Token.THEN);
-        Command c1AST = parseSingleCommand();
+        Command c1AST = parseCommand();
+        Expression eAST2 = null;
+        Command c2AST = null;
+        Command c3AST = null;
+        while (currentToken.kind == Token.PIPE)
+        {
+            acceptIt(); 
+            eAST2 = parseExpression();
+            accept(Token.THEN);
+            c2AST = parseCommand();
+            c3AST = c2AST;
+        }
+       
         accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
+        c3AST = parseCommand();
+        accept(Token.END);
         finish(commandPos);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+        commandAST = new IfCommand(eAST, c1AST, c3AST, commandPos);
       }
       break;
 
@@ -332,23 +353,29 @@ public class Parser {
       
     case Token.REPEAT:
     {
-        
-      
+        acceptIt();
+        commandAST = parseRepeatCases();
       break;
     }
       
       
     
     case Token.SKIP: // nuevo
-    case Token.SEMICOLON:
+    {
+        acceptIt();
+        finish(commandPos);
+        commandAST = new EmptyCommand(commandPos);
+      break;
+    }
+      
+    /*case Token.SEMICOLON: quitar
     case Token.END:
     case Token.ELSE:
     case Token.IN:
-    case Token.EOT:
+    case Token.EOT:*/
     
-      finish(commandPos);
-      //commandAST = new EmptyCommand(commandPos); // Comando vacio 
-      break;
+      
+      // // Comando vacio 
 
     default:
       syntacticError("\"%\" cannot start a command",
@@ -358,6 +385,199 @@ public class Parser {
     }
 
     return commandAST;
+  }
+  
+//************************METODOS DE COMANDO NUEVOS*****************************
+
+  
+//******************************************************************************
+// Comparación de REPEATS
+//******************************************************************************
+  
+  Command parseRepeatCases() throws SyntaxError {
+    Command commandAST = null; // in case there's a syntactic error
+
+    SourcePosition commandPos = new SourcePosition();
+    start(commandPos);
+  
+    switch (currentToken.kind) {
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new RepeatWhileDoCommand(eAST, cAST,commandPos); //Metodo agregado al AST
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new RepeatUntilDoCommand(eAST, cAST, commandPos);  //Metodo agregado al AST
+            }
+            break;
+            case Token.DO:
+            {   
+                acceptIt();
+                Command cAST = parseCommand();
+                commandAST = parseRepeatDo(cAST); //Comparar UNTIL y WHILE
+            }
+            break;
+            case Token.FOR:
+            {   
+                acceptIt();
+                Identifier iAST = parseIdentifier();
+                commandAST = parseRepeatRangeIn(iAST); //Comparar IN y := (BECOMES)
+                
+            }
+            break;
+            default:
+                syntacticError("\"%\" cannot start a loop",
+                currentToken.spelling);
+                break;
+        }
+        return commandAST;
+    }
+  
+//******************************************************************************
+// Comparación de WHILE, UNTIL de REPEAT DO
+//******************************************************************************
+        
+    Command parseRepeatDo(Command cAST) throws SyntaxError{
+        Command commandAST = null; // in case there's a syntactic error
+        
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
+        
+        switch (currentToken.kind) {
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new RepeatDoWhileCommand(cAST, eAST, commandPos); //Metodo agregado al AST
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new RepeatDoUntilCommand(cAST, eAST, commandPos); //Metodo agregado al AST
+            }
+            break;
+            default:
+                syntacticError("\"%\" not expected after do expression",currentToken.spelling);
+                break;
+
+        }
+        return commandAST;
+    }
+    
+//******************************************************************************
+// Comparación de := y IN de REPEAT FOR RANGE y IN
+//******************************************************************************
+      
+    Command parseRepeatRangeIn(Identifier iAST) throws SyntaxError{
+        Command commandAST = null; // in case there's a syntactic error
+        
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
+        
+        switch (currentToken.kind) {
+            case Token.BECOMES: //:=
+            {   
+                acceptIt();
+                accept(Token.RANGE);
+                Expression e1AST = parseExpression();
+                accept(Token.DOUBLEDOT);
+                Expression e2AST = parseExpression();
+                commandAST = parseRepeatRange(iAST, e1AST, e2AST);
+                
+            }
+            break;
+            case Token.IN:
+            {   
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                Declaration InVarDecl = new ForRangeIdentifierExpression(iAST, eAST, commandPos);
+                commandAST = new RepeatInCommand(InVarDecl, cAST, commandPos); //Metodo agregado al AST
+
+            }
+            break;
+            
+            default:
+                syntacticError("\"%\" not expected after for expression",currentToken.spelling);
+                break;
+        }
+        return commandAST;
+    }
+  
+//******************************************************************************
+// Comparación de DO, WHILE, UNTIL de REPEAT FOR RANGE
+//******************************************************************************
+ 
+  Command parseRepeatRange(Identifier iAST, Expression e1AST, Expression e2AST) throws SyntaxError{
+        Command commandAST = null; // in case there's a syntactic error
+        
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
+        
+        switch (currentToken.kind) {
+            case Token.DO:
+            {   
+                acceptIt();
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeCommand(RangeVarDecl, e2AST, cAST, commandPos);
+            }
+            break;
+            case Token.WHILE:
+            {   
+                acceptIt();
+                Expression e3AST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeWhileCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
+            }
+            break;
+            case Token.UNTIL:
+            {   
+                acceptIt();
+                Expression e3AST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                
+                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                commandAST = new RepeatForRangeWhileCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
+
+            }
+            break;
+            default:
+                syntacticError("\"%\" not expected after for expression",currentToken.spelling);
+                break;
+        }
+        return commandAST;
   }
 
 ///////////////////////////////////////////////////////////////////////////////

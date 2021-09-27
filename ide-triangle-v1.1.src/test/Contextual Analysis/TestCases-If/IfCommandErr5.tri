@@ -1,0 +1,10 @@
+! If Command error test
+
+let
+  var a : Integer;
+  var b : Integer
+in
+  if ( a / b ) then ! not a boolean expression
+    putint(a)
+  else
+    putint(b)

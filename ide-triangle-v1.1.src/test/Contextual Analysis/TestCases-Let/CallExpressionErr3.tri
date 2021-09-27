@@ -1,0 +1,8 @@
+! Error: Function called is not declared
+let
+   var x: Integer
+in
+begin
+  x:= media('a','b'); ! media not declared
+  putint(x)
+end

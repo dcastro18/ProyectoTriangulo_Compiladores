@@ -1,0 +1,14 @@
+! Call command successful test
+
+let
+   proc p1(a: Integer) ~ begin
+                          put('[');
+                          putint(a);
+                          put(']')
+                         end;
+   var x: Integer
+in
+begin
+  getint(var x);
+  p1(x)
+end

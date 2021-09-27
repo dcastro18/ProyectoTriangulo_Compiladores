@@ -1,0 +1,16 @@
+! Test of If Expression as an expression of an If Command
+! It does run correctly
+
+let
+    var a : Integer;
+    var b : Integer
+in 
+    let 
+        var a : Boolean;
+        var c : Boolean
+    in
+        if (if b > 5 then a else c) ! in this scope, a and c are boolean
+        then
+            putint(0)
+        else
+            putint(1)

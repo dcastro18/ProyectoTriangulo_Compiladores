@@ -1,0 +1,11 @@
+! If Command successful test
+
+let
+  var a : Integer;
+  var b : Integer;
+  var c : Boolean
+in
+  if (if a < 5 then true else c) then ! returns boolean expression
+    putint(a)
+  else
+    putint(b)

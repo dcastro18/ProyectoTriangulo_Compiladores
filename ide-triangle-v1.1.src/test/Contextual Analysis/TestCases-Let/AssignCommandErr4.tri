@@ -1,0 +1,10 @@
+! Test of array expression, it fails
+! Expected different array size
+
+let
+   var x: array 10 of Integer
+in
+begin
+  x:= [1, 2, 4, 8, 16, 32, 64, 128, 256]; !Expected array of size 10, got array of size 9
+  putint(x[5])
+end

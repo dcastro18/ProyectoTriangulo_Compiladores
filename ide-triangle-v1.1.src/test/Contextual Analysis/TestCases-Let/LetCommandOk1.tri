@@ -1,0 +1,23 @@
+! Let command successful test
+
+let
+   proc p() ~ let
+                 var x: Integer in
+                 begin
+                   getint(var x);
+                   putint(x)
+                 end;
+   var x: Char;
+   var y: Integer
+in
+begin
+  get(var x);
+  put(x);
+  let
+    var y: Integer 
+  in;
+  begin
+    getint(var y);
+    putint(y) ! It uses the first declaration
+  end;
+end

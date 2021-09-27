@@ -1,0 +1,18 @@
+! If Command error test
+
+let
+    var a : Integer;
+    var b : Integer
+in
+    begin
+        let 
+            var a : Boolean
+        in
+            if (a) ! in this scope, a is boolean
+            then
+                put('a')
+            else
+                put('b')
+            ;
+        a := true ! error: in this scope a is an integer
+    end

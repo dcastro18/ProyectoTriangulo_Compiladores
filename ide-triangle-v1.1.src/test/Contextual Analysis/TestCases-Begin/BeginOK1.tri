@@ -1,0 +1,19 @@
+! Test of scopes and types in begin and let command
+! It runs correctly
+
+let 
+  const y ~ 85 ;
+  var x : Integer
+in 
+  begin
+    x := 25;
+    let
+      var y : Char; 
+      var z : Boolean
+    in
+      begin
+        y := 'z';
+        put(y);
+        putint(x)
+      end
+    end

@@ -62,8 +62,17 @@ import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatInCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -153,6 +162,40 @@ public final class Checker implements Visitor {
     ast.C.visit(this, null);
     return null;
   }
+  
+  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el método visitRepeatWhileDo()
+    return null;
+  }
+  
+  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el método visitRepeatUntilDo()
+    return null;
+  }
+  
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) { //Se agrego el metodo visitRepeatDoWhileCommand()
+    return null;
+  }
+  
+  public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { //Se agrego el metodo visitRepeatDoUntilCommand()
+    return null;
+  }
+  
+  public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
+    return null;
+  }
+  
+  public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
+    return null;
+  }
+  
+  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+    return null;
+  }
+  
+  public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el método visitRepeatForRangeUntilCommand()
+    return null;
+  }
+  
+
 
   // Expressions
 
@@ -351,6 +394,10 @@ public final class Checker implements Visitor {
                             ast.I.spelling, ast.position);
 
     return null;
+  }
+  
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método
+      return null;
   }
 
   // Array Aggregates

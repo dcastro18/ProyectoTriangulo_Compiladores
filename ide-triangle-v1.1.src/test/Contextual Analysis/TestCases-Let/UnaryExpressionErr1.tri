@@ -1,0 +1,6 @@
+! Error: unary operator expected
+let
+   func a(b: Boolean): Boolean ~
+        +b ! + it's not an unary operator
+in
+  put('a')

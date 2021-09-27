@@ -1,0 +1,7 @@
+! Test of parameters's names in func declaration
+! It runs correctly
+
+let
+  func a(var par1 : Char, var par2 : Integer): Char ~ 'C'
+in
+  ; ! Empty Commands

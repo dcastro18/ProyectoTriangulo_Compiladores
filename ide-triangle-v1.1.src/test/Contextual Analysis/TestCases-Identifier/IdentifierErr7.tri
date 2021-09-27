@@ -1,0 +1,7 @@
+! Contextual error on identifier double declaration
+
+let
+    const x ~ 2;
+    var x : Integer ! x already declared
+in
+    putint(x)

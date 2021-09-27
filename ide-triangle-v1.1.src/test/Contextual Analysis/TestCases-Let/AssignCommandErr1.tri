@@ -1,0 +1,10 @@
+! Contextual error on assign commands
+! Assignment and type incompatibility
+
+let
+   var y: array 5 of Integer
+in
+begin
+  !y was declared as an array of integers
+  y:= ['a', 1, 5, 2, 3]; !'a' is not a integer
+end

@@ -1,0 +1,10 @@
+! Identifier successful test
+
+let
+
+  var a : Integer
+
+in
+
+  getint(var a) ! a is a variable
+
