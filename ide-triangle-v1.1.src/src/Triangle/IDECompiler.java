@@ -13,6 +13,8 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
+import Triangle.HTMLWriter.HTML;
+import Triangle.HTMLWriter.HTMLWriter;
 import Triangle.XMLWriter.XMLWriterTree;
 
 
@@ -22,7 +24,7 @@ import Triangle.XMLWriter.XMLWriterTree;
  * to get to the ASTs in order to draw them in the IDE without modifying the
  * original Triangle code.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class IDECompiler {
 
@@ -47,18 +49,20 @@ public class IDECompiler {
         
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
+        SourceFile source1= new SourceFile(sourceName);
         
         String filesDestination = sourceName.substring(0, sourceName.length() - 4);
-        
+        System.out.println(source.toString());
+
         Scanner scanner = new Scanner(source);
         report = new IDEReporter();
         Parser parser = new Parser(scanner, report);
         boolean success = false;
         
         rootAST = parser.parseProgram();
-//        System.out.println("\nHtml file destination: "+filesDestination);
-//        HTMLGenerator writerHTML = new HTMLGenerator(source2);
-//        writerHTML.generateHTML(filesDestination);
+          //System.out.println("\nHtml file destination: "+filesDestination);
+        HTML writerHTML = new HTML(source1);
+        writerHTML.generateHTML(filesDestination);
         if (report.numErrors == 0) {
 
             //System.out.println("Contextual Analysis ...");

@@ -1,13 +1,21 @@
-package Triangle.TreeWriter;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Triangle.HTMLWriter;
 
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Token;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public final class HTMLGenerator {
-
-  private SourceFile sourceFile;
+/**
+ *
+ * @author anner
+ */
+public class HTML {
+    private SourceFile sourceFile;
   public boolean isDone,error = false;
   private FileWriter fileWriter;
   private String content = "";
@@ -15,7 +23,7 @@ public final class HTMLGenerator {
   private char currentChar;
   private StringBuffer currentSpelling;
   
-  public HTMLGenerator(SourceFile source){
+  public HTML(SourceFile source){
       sourceFile = source;
       currentChar = sourceFile.getSource();
   }
@@ -102,9 +110,9 @@ public final class HTMLGenerator {
             while (isLetter(currentChar) || isDigit(currentChar))
                 takeIt();
             if (this.isReserved(this.currentSpelling.toString())){
-                writeLine(this.currentSpelling.toString(), HTMLGenerator.BOLD);
+                writeLine(this.currentSpelling.toString(), HTML.BOLD);
             }else{
-                writeLine(this.currentSpelling.toString(), HTMLGenerator.SIMPLE);
+                writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
             }
             break;
         case '0':  case '1':  case '2':  case '3':  case '4':
@@ -112,7 +120,7 @@ public final class HTMLGenerator {
             takeIt();
             while (isDigit(currentChar))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.BLUE);
+            writeLine(this.currentSpelling.toString(), HTML.BLUE);
             break;
         case '+':  case '-':  case '*': case '/':  case '=':
         case '<':  case '>':  case '\\':  case '&':  case '@':
@@ -120,7 +128,7 @@ public final class HTMLGenerator {
             takeIt();
             while (isOperator(currentChar))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.SIMPLE);
+            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
             break;
         case '\'':
             takeIt();
@@ -128,7 +136,7 @@ public final class HTMLGenerator {
             //PREGUNTA
             if (currentChar == '\'') {
                 takeIt();
-                writeLine(this.currentSpelling.toString(), HTMLGenerator.BLUE);
+                writeLine(this.currentSpelling.toString(), HTML.BLUE);
             }else{
                 this.error = true;
                 System.out.println("Error while writing HTML file for print the AST");
@@ -139,23 +147,23 @@ public final class HTMLGenerator {
             if(currentChar == '.'){
                 takeIt();
             }
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.SIMPLE);
+            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
             break;
         case ':':
             takeIt();
             if (currentChar == '=') {
                 takeIt();
             }
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.SIMPLE);
+            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
             break;
         case ',': case '~': case '|': case '$': case '(': 
         case ')': case '[': case ']': case '{': case '}': case ';':
             takeIt();
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.SIMPLE);
+            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
             break;  
         case ' ':
             takeIt();
-            writeLine("&nbsp;", HTMLGenerator.SIMPLE);
+            writeLine("&nbsp;", HTML.SIMPLE);
             break;
         case SourceFile.EOT:
             this.isDone = true;
@@ -164,16 +172,16 @@ public final class HTMLGenerator {
             takeIt();
             while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTMLGenerator.GREEN);
+            writeLine(this.currentSpelling.toString(), HTML.GREEN);
             break;
         }  
         case '\n': case '\r': 
             takeIt();
-            writeLine("<br>",HTMLGenerator.EMPTY);
+            writeLine("<br>",HTML.EMPTY);
             break;
         case '\t':
             takeIt();
-            writeLine("&emsp;",HTMLGenerator.SIMPLE);
+            writeLine("&emsp;",HTML.SIMPLE);
             break;
         default:
             takeIt();
@@ -192,15 +200,15 @@ public final class HTMLGenerator {
   
   public void writeLine(String line, int kind){
       switch(kind){
-          case HTMLGenerator.SIMPLE: this.content+=("<p>"+line+"</p>");
+          case HTML.SIMPLE: this.content+=("<p>"+line+"</p>");
           break;
-          case HTMLGenerator.BOLD: this.content+=("<strong>"+line+"</strong>");
+          case HTML.BOLD: this.content+=("<strong>"+line+"</strong>");
           break;
-          case HTMLGenerator.GREEN: this.content+=("<span style = \"color:#00b300;\">"+line+"</span>");
+          case HTML.GREEN: this.content+=("<span style = \"color:#00b300;\">"+line+"</span>");
           break;
-          case HTMLGenerator.BLUE: this.content+=("<span style = \"color:#0000cd;\">"+line+"</span>");
+          case HTML.BLUE: this.content+=("<span style = \"color:#0000cd;\">"+line+"</span>");
           break;
-          case HTMLGenerator.EMPTY: this.content+=(line);
+          case HTML.EMPTY: this.content+=(line);
           break;
       }
   }
