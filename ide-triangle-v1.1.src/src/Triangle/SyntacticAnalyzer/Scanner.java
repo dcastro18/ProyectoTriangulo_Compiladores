@@ -195,6 +195,8 @@ public final class Scanner {
     }
   }
 
+  
+  
   public Token scan () {
     Token tok;
     SourcePosition pos;

@@ -36,7 +36,7 @@ public class SourceFile {
     }
   }
 
-  char getSource() {
+  public char getSource() {
     try {
       int c = source.read();
 
@@ -52,7 +52,7 @@ public class SourceFile {
     }
   }
 
-  int getCurrentLine() {
+  public int getCurrentLine() {
     return currentLine;
   }
 }
