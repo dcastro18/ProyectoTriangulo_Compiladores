@@ -117,6 +117,8 @@ public interface Visitor {
 
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration aThis, Object o);
 
+    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o);
+
     
 
 }

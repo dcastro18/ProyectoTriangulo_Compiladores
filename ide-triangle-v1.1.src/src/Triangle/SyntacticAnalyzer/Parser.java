@@ -65,6 +65,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
@@ -855,7 +856,7 @@ public class Parser {
                 declarationAST = parseProcFuncS();
                 accept (Token.END);
                 finish(declarationPos);
-                //declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
+                declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
             }
             break;
         
@@ -1059,82 +1060,105 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
+  
+  
  Declaration parseCases() throws SyntaxError{
     Declaration declarationAST = null; // in case there's a syntactic error the user see this
+    Declaration casesAST1 = null;
+    Declaration casesAST2 = null;
+    Declaration casesAST3 = null;
 
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     
-    parseCase();
+    casesAST1 = parseCase();
+    finish(declarationPos);
+    
     while(){
-        parseCase();
-    }
-    if (currentToken.kind == Token.LCURLY){
-        acceptIt();
-        parseElseCase();
-        accept(Token.RBRACKET);
+        start(declarationPos);
+        casesAST2 = parseCase();
+        finish(declarationPos);
+        declarationAST = new casesDeclaration(casesAST1, casesAST2, declarationPos);
     }
     
+    if (){
+        start(declarationPos);
+        casesAST3 = parseElseCase();
+        finish(declarationPos);
+        declarationAST = new caseElseDeclaration(casesAST3, declarationPos);
+    }
     return declarationAST;
      
  }
   
  Declaration parseCase() throws SyntaxError{
-    Declaration declarationAST = null; // in case there's a syntactic error the user see this
-
+    Declaration dAST = null; // in case there's a syntactic error the user see this
+    Declaration dAST2 = null;
+    Command commandAST = null;
+    
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     
     if(currentToken.kind == Token.WHEN){
         acceptIt();
-        switch (currentToken.kind){
-            case parseCaseLiteral():
-            {
-                parseCaseLiteral()
-            }
-            break;
-            case Token.RANGE:
-            {
-                
-            }
-            break;
+        if (currentToken.kind == Token.RANGE){
+            dAST = parseCaseLiteral();
+            accept(Token.DOUBLEDOT); 
+            dAST2 = parseCaseLiteral();
+            finish(declarationPos);
+            dAST = new caseLiteralDeclaration(dAST, dAST2, declarationPos);     
+        }else{
+            dAST = parseCaseLiteral();
+            finish(declarationPos);
+            dAST = new caseLiteralDeclaration(dAST, declarationPos);     
         }
         accept(Token.THEN);
-        parseCommand();
+        commandAST = parseCommand();
+        finish(declarationPos);
     }
-    
-    return declarationAST;
+    return dAST;
  }
   
-  Declaration parseElseCase() throws SyntaxError{
-    Declaration declarationAST = null; // in case there's a syntactic error the user see this
+  Command parseElseCase() throws SyntaxError{
+    Command commandAST = null; // in case there's a syntactic error the user see this
 
-    SourcePosition declarationPos = new SourcePosition();
-    start(declarationPos);
+    SourcePosition commandPos = new SourcePosition();
+    start(commandPos);
     
     if(currentToken.kind == Token.ELSE){
-        parseCommand();
+        commandAST = parseCommand();
+        finish(commandPos);
+        commandAST = new elseCaseCommand(commandAST, commandPos);
+
     }
     
-    return declarationAST;
+    return commandAST;
      
  }
   
    Declaration parseCaseLiteral() throws SyntaxError{
     Declaration declarationAST = null; // in case there's a syntactic error the user see this
-
+    IntegerLiteral intAST = null;
+    CharacterLiteral charAST = null;
+    
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     
     switch (currentToken.kind){
         case Token.INTLITERAL:
         {
-            parseIntegerLiteral();
+            acceptIt();
+            intAST = parseIntegerLiteral();
+            finish(declarationPos);
+            declarationAST = new ProcFuncSDeclaration(intAST, declarationPos);
         }
         break;
         case Token.CHARLITERAL:
         {
-            parseCharacterLiteral();
+            acceptIt();
+            charAST = parseCharacterLiteral();
+            finish(declarationPos);
+            declarationAST = new ProcFuncSDeclaration(charAST, declarationPos);
         }
         break;
     

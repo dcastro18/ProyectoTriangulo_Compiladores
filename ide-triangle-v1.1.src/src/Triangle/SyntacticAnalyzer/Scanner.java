@@ -92,7 +92,7 @@ public final class Scanner {
           comment += currentChar;       // Add comment - MODIFIED
           takeIt();
         }
-        htmlWriter.writeComment(comment);   //Write the comment
+        htmlWriter.writeComment(comment);   // Write the comment
         comment = "";                       // Restart the comment field
       }
       break;
