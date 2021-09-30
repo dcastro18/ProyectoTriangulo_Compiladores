@@ -194,42 +194,8 @@ public class HTML {
       }
   }
   
-  public void writeLine(String line, int kind){
-      switch(kind){
-          case HTML.SIMPLE: this.content+=("<p>"+line+"</p>");
-          break;
-          case HTML.BOLD: this.content+=("<strong>"+line+"</strong>");
-          break;
-          case HTML.GREEN: this.content+=("<span style = \"color:#00b300;\">"+line+"</span>");
-          break;
-          case HTML.BLUE: this.content+=("<span style = \"color:#0000cd;\">"+line+"</span>");
-          break;
-          case HTML.EMPTY: this.content+=(line);
-          break;
-      }
-  }
-  
   public void writeComment(String comment) {
       this.content+=("<span class='comment'>"+comment+"</span><br></br>");
-    }
-
-    public void writeSpace(String currentChar) throws IOException {
-        /*switch (currentChar) {
-                case '\n':
-                {
-                    this.content+=("<br></br>\n");
-                }
-                break;
-                case '\t':
-                {
-                    this.content+=("<span>"+"&nbsp;&nbsp;"+"</span>\n");
-                }
-                break;
-                default:
-                    this.content+=("<span>"+"&nbsp;"+"</span>\n");
-                
-            }*/
-        
     }
 
     public void writeReservedWord(String spelling)  {
@@ -243,10 +209,6 @@ public class HTML {
     public void writeNormalWord(String spelling)  {
         this.content+=("<span>"+spelling+"</span>\n");
     }
-  
-  public static final int
-    SIMPLE  = 0,BOLD    = 1,
-    GREEN   = 2,BLUE    = 3,
-    EMPTY   = 4;
+
 }
 

@@ -14,7 +14,6 @@ import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.ContextualAnalyzer.Checker;
 import Triangle.CodeGenerator.Encoder;
 import Triangle.HTMLWriter.HTML;
-import Triangle.HTMLWriter.HTMLWriter;
 import Triangle.XMLWriter.XMLWriterTree;
 
 
