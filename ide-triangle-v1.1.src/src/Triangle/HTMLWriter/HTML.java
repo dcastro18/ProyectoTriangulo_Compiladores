@@ -176,7 +176,7 @@ public class HTML {
              if (currentChar == '\n') {
                 takeIt();
             }
-            writeLine("<br>",HTML.EMPTY);
+            writeNormalWord("<br>");
             break;
         case '\n': 
             takeIt();
