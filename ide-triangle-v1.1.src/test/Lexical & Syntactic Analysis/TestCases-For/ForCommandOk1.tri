@@ -1,9 +1,5 @@
 repeat for
-
 x
-
 in true 
-
 do put('c'); put(3)
-
 end

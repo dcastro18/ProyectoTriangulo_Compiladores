@@ -10,3 +10,5 @@ in
     putint(a)
   else
     putint(b)
+end
+end

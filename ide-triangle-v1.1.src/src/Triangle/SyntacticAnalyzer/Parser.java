@@ -67,6 +67,7 @@ import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
@@ -569,7 +570,7 @@ public class Parser {
                 finish(commandPos);
                 
                 Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
-                commandAST = new RepeatForRangeWhileCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
+                commandAST = new RepeatForRangeUntilCommand(RangeVarDecl, e2AST, e3AST, cAST, commandPos);
 
             }
             break;

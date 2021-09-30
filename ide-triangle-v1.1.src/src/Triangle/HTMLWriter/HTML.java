@@ -175,7 +175,14 @@ public class HTML {
             writeLine(this.currentSpelling.toString(), HTML.GREEN);
             break;
         }  
-        case '\n': case '\r': 
+        case '\r': 
+            takeIt();
+             if (currentChar == '\n') {
+                takeIt();
+            }
+            writeLine("<br>",HTML.EMPTY);
+            break;
+        case '\n': 
             takeIt();
             writeLine("<br>",HTML.EMPTY);
             break;
