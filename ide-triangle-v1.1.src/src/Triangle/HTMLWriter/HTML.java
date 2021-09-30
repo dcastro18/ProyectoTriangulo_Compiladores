@@ -9,6 +9,8 @@ import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.SyntacticAnalyzer.Token;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,26 +56,20 @@ public class HTML {
   }
   
   public void generateHTML(String fileName) {
-      this.content+=("<!DOCTYPE html>\n" +
-                        "<head>\n" +
-                        "  \t<meta charset=\"utf-8\">\n" +
-                        "  \t<title>FileHTML</title>\n" +
-                        "</head>\n"+
-                        "<style type=\"text/css\">\n"
-               + "div {display: inline;" +
-                        "      font-family: courier;" +
-                        "      font-size:1em;" +
-                        "    }"
-               + "p {display: inline;" +
-                        "      font-family: courier;" +
-                        "      font-size:1em;" +
-                        "    }" +
-                        "\n" +
-                        "</style>" +
-                        "<body>");
+      this.content+=("<!DOCTYPE html>\n"
+                    + "<html>\n"
+                    + "\t<head>\n"
+                    + "\t\t<style>\n"
+                    + "\t\t\tp{font-size: 1em; font-family: \"Courier New\", monospaced;}\n"
+                    + "\t\t\t.literal{color : #004080;}\n"
+                    + "\t\t\t.comment{color: #009933;}\n"
+                    + "\t\t\t.reservedword {font-weight:bold;}\n"
+                    + "\t\t</style>\n"
+                    + "\t</head>\n"
+                    + "\t<body>\n");
       this.scan();
       this.content+=("</body>\n" +
-                  "</html>");
+                    "</html>");
       try {
           if (!this.error){
               fileWriter = new FileWriter(fileName + ".html");
@@ -110,9 +106,9 @@ public class HTML {
             while (isLetter(currentChar) || isDigit(currentChar))
                 takeIt();
             if (this.isReserved(this.currentSpelling.toString())){
-                writeLine(this.currentSpelling.toString(), HTML.BOLD);
+                writeReservedWord(this.currentSpelling.toString());
             }else{
-                writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
+                writeNormalWord(this.currentSpelling.toString());
             }
             break;
         case '0':  case '1':  case '2':  case '3':  case '4':
@@ -120,7 +116,7 @@ public class HTML {
             takeIt();
             while (isDigit(currentChar))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTML.BLUE);
+            writeLiteralWord(this.currentSpelling.toString());
             break;
         case '+':  case '-':  case '*': case '/':  case '=':
         case '<':  case '>':  case '\\':  case '&':  case '@':
@@ -128,7 +124,7 @@ public class HTML {
             takeIt();
             while (isOperator(currentChar))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
+            writeNormalWord(this.currentSpelling.toString());
             break;
         case '\'':
             takeIt();
@@ -136,7 +132,7 @@ public class HTML {
             //PREGUNTA
             if (currentChar == '\'') {
                 takeIt();
-                writeLine(this.currentSpelling.toString(), HTML.BLUE);
+                writeLiteralWord(this.currentSpelling.toString());
             }else{
                 this.error = true;
                 System.out.println("Error while writing HTML file for print the AST");
@@ -147,23 +143,23 @@ public class HTML {
             if(currentChar == '.'){
                 takeIt();
             }
-            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
+            writeNormalWord(this.currentSpelling.toString());
             break;
         case ':':
             takeIt();
             if (currentChar == '=') {
                 takeIt();
             }
-            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
+            writeNormalWord(this.currentSpelling.toString());
             break;
         case ',': case '~': case '|': case '$': case '(': 
         case ')': case '[': case ']': case '{': case '}': case ';':
             takeIt();
-            writeLine(this.currentSpelling.toString(), HTML.SIMPLE);
+            writeNormalWord(this.currentSpelling.toString());
             break;  
         case ' ':
             takeIt();
-            writeLine("&nbsp;", HTML.SIMPLE);
+            writeNormalWord("&nbsp;");
             break;
         case SourceFile.EOT:
             this.isDone = true;
@@ -172,16 +168,16 @@ public class HTML {
             takeIt();
             while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT))
                 takeIt();
-            writeLine(this.currentSpelling.toString(), HTML.GREEN);
+            writeComment(this.currentSpelling.toString());
             break;
         }  
         case '\n': case '\r': 
             takeIt();
-            writeLine("<br>",HTML.EMPTY);
+            writeNormalWord("<br>");
             break;
         case '\t':
             takeIt();
-            writeLine("&emsp;",HTML.SIMPLE);
+            writeNormalWord("&emsp;");
             break;
         default:
             takeIt();
@@ -213,8 +209,44 @@ public class HTML {
       }
   }
   
+  public void writeComment(String comment) {
+      this.content+=("<span class='comment'>"+comment+"</span><br></br>");
+    }
+
+    public void writeSpace(String currentChar) throws IOException {
+        /*switch (currentChar) {
+                case '\n':
+                {
+                    this.content+=("<br></br>\n");
+                }
+                break;
+                case '\t':
+                {
+                    this.content+=("<span>"+"&nbsp;&nbsp;"+"</span>\n");
+                }
+                break;
+                default:
+                    this.content+=("<span>"+"&nbsp;"+"</span>\n");
+                
+            }*/
+        
+    }
+
+    public void writeReservedWord(String spelling)  {
+        this.content+=("<strong>"+spelling+"</strong>");
+    }
+
+    public void writeLiteralWord(String spelling) {
+        this.content+=("<span class='literal'>"+spelling+"</span>\n");
+    }
+
+    public void writeNormalWord(String spelling)  {
+        this.content+=("<span>"+spelling+"</span>\n");
+    }
+  
   public static final int
     SIMPLE  = 0,BOLD    = 1,
     GREEN   = 2,BLUE    = 3,
     EMPTY   = 4;
 }
+

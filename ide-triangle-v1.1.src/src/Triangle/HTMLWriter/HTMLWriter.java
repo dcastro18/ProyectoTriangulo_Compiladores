@@ -414,7 +414,7 @@ private int scanToken() {
 
     public void writeNormalWord(String spelling)  {
         try {
-            file.write("<span>"+spelling+"</span>\n");
+            file.write("<p>"+spelling+"</p>\n");
         } catch (IOException ex) {
             Logger.getLogger(HTMLWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
