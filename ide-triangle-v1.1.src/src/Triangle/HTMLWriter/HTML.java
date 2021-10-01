@@ -173,10 +173,10 @@ public class HTML {
         }  
         case '\r': 
             takeIt();
-             if (currentChar == '\n') {
+            /*if (currentChar == '\n') {
                 takeIt();
             }
-            writeNormalWord("<br>");
+            writeNormalWord("<br>");*/
             break;
         case '\n': 
             takeIt();
@@ -202,7 +202,7 @@ public class HTML {
   }
   
   public void writeComment(String comment) {
-      this.content+=("<span class='comment'>"+comment+"</span><br></br>");
+      this.content+=("<span class='comment'>"+comment+"</span>");
     }
 
     public void writeReservedWord(String spelling)  {
