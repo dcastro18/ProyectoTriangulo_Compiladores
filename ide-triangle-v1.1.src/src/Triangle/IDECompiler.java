@@ -47,6 +47,7 @@ public class IDECompiler {
                            " **********");
         
         System.out.println("Syntactic Analysis ...");
+        HTMLWriter htmlWriter = new HTMLWriter(sourceName);
         SourceFile source = new SourceFile(sourceName);
         SourceFile source1= new SourceFile(sourceName);
         

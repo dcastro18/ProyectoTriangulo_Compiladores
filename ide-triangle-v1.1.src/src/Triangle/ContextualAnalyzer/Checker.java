@@ -63,8 +63,11 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;  //Se agrego el import
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
@@ -90,6 +93,7 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -163,11 +167,11 @@ public final class Checker implements Visitor {
     return null;
   }
   
-  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el método visitRepeatWhileDo()
+  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el mï¿½todo visitRepeatWhileDo()
     return null;
   }
   
-  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el método visitRepeatUntilDo()
+  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el mï¿½todo visitRepeatUntilDo()
     return null;
   }
   
@@ -187,11 +191,11 @@ public final class Checker implements Visitor {
     return null;
   }
   
-  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeWhileCommand()
     return null;
   }
   
-  public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el método visitRepeatForRangeUntilCommand()
+  public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeUntilCommand()
     return null;
   }
   
@@ -396,7 +400,7 @@ public final class Checker implements Visitor {
     return null;
   }
   
-    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el mï¿½todo
       return null;
   }
 
@@ -985,4 +989,24 @@ public final class Checker implements Visitor {
     StdEnvironment.unequalDecl = declareStdBinaryOp("\\=", StdEnvironment.anyType, StdEnvironment.anyType, StdEnvironment.booleanType);
 
   }
+
+    @Override
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitLocalDeclaration(LocalDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

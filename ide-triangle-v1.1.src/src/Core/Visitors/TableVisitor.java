@@ -48,8 +48,11 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;   //Se agrego el import
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
@@ -73,6 +76,7 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -93,7 +97,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * Generates a DefaultTableModel, used to draw a Jable.
  *
- * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class TableVisitor implements Visitor {
     
@@ -150,42 +154,42 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el método visitRepeatWhileDo() al AST
+    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el mï¿½todo visitRepeatWhileDo() al AST
       ast.E.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
     }
     
-    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el método visitRepeatUntilDo() al AST
+    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el mï¿½todo visitRepeatUntilDo() al AST
       ast.E.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
     }
     
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) { //Se agrego el método visitRepeatDoWhileCommand() al AST
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatDoWhileCommand() al AST
         ast.C.visit(this, null);
         ast.E.visit(this, null);
         
         return(null);
     }
     
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { //Se agrego el método visitRepeatDoUntilCommand() al AST
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatDoUntilCommand() al AST
         ast.C.visit(this, null);
         ast.E.visit(this, null);
         
         return(null);
     }
     
-    public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el método visitRepeatInCommand() al AST
+    public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatInCommand() al AST
         ast.D.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);
     }
     
-    public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el método visitRepeatForRangeCommand() al AST
+    public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeCommand() al AST
         ast.D.visit(this, null);
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -193,7 +197,7 @@ public class TableVisitor implements Visitor {
         return(null);
     }
     
-    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
+    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeWhileCommand()
         ast.D.visit(this, null);
         ast.E1.visit(this, null);
         ast.E2.visit(this, null);
@@ -202,7 +206,7 @@ public class TableVisitor implements Visitor {
         return(null);
     }
     
-    public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el método visitRepeatForRangeUntilCommand()
+    public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeUntilCommand()
         ast.D.visit(this, null);
         ast.E1.visit(this, null);
         ast.E2.visit(this, null);
@@ -384,7 +388,7 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el mï¿½todo visitForRangeIdentifierExpression()
       ast.I.visit(this, null);
       ast.E.visit(this, null);
         
@@ -704,4 +708,24 @@ public class TableVisitor implements Visitor {
   // <editor-fold defaultstate="collapsed" desc=" Attributes ">
     private DefaultTableModel model;
     // </editor-fold>
+
+    @Override
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitLocalDeclaration(LocalDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -24,14 +24,14 @@ public interface Visitor {
   public abstract Object visitLetCommand(LetCommand ast, Object o);
   public abstract Object visitSequentialCommand(SequentialCommand ast, Object o);
   public abstract Object visitWhileCommand(WhileCommand ast, Object o);
-  public abstract Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o); //Se añadio el método visitRepeatWhileDo()
-  public abstract Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o); //Se añadio el método visitRepeatUntilDo()
-  public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o); //Se añadio el método visitRepeatDoWhileCommand()
-  public abstract Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o); //Se añadio el método visitRepeatDoUntilCommand()
-  public abstract Object visitRepeatInCommand(RepeatInCommand ast, Object o); //Se añadio el método visitRepeatInCommand()
-  public abstract Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o); //Se añadio el método visitRepeatForRangeCommand()
-  public abstract Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o); //Se añadio el método visitRepeatForRangeWhileCommand();
-  public abstract Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o); //Se añadio el método visitRepeatForRangeUntilCommand()
+  public abstract Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatWhileDo()
+  public abstract Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatUntilDo()
+  public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatDoWhileCommand()
+  public abstract Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatDoUntilCommand()
+  public abstract Object visitRepeatInCommand(RepeatInCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatInCommand()
+  public abstract Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatForRangeCommand()
+  public abstract Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatForRangeWhileCommand();
+  public abstract Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o); //Se aï¿½adio el mï¿½todo visitRepeatForRangeUntilCommand()
   
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
@@ -55,7 +55,8 @@ public interface Visitor {
   public abstract Object visitTypeDeclaration(TypeDeclaration ast, Object o);
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
-  public abstract Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o); //Se añadio el método
+  public abstract Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o); //Se aï¿½adio el mï¿½todo
+  public abstract Object visitVarExpressionDeclaration(VarExpressionDeclaration aThis, Object o);//Se aï¿½adio el mï¿½todo
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);
@@ -111,5 +112,13 @@ public interface Visitor {
 
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
+
+    public Object visitLocalDeclaration(LocalDeclaration aThis, Object o);
+
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration aThis, Object o);
+
+    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o);
+
+    
 
 }
