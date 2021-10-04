@@ -11,9 +11,9 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  *
  * @author Keila
  */
-public class RepeatForRangeCommand extends Command{
+public class RepeatForRangeDoCommand extends Command{
     
-    public RepeatForRangeCommand (Declaration dAST, Expression eAST, Command cAST, SourcePosition thePosition) {
+    public RepeatForRangeDoCommand (Declaration dAST, Expression eAST, Command cAST, SourcePosition thePosition) {
         super (thePosition);
         D = dAST;
         E = eAST;
@@ -22,7 +22,7 @@ public class RepeatForRangeCommand extends Command{
     }
     
     public Object visit(Visitor v, Object o) {
-        return v.visitRepeatForRangeCommand(this, o);
+        return v.visitRepeatForRangeDoCommand(this, o);
     }
     
     public Declaration D;

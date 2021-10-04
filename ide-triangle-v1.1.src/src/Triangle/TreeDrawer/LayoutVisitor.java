@@ -66,7 +66,7 @@ import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
@@ -153,8 +153,8 @@ public class LayoutVisitor implements Visitor {
       return layoutBinary("RepeatInCom", ast.D, ast.C);
   }
   
-  public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
-      return layoutTernary("RepeatForRangeCom", ast.D, ast.E, ast.C);
+  public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
+      return layoutTernary("RepeatForRangeDoCom", ast.D, ast.E, ast.C);
   }
   
   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()

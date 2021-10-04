@@ -74,7 +74,7 @@ import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
@@ -190,7 +190,7 @@ public final class Encoder implements Visitor {
       return null;
   }
   
-  public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
+  public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
       return null;
   }
   

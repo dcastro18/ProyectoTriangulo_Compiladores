@@ -29,7 +29,7 @@ public interface Visitor {
   public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o); //Se a�adio el m�todo visitRepeatDoWhileCommand()
   public abstract Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o); //Se a�adio el m�todo visitRepeatDoUntilCommand()
   public abstract Object visitRepeatInCommand(RepeatInCommand ast, Object o); //Se a�adio el m�todo visitRepeatInCommand()
-  public abstract Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o); //Se a�adio el m�todo visitRepeatForRangeCommand()
+  public abstract Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o); //Se a�adio el m�todo visitRepeatForRangeCommand()
   public abstract Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o); //Se a�adio el m�todo visitRepeatForRangeWhileCommand();
   public abstract Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o); //Se a�adio el m�todo visitRepeatForRangeUntilCommand()
   
