@@ -13,7 +13,8 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class RepeatForRangeDoCommand extends Command{
     
-    public RepeatForRangeDoCommand (Declaration dAST, Expression eAST, Command cAST, SourcePosition thePosition) {
+    public RepeatForRangeDoCommand (Declaration dAST, Expression eAST, 
+            Command cAST, SourcePosition thePosition) {
         super (thePosition);
         D = dAST;
         E = eAST;

@@ -851,7 +851,7 @@ public class Parser {
                 declarationAST = parseProcFuncS();
                 accept (Token.END);
                 finish(declarationPos);
-                //declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
+                declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
             }
             break;
         
