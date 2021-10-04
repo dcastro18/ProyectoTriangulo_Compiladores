@@ -52,7 +52,7 @@ import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
@@ -145,8 +145,8 @@ public class TreeVisitor implements Visitor {
       return(createBinary("Repeat In Command", ast.D, ast.C));
     }
     
-    public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) {
-        return(createTernary("Repeat For Range Command", ast.D, ast.E, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
+    public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) {
+        return(createTernary("Repeat For Range Do Command", ast.D, ast.E, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
     }
     
     public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) {

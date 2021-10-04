@@ -47,7 +47,7 @@ import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
@@ -179,7 +179,7 @@ public class XMLWriterVisitor implements Visitor {
         return null;
     }
     
-    public Object visitRepeatForRangeCommand(RepeatForRangeCommand ast, Object o) {
+    public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) {
         writeLineXML("<RepeatForRangeCommand>");
         ast.D.visit(this, null);
         ast.E.visit(this, null);

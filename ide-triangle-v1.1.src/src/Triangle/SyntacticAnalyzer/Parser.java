@@ -65,7 +65,7 @@ import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
@@ -374,9 +374,6 @@ public class Parser {
     case Token.ELSE:
     case Token.IN:
     case Token.EOT:*/
-    
-      
-      // // Comando vacio 
 
     default:
       syntacticError("\"%\" cannot start a command",
@@ -545,7 +542,7 @@ public class Parser {
                 accept(Token.END);
                 finish(commandPos);
                 Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
-                commandAST = new RepeatForRangeCommand(RangeVarDecl, e2AST, cAST, commandPos);
+                commandAST = new RepeatForRangeDoCommand(RangeVarDecl, e2AST, cAST, commandPos);
             }
             break;
             case Token.WHILE:

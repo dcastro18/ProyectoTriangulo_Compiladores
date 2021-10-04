@@ -48,6 +48,7 @@ public class IDECompiler {
         
         System.out.println("Syntactic Analysis ...");
         SourceFile source = new SourceFile(sourceName);
+        SourceFile source1 = new SourceFile(sourceName);
         
         String filesDestination = sourceName.substring(0, sourceName.length() - 4);
         Scanner scanner = new Scanner(source);
@@ -56,7 +57,7 @@ public class IDECompiler {
         boolean success = false;
         
         rootAST = parser.parseProgram();
-        HTML writerHTML = new HTML(source);
+        HTML writerHTML = new HTML(source1);
         writerHTML.generateHTML(filesDestination);
         if (report.numErrors == 0) {
 
