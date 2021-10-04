@@ -32,6 +32,7 @@ import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.Declaration;
 import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.ElseCaseCommand;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
@@ -1056,7 +1057,7 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
   
- /*
+ 
   Declaration parseCases() throws SyntaxError{
     Declaration declarationAST = null; // in case there's a syntactic error the user see this
   
@@ -1153,7 +1154,7 @@ public class Parser {
     
     return declarationAST;
   }
-  */
+  
 ///////////////////////////////////////////////////////////////////////////////
 //
 // PARAMETERS

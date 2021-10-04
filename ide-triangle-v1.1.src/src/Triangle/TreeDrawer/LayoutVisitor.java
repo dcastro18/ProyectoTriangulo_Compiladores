@@ -33,6 +33,7 @@ import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.ElseCaseCommand;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
@@ -267,7 +268,10 @@ public class LayoutVisitor implements Visitor {
     public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
         return layoutUnary("RecursiveDeclaration", ast.D1); //Se agrego el m�todo
     }
-
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
+        return layoutUnary("RecursiveDeclaration", ast.C); //Se agrego el m�todo
+    }
   
 
   // Array Aggregates
@@ -610,6 +614,8 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
+    
 
    
 }

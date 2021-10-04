@@ -21,6 +21,7 @@ import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.ElseCaseCommand;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
@@ -269,6 +270,10 @@ public class TreeVisitor implements Visitor {
     public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
         return(createUnary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
     }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
+        return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">
@@ -509,6 +514,8 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+ 
 
     
 

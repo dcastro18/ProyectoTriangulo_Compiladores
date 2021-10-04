@@ -117,6 +117,8 @@ public interface Visitor {
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
 
+    public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o);
+
 
 
 

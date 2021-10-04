@@ -16,6 +16,7 @@ import Triangle.AbstractSyntaxTrees.ConstActualParameter;
 import Triangle.AbstractSyntaxTrees.ConstDeclaration;
 import Triangle.AbstractSyntaxTrees.ConstFormalParameter;
 import Triangle.AbstractSyntaxTrees.DotVname;
+import Triangle.AbstractSyntaxTrees.ElseCaseCommand;
 import Triangle.AbstractSyntaxTrees.EmptyActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
@@ -406,6 +407,12 @@ public class XMLWriterVisitor implements Visitor {
         writeLineXML("</RecursiveDeclaration>");
         return null;
     }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
+        writeLineXML("<ElseCaseCommand>");
+        ast.C.visit(this, null);
+        writeLineXML("</ElseCaseCommand>");
+        return null;    }
    
     
     
@@ -693,6 +700,8 @@ public class XMLWriterVisitor implements Visitor {
       else
         return operator;
     }
+
+   
 
     
 
