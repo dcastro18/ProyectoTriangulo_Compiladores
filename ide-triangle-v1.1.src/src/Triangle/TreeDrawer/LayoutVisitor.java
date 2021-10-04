@@ -60,8 +60,6 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
-import Triangle.AbstractSyntaxTrees.LocalDeclaration;  //Se agrego el import
-import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
@@ -87,7 +85,6 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
-import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;  //Se agrego el import VarExpressionDeclaration
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -133,15 +130,15 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("WhileCom.", ast.E, ast.C);
   }
   
-  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {  //Se agrego el mï¿½todo visitRepeatWhileDo()
+  public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {  //Se agrego el método visitRepeatWhileDo()
       return layoutBinary("RepeatWhileCom", ast.E, ast.C);
   }
   
-  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {  //Se agrego el mï¿½todo visitRepeatUntilDo()
+  public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {  //Se agrego el método visitRepeatUntilDo()
       return layoutBinary("RepeatUntilCom", ast.E, ast.C);
   }
   
-  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoWhileCommand()
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
       return layoutBinary("RepeatDoWhileCom", ast.C, ast.E);
   }
   
@@ -157,7 +154,7 @@ public class LayoutVisitor implements Visitor {
       return layoutTernary("RepeatForRangeCom", ast.D, ast.E, ast.C);
   }
   
-  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el mï¿½todo visitRepeatForRangeWhileCommand()
+  public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el método visitRepeatForRangeWhileCommand()
       return layoutQuaternary("RepeatForRangeWhileCom", ast.D, ast.E1, ast.E2, ast.C);
   }
   
@@ -247,24 +244,9 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el mï¿½todo visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método visitForRangeIdentifierExpression()
     return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
   }
-  
-  public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        return layoutBinary("VarExpressionDeclaration", ast.I, ast.E); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-        return layoutBinary("LocalDeclaration", ast.D1, ast.D2); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        return layoutBinary("ProcFuncSDeclaration", ast.D1, ast.D2); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-  
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object obj) {
@@ -606,6 +588,5 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
-
 
 }

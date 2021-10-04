@@ -17,12 +17,10 @@ package Triangle;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.CodeGenerator.Encoder;
 import Triangle.ContextualAnalyzer.Checker;
-import Triangle.HTMLWriter.HTMLWriter;
 import Triangle.SyntacticAnalyzer.Parser;
 import Triangle.SyntacticAnalyzer.Scanner;
 import Triangle.SyntacticAnalyzer.SourceFile;
 import Triangle.TreeDrawer.Drawer;
-import java.io.IOException;
 
 /**
  * The main driver class for the Triangle compiler.
@@ -35,7 +33,6 @@ public class Compiler {
     /** The filename for the object program, normally obj.tam. */
     static String objectName = "obj.tam";
 
-    private static HTMLWriter htmlWriter;
     private static Scanner scanner;
     private static Parser parser;
     private static Checker checker;
@@ -76,8 +73,7 @@ public class Compiler {
             System.exit(1);
         }
 
-        htmlWriter = new HTMLWriter(sourceName);
-        scanner  = new Scanner(source,htmlWriter);
+        scanner  = new Scanner(source);
         reporter = new ErrorReporter();
         parser   = new Parser(scanner, reporter);
         checker  = new Checker(reporter);

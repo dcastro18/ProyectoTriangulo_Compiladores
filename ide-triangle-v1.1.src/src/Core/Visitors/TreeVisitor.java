@@ -48,11 +48,8 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
-import Triangle.AbstractSyntaxTrees.LocalDeclaration;
-import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
-import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
@@ -76,7 +73,6 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
-import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -89,7 +85,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  *
  * Generates DefaultMutableTreeNodes, used to draw a JTree.
  *
- * @author Luis Leopoldo Pï¿½rez <luiperpe@ns.isi.ulatina.ac.cr>
+ * @author Luis Leopoldo Pérez <luiperpe@ns.isi.ulatina.ac.cr>
  */
 public class TreeVisitor implements Visitor {
       
@@ -129,19 +125,19 @@ public class TreeVisitor implements Visitor {
         return(createBinary("While Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el mï¿½todo visitRepeatWhileDo()
+    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el método visitRepeatWhileDo()
         return(createBinary("Repeat While Do Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el mï¿½todo visitRepeatUntilDo()
+    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el método visitRepeatUntilDo()
         return(createBinary("Repeat Until Do Command", ast.E, ast.C));
     }
     
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoWhileCommand()
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
         return(createBinary("Repeat Do While Command", ast.C, ast.E));
     }
     
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoUntilCommand()
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el método visitRepeatDoUntilCommand()
         return(createBinary("Repeat Do Until Command", ast.C, ast.E));
     }
     
@@ -250,17 +246,6 @@ public class TreeVisitor implements Visitor {
         return(createBinary("For Range Identifier Expression Declaration", ast.I, ast.E));
     }
     
-    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object obj){  // Se agrega el nuevo VarExpressionDeclaration
-        return(createBinary("Variable Expression Declaration", ast.I, ast.E));
-    }
-    
-    public Object visitLocalDeclaration(LocalDeclaration ast, Object obj){  // Se agrega el nuevo VarExpressionDeclaration
-        return(createBinary("Local Declaration", ast.D1, ast.D2));
-    }
-    
-    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        return(createBinary("proc-funcs", ast.D1, ast.D2));
-    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">
@@ -501,10 +486,4 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
-
-    @Override
-    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
