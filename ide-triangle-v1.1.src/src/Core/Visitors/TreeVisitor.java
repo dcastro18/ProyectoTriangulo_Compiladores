@@ -52,6 +52,7 @@ import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
@@ -265,6 +266,9 @@ public class TreeVisitor implements Visitor {
         return(createBinary("ProcFuncSDeclaration", ast.D1, ast.D2)); //Se agrego el metodo
     }
     
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+        return(createUnary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
+    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">
@@ -505,6 +509,8 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+    
 
 
 }

@@ -65,6 +65,7 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
@@ -848,10 +849,10 @@ public class Parser {
         case Token.RECURSIVE:
             {
                 acceptIt();
-                declarationAST = parseProcFuncS();
+                Declaration dAST = parseProcFuncS();
                 accept (Token.END);
                 finish(declarationPos);
-                declarationAST = new RecursiveDeclaration(declarationAST, declarationPos);
+                declarationAST = new RecursiveDeclaration(dAST, declarationPos);
             }
             break;
         
@@ -875,6 +876,7 @@ public class Parser {
         case Token.TYPE:
         {
             declarationAST = parseSingleDeclaration();
+            finish(declarationPos);
         }
     }
     return declarationAST;

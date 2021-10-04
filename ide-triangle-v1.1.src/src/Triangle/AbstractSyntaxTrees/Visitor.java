@@ -59,6 +59,7 @@ public interface Visitor {
   public abstract Object visitLocalDeclaration(LocalDeclaration ast, Object o);
   public abstract Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o);
   public abstract Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o);
+  public abstract Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o);
   
 
   // Array Aggregates
@@ -115,6 +116,7 @@ public interface Visitor {
 
   // Programs
   public abstract Object visitProgram(Program ast, Object o);
+
 
 
 

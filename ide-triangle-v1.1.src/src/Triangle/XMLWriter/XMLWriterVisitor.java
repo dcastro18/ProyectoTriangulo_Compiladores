@@ -47,6 +47,7 @@ import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
@@ -391,12 +392,18 @@ public class XMLWriterVisitor implements Visitor {
         return null;
     }
 
-    @Override
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
         writeLineXML("<ProcFuncSDeclaration>");
         ast.D1.visit(this, null);
         ast.D2.visit(this, null);
         writeLineXML("</ProcFuncSDeclaration>");
+        return null;
+    }
+    
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+        writeLineXML("<RecursiveDeclaration>");
+        ast.D1.visit(this, null);
+        writeLineXML("</RecursiveDeclaration>");
         return null;
     }
    
@@ -673,6 +680,8 @@ public class XMLWriterVisitor implements Visitor {
         }
     }
     
+    
+    
    /*
    * Convert the characters "<" & "<=" to their equivalents in html
    */
@@ -684,6 +693,8 @@ public class XMLWriterVisitor implements Visitor {
       else
         return operator;
     }
+
+    
 
  
 }

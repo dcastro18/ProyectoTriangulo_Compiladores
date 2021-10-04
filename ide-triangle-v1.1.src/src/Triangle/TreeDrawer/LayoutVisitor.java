@@ -64,6 +64,7 @@ import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
@@ -262,6 +263,11 @@ public class LayoutVisitor implements Visitor {
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
         return layoutBinary("ProcFuncSDeclaration", ast.D1, ast.D2); //Se agrego el m�todo
     }
+    
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+        return layoutUnary("RecursiveDeclaration", ast.D1); //Se agrego el m�todo
+    }
+
   
 
   // Array Aggregates
@@ -605,4 +611,5 @@ public class LayoutVisitor implements Visitor {
     return r;
   }
 
+   
 }
