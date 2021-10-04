@@ -65,7 +65,6 @@ import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
-import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatForRangeCommand;
