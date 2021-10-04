@@ -1062,7 +1062,7 @@ public class Parser {
 ///////////////////////////////////////////////////////////////////////////////
 
   
-  
+ /* 
  Declaration parseCases() throws SyntaxError{
     Declaration declarationAST = null; // in case there's a syntactic error the user see this
     Declaration casesAST1 = null;
@@ -1167,7 +1167,7 @@ public class Parser {
     
     return declarationAST;
  }
-  
+  */
   
 ///////////////////////////////////////////////////////////////////////////////
 //
