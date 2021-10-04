@@ -43,6 +43,8 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
@@ -68,6 +70,7 @@ import Triangle.AbstractSyntaxTrees.UnaryExpression;
 import Triangle.AbstractSyntaxTrees.UnaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.VarActualParameter;
 import Triangle.AbstractSyntaxTrees.VarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarExpressionDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
@@ -139,7 +142,7 @@ public class XMLWriterVisitor implements Visitor {
         return null;        
     }
     
-    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el método visitRepeatWhileDo()
+    public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object obj) {    //Se agrego el mï¿½todo visitRepeatWhileDo()
         writeLineXML("<RepeatWhileDo>");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -147,7 +150,7 @@ public class XMLWriterVisitor implements Visitor {
         return null;
     }
     
-    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el método visitRepeatUntilDo()
+    public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object obj) {    //Se agrego el mï¿½todo visitRepeatUntilDo()
         writeLineXML("<RepeatUntilDo>");
         ast.E.visit(this, null);
         ast.C.visit(this, null);
@@ -155,7 +158,7 @@ public class XMLWriterVisitor implements Visitor {
         return null;
     }
     
-    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el método visitRepeatDoWhileCommand()
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoWhileCommand()
         writeLineXML("<RepeatDoWhileCommand>");
         ast.C.visit(this, null);
         ast.E.visit(this, null);
@@ -163,7 +166,7 @@ public class XMLWriterVisitor implements Visitor {
         return null;
     }
     
-    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el método visitRepeatDoUntilCommand()
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) { //Se agrego el mï¿½todo visitRepeatDoUntilCommand()
         writeLineXML("<RepeatDoUntilCommand>");
         ast.C.visit(this, null);
         ast.E.visit(this, null);
@@ -371,6 +374,32 @@ public class XMLWriterVisitor implements Visitor {
         writeLineXML("</ForRangeIdentifierExpression>");
         return null;
     }
+    
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+        writeLineXML("<LocalDeclaration>");
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+        writeLineXML("</LocalDeclaration>");
+        return null;
+    }
+
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
+        writeLineXML("<VarExpressionDeclaration>");
+        ast.E.visit(this, null);
+        ast.I.visit(this, null);
+        writeLineXML("</VarExpressionDeclaration>");
+        return null;
+    }
+
+    @Override
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
+        writeLineXML("<ProcFuncSDeclaration>");
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+        writeLineXML("</ProcFuncSDeclaration>");
+        return null;
+    }
+   
     
     
 // Array Aggregates
@@ -655,6 +684,7 @@ public class XMLWriterVisitor implements Visitor {
       else
         return operator;
     }
-   
+
+ 
 }
 
