@@ -95,6 +95,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.selectCommand;
 
 public class Parser {
 
@@ -345,6 +346,18 @@ public class Parser {
       }
       break;
 
+    case Token.SELECT:
+    {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.FROM);
+        Declaration casesAST = parseCases();
+        accept(Token.END);
+        finish(commandPos);
+        commandAST = new selectCommand(casesAST,eAST, commandPos);
+        
+    }
+      
     /*
     case Token.WHILE:
       {
@@ -998,6 +1011,7 @@ public class Parser {
             break;
         }
        }
+      break;
 
     case Token.PROC:
       {
@@ -1102,7 +1116,7 @@ public class Parser {
         //dAST = new caseLiteralDeclaration(dAST, dAST2, declarationPos);     
     }else{
         dAST = parseCaseLiteral();
-        //finish(declarationPos);
+        finish(declarationPos);
         //dAST = new caseLiteralDeclaration(dAST, declarationPos);     
     }
     accept(Token.THEN);
@@ -1136,17 +1150,17 @@ public class Parser {
     switch (currentToken.kind){
         case Token.INTLITERAL:
         {
-            acceptIt();
+            //acceptIt();
             intAST = parseIntegerLiteral();
-            //finish(declarationPos);
+            finish(declarationPos);
             //declarationAST = new ProcFuncSDeclaration(intAST, declarationPos);
         }
         break;
         case Token.CHARLITERAL:
         {
-            acceptIt();
+            //acceptIt();
             charAST = parseCharacterLiteral();
-            //finish(declarationPos);
+            finish(declarationPos);
             //declarationAST = new ProcFuncSDeclaration(charAST, declarationPos);
         }
         break;

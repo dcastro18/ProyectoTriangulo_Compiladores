@@ -82,6 +82,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.selectCommand;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -274,6 +275,12 @@ public class TreeVisitor implements Visitor {
     public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
         return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
     }
+    
+    public Object visitSelectCommand(selectCommand ast, Object o) {
+        return(createBinary("selectCommand", ast.D, ast.E)); //Se agrego el metodo
+    }
+    
+    
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">
@@ -514,6 +521,8 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+   
 
  
 

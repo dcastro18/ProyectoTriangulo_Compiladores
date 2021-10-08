@@ -77,6 +77,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.selectCommand;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -412,7 +413,17 @@ public class XMLWriterVisitor implements Visitor {
         writeLineXML("<ElseCaseCommand>");
         ast.C.visit(this, null);
         writeLineXML("</ElseCaseCommand>");
-        return null;    }
+        return null;    
+    }
+    
+    public Object visitSelectCommand(selectCommand ast, Object o) {
+        writeLineXML("<SelectCommand>");
+        ast.D.visit(this, null);
+        ast.E.visit(this, null);
+        writeLineXML("</SelectCommand>");
+        return null; 
+    }
+
    
     
     
@@ -701,6 +712,7 @@ public class XMLWriterVisitor implements Visitor {
         return operator;
     }
 
+    
    
 
     

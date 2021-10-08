@@ -94,6 +94,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import Triangle.AbstractSyntaxTrees.selectCommand;
 
 public class LayoutVisitor implements Visitor {
 
@@ -271,6 +272,10 @@ public class LayoutVisitor implements Visitor {
     
     public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
         return layoutUnary("RecursiveDeclaration", ast.C); //Se agrego el m�todo
+    }
+
+    public Object visitSelectCommand(selectCommand ast, Object o) {
+        return layoutBinary("selectCommand", ast.D, ast.E); //Se agrego el m�todo
     }
   
 
@@ -614,6 +619,7 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
 
     
 
