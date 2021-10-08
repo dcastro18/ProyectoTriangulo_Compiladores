@@ -357,6 +357,7 @@ public class Parser {
         commandAST = new selectCommand(casesAST,eAST, commandPos);
         
     }
+   break;
       
     /*
     case Token.WHILE:
@@ -1089,11 +1090,13 @@ public class Parser {
     while (currentToken.kind == Token.WHEN){
         acceptIt();
         casesAST2 = parseCase();
+        finish(declarationPos);
     }
     
     if(currentToken.kind == Token.ELSE){
         acceptIt();
         casesAST3 = parseElseCase();
+        finish(declarationPos);
     }
     
     
@@ -1109,6 +1112,7 @@ public class Parser {
     start(declarationPos);
     
     if (currentToken.kind == Token.RANGE){
+        acceptIt();
         dAST = parseCaseLiteral();
         accept(Token.DOUBLEDOT); 
         dAST2 = parseCaseLiteral();
@@ -1133,6 +1137,7 @@ public class Parser {
     SourcePosition commandPos = new SourcePosition();
     start(commandPos);
     
+    commandAST = parseCommand();
     commandAST = new ElseCaseCommand(commandAST, commandPos);
       
     return commandAST;
