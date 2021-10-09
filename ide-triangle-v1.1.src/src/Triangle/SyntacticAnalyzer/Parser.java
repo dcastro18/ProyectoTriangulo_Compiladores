@@ -1179,6 +1179,9 @@ public class Parser {
             //declarationAST = new ProcFuncSDeclaration(charAST, declarationPos);
         }
         break;
+        default:
+            syntacticError("\"%\" expected literal or char", currentToken.spelling);
+        break;
     }
     
     return declarationAST;
