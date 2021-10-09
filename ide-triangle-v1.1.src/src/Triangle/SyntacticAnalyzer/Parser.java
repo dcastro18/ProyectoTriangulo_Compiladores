@@ -308,12 +308,12 @@ public class Parser {
       }
       break;
 
-    case Token.LET: //Se a�adio el comando LET
+    case Token.LET: // Comando modificado
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
         accept(Token.IN);
-        Command cAST = parseCommand();
+        Command cAST = parseCommand(); // cambio
         accept(Token.END);
         finish(commandPos);
         commandAST = new LetCommand(dAST, cAST, commandPos);
@@ -329,7 +329,7 @@ public class Parser {
         Expression eAST2 = null;
         Command c2AST = null;
         Command c3AST = null;
-        while (currentToken.kind == Token.PIPE)
+        while (currentToken.kind == Token.PIPE)  //  Modificacion del pipe(elif)
         {
             acceptIt(); 
             eAST2 = parseExpression();
@@ -346,7 +346,7 @@ public class Parser {
       }
       break;
 
-    case Token.SELECT:
+    case Token.SELECT: // Comando nuevo
     {
         acceptIt();
         Expression eAST = parseExpression();
@@ -359,19 +359,8 @@ public class Parser {
     }
    break;
       
-    /*
-    case Token.WHILE:
-      {
-        acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.DO);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new WhileCommand(eAST, cAST, commandPos);
-      }
-      break;*/
       
-    case Token.REPEAT:
+    case Token.REPEAT: // Comando nuevo
     {
         acceptIt();
         commandAST = parseRepeatCases();
@@ -380,7 +369,7 @@ public class Parser {
       
       
     
-    case Token.SKIP: // nuevo
+    case Token.SKIP: // Comando nuevo
     {
         acceptIt();
         finish(commandPos);
@@ -388,12 +377,6 @@ public class Parser {
       break;
     }
       
-    /*case Token.SEMICOLON: quitar
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
-    case Token.EOT:*/
-
     default:
       syntacticError("\"%\" cannot start a command",
         currentToken.spelling);
