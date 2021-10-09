@@ -79,6 +79,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -1103,6 +1104,7 @@ public class Parser {
         acceptIt();
         casesAST2 = parseCase();
         finish(declarationPos);
+        casesAST2 = new SelectWhen(casesAST2, declarationPos); 
     }
     
     if(currentToken.kind == Token.ELSE){
@@ -1112,7 +1114,7 @@ public class Parser {
     }
     
     
-    return casesAST2;
+    return casesAST1;
   }
   
   Declaration parseCase() throws SyntaxError{

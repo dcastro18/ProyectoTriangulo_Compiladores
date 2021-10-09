@@ -66,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -294,6 +295,10 @@ public class TreeVisitor implements Visitor {
     
     public Object visitCharDeclaration(CharDeclaration ast, Object o) {
         return(createUnary("CharDeclaration", ast.CH)); //Se agrego el metodo
+    }
+    
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        return(createUnary("SelectWhen", ast.D1)); //Se agrego el metodo
     }
     
     // </editor-fold>
@@ -539,6 +544,8 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+  
 
     
 

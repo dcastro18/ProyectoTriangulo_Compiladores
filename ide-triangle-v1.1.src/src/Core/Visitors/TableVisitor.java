@@ -66,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -476,6 +477,14 @@ public class TableVisitor implements Visitor {
     
     }
     
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        ast.D1.visit(this, null);
+        
+        return(null);
+    
+    }
+
+    
   
   // </editor-fold>
 
@@ -791,6 +800,7 @@ public class TableVisitor implements Visitor {
     private DefaultTableModel model;
     // </editor-fold>
 
+    
     
 
 

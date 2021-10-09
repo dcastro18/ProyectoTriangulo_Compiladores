@@ -61,6 +61,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -458,7 +459,13 @@ public class XMLWriterVisitor implements Visitor {
         writeLineXML("</CharDeclaration>");
         return null;
     }
-
+    
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        writeLineXML("<SelectWhen>");
+        ast.D1.visit(this, null);
+        writeLineXML("</SelectWhen>");
+        return null;
+    }
    
     
     
@@ -746,6 +753,8 @@ public class XMLWriterVisitor implements Visitor {
       else
         return operator;
     }
+
+   
 
    
 

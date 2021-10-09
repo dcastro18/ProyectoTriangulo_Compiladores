@@ -78,6 +78,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand; //Se agrego el import RepeatWhileDo
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -297,7 +298,10 @@ public class LayoutVisitor implements Visitor {
     public Object visitCharDeclaration(CharDeclaration ast, Object o) {
         return layoutUnary("CharDeclaration", ast.CH); //Se agrego el metodo
     }
-
+  
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        return layoutUnary("SelectWhen", ast.D1); //Se agrego el metodo
+    }
     
     
     
@@ -642,6 +646,8 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
+  
 
     
 

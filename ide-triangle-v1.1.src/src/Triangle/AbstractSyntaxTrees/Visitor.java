@@ -129,6 +129,8 @@ public interface Visitor {
 
     public Object visitCharDeclaration(CharDeclaration aThis, Object o);
 
+    public Object visitSelectWhen(SelectWhen aThis, Object o);
+
 
 
 
