@@ -963,13 +963,18 @@ public class Parser {
     procAST1 = parseProcFunc();
     finish(declarationPos);
    
-    while (currentToken.kind == Token.PIPE){
-        accept(Token.PIPE); 
-        start(declarationPos);
-        procAST2 = parseProcFunc();
-        finish(declarationPos);
-        dAST = new ProcFuncSDeclaration(procAST1, procAST2, declarationPos);
+    if(currentToken.kind == Token.PIPE){
+        while (currentToken.kind == Token.PIPE){
+            accept(Token.PIPE); 
+            start(declarationPos);
+            procAST2 = parseProcFunc();
+            finish(declarationPos);
+            dAST = new ProcFuncSDeclaration(procAST1, procAST2, declarationPos);
+        }
+    }else{
+        syntacticError("\"%\" not expected parsing proc-func expression, expected |", currentToken.spelling);
     }
+    
     return dAST;
   }
 
