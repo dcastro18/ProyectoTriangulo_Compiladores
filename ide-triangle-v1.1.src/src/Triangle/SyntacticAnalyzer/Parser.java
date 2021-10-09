@@ -1173,7 +1173,7 @@ public class Parser {
             //acceptIt();
             intAST = parseIntegerLiteral();
             finish(declarationPos);
-            //intAST = new LiteralDeclaration(intAST, declarationPos);
+            declarationAST = new LiteralDeclaration(intAST, declarationPos);
         }
         break;
         case Token.CHARLITERAL:
@@ -1181,7 +1181,7 @@ public class Parser {
             //acceptIt();
             charAST = parseCharacterLiteral();
             finish(declarationPos);
-            //declarationAST = new CharDeclaration(charAST, declarationPos);
+            declarationAST = new CharDeclaration(charAST, declarationPos);
         }
         break;
         default:
@@ -1189,7 +1189,7 @@ public class Parser {
         break;
     }
     
-    return intAST;
+    return declarationAST;
   }
   
 ///////////////////////////////////////////////////////////////////////////////

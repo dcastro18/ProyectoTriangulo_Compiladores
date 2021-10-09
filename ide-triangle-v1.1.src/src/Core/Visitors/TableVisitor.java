@@ -431,6 +431,51 @@ public class TableVisitor implements Visitor {
       return(null);
     
     }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {//Se agrego el metodo visitElseCaseCommand()
+      ast.C.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitSelectCommand(selectCommand ast, Object o) {//Se agrego el metodo visitSelectCommand()
+      ast.D.visit(this, null);
+      ast.E.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {//Se agrego el metodo visitRangeDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {//Se agrego el metodo visitCaseLiteralDeclaration()
+      ast.D1.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {//Se agrego el metodo visitLiteralDeclaration()
+      ast.IL.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {//Se agrego el metodo visitCharDeclaration()
+      ast.CH.visit(this, null);
+        
+      return(null);
+    
+    }
+    
   
   // </editor-fold>
 
@@ -748,33 +793,5 @@ public class TableVisitor implements Visitor {
 
     
 
-    @Override
-    public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Object visitSelectCommand(selectCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitRangeDeclaration(RangeDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitLiteralDeclaration(LiteralDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitCharDeclaration(CharDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

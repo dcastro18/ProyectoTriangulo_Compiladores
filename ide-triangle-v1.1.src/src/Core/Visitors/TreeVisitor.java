@@ -264,20 +264,12 @@ public class TreeVisitor implements Visitor {
         return(createBinary("VarExpressionDeclaration", ast.E, ast.I)); //Se agrego el metodo
     }
 
-    /*public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-        return(createBinary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
-    }*/
-
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
         return(createBinary("ProcFuncSDeclaration", ast.D1, ast.D2)); //Se agrego el metodo
     }
     
     public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
         return(createUnary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
-    }
-    
-    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
-        return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
     }
     
     public Object visitSelectCommand(selectCommand ast, Object o) {
@@ -290,6 +282,10 @@ public class TreeVisitor implements Visitor {
     
     public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
         return(createUnary("CaseLiteralDeclaration", ast.D1)); //Se agrego el metodo
+    }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
+        return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
     }
 
     public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
