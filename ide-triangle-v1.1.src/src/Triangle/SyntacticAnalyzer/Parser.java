@@ -1126,10 +1126,12 @@ public class Parser {
         dAST2 = parseCaseLiteral();
         //finish(declarationPos);
         //dAST = new caseLiteralDeclaration(dAST, dAST2, declarationPos);     
-    }else{
+    }else if (currentToken.kind == Token.INTLITERAL || currentToken.kind == Token.CHARLITERAL){
         dAST = parseCaseLiteral();
         finish(declarationPos);
         //dAST = new caseLiteralDeclaration(dAST, declarationPos);     
+    }else{
+        syntacticError("\"%\" expected literal, char or range declaration", currentToken.spelling);  
     }
     accept(Token.THEN);
     cAST = parseCommand();
