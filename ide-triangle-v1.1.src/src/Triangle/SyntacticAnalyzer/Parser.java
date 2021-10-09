@@ -892,6 +892,7 @@ public class Parser {
         {
             declarationAST = parseSingleDeclaration();
         }
+        break;
         default:
               syntacticError("\"%\" cannot start a declaration", currentToken.spelling);
               break;
