@@ -14,6 +14,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -49,8 +51,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -390,12 +394,43 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
       ast.I.visit(this, null);
       ast.E.visit(this, null);
         
       return(null);
   }
+  
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {//Se agrego el metodo visitLocalDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {//Se agrego el metodo visitVarExpressionDeclaration()
+      ast.I.visit(this, null);
+      ast.E.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {//Se agrego el metodo visitProcFuncSDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {//Se agrego el metodo visitRecursiveDeclaration()
+      ast.D1.visit(this, null);
+        
+      return(null);
+    
+    }
   
   // </editor-fold>
 
@@ -711,25 +746,7 @@ public class TableVisitor implements Visitor {
     private DefaultTableModel model;
     // </editor-fold>
 
-    @Override
-    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o) {
@@ -738,6 +755,26 @@ public class TableVisitor implements Visitor {
 
     @Override
     public Object visitSelectCommand(selectCommand aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitRangeDeclaration(RangeDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitLiteralDeclaration(LiteralDeclaration aThis, Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object visitCharDeclaration(CharDeclaration aThis, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

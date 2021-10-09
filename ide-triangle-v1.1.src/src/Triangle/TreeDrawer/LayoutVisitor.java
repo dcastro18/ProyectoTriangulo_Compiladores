@@ -26,6 +26,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -61,8 +63,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -278,6 +282,25 @@ public class LayoutVisitor implements Visitor {
         return layoutBinary("selectCommand", ast.D, ast.E); //Se agrego el m�todo
     }
   
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
+        return layoutBinary("RangeDeclaration", ast.D1, ast.D2); //Se agrego el m�todo
+    }
+    
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
+        return layoutUnary("CaseLiteralDeclaration", ast.D1); //Se agrego el m�todo
+    }
+    
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
+        return layoutUnary("LiteralDeclaration", ast.IL); //Se agrego el m�todo
+    }
+    
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {
+        return layoutUnary("CharDeclaration", ast.CH); //Se agrego el m�todo
+    }
+
+    
+    
+    
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object obj) {
@@ -619,6 +642,11 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
+    
+
+    
+
 
 
     
