@@ -72,21 +72,21 @@ public final class Token extends Object {
     DO			= 6,
     ELSE		= 7,
     END			= 8,
-    FOR                 = 9,
+    FOR                 = 9, // nuevo
     FROM                = 10,
     FUNC		= 11,
     IF			= 12,
     IN			= 13,
     LET			= 14,
-    LOCAL               = 15,
+    LOCAL               = 15, // nuevo
     OF			= 16,
     PROC		= 17,
-    RANGE               = 18,
+    RANGE               = 18, // nuevo
     RECORD		= 19,
-    RECURSIVE           = 20,
-    REPEAT		= 21,
-    SELECT              = 22,
-    SKIP                = 23,
+    RECURSIVE           = 20, // nuevo
+    REPEAT		= 21, // nuevo
+    SELECT              = 22, // nuevo
+    SKIP                = 23, // nuevo
     THEN		= 24,
     TO                  = 25, // nuevo
     TYPE                = 26,
@@ -127,36 +127,36 @@ public final class Token extends Object {
     "do",
     "else",
     "end",
-    "for",
-    "from",
+    "for", // nuevo
+    "from", // nuevo
     "func",
     "if",
     "in",
     "let",
-    "local",
+    "local", // nuevo
     "of",
     "proc",
-    "range",
-    "record",
-    "recursive",
-    "repeat",
-    "select",
-    "skip",
+    "range", // nuevo
+    "record", 
+    "recursive", // nuevo
+    "repeat", // nuevo
+    "select", // nuevo
+    "skip", // nuevo
     "then",
-    "to",
+    "to", // nuevo
     "type",
-    "until",
+    "until", // nuevo
     "var",
-    "when",
+    "when", // nuevo
     "while",
     ".",
-    "..",
+    "..", // nuevo
     ":",
     ";",
     ",",
     ":=",
     "~",
-    "|",
+    "|", // nuevo
     "(",
     ")",
     "[",
