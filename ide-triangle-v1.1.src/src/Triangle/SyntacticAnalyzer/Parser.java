@@ -891,8 +891,10 @@ public class Parser {
         case Token.TYPE:
         {
             declarationAST = parseSingleDeclaration();
-            finish(declarationPos);
         }
+        default:
+              syntacticError("\"%\" cannot start a declaration", currentToken.spelling);
+              break;
     }
     return declarationAST;
     
