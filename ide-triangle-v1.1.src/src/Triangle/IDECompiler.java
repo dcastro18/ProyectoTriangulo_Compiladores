@@ -50,14 +50,17 @@ public class IDECompiler {
         SourceFile source = new SourceFile(sourceName);
         SourceFile source1 = new SourceFile(sourceName);
         
-        String filesDestination = sourceName.substring(0, sourceName.length() - 4);
+         
         Scanner scanner = new Scanner(source);
         report = new IDEReporter();
         Parser parser = new Parser(scanner, report);
         boolean success = false;
         
         rootAST = parser.parseProgram();
-        HTML writerHTML = new HTML(source1);
+        
+        // nuevo: Llamada al generador HTML
+        String filesDestination = sourceName.substring(0, sourceName.length() - 4);
+        HTML writerHTML = new HTML(source1); 
         writerHTML.generateHTML(filesDestination);
         if (report.numErrors == 0) {
 
@@ -79,7 +82,8 @@ public class IDECompiler {
         if (success)
         {
             System.out.println("Compilation was successful.");
-            XMLWriterTree writerXML = new XMLWriterTree(sourceName);
+            // nuevo: Llamada al XML
+            XMLWriterTree writerXML = new XMLWriterTree(sourceName);  
             writerXML.writer(rootAST);
         }
         else

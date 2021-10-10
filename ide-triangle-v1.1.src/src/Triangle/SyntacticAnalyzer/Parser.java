@@ -51,7 +51,7 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
-import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration; // nuevo
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -61,20 +61,20 @@ import Triangle.AbstractSyntaxTrees.Operator;
 import Triangle.AbstractSyntaxTrees.ProcActualParameter;
 import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
-import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration; // nuevo
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
-import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
-import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
-import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
-import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
-import Triangle.AbstractSyntaxTrees.RepeatInCommand;
-import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
-import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatInCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand; // nuevo
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -95,7 +95,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand;
+import Triangle.AbstractSyntaxTrees.selectCommand; // nuevo
 
 public class Parser {
 
@@ -366,9 +366,7 @@ public class Parser {
         commandAST = parseRepeatCases();
       break;
     }
-      
-      
-    
+            
     case Token.SKIP: // Comando nuevo
     {
         acceptIt();
@@ -378,10 +376,8 @@ public class Parser {
     }
       
     default:
-      syntacticError("\"%\" cannot start a command",
-        currentToken.spelling);
+      syntacticError("\"%\" cannot start a command", currentToken.spelling);
       break;
-
     }
 
     return commandAST;
@@ -865,7 +861,6 @@ public class Parser {
                 declarationAST = new LocalDeclaration(d1AST, d2AST, declarationPos);
             }
             break;
-        
 
         case Token.CONST:
         case Token.VAR:
