@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			p{font-size: 1em; font-family: "Courier New", monospaced;}
+			.literal{color : #004080;}
+			.comment{color: #009933;}
+			.reservedword {font-weight:bold;}
+		</style>
+	</head>
+	<body>
+<strong>select</strong><span>&nbsp;</span>
+<span class='literal'>0</span>
+<span>&nbsp;</span>
+<strong>from</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>when</strong><span>&nbsp;</span>
+<span class='literal'>123</span>
+<span>&nbsp;</span>
+<strong>then</strong><span>&nbsp;</span>
+<span>putint</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>123</span>
+<span>)</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>when</strong><span>&nbsp;</span>
+<span class='literal'>4</span>
+<span>&nbsp;</span>
+<strong>then</strong><span><br></span>
+<span class='comment'>! comienza select anidado</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>select</strong><span>&nbsp;</span>
+<span class='literal'>'1'</span>
+<span>&nbsp;</span>
+<strong>from</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>when</strong><span>&nbsp;</span>
+<span class='literal'>'1'</span>
+<span>&nbsp;</span>
+<strong>then</strong><span>&nbsp;</span>
+<span>putint</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>1</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span class='comment'>!OK, está en select anidado</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>else</strong><span>&nbsp;</span>
+<span>putint</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>2</span>
+<span>)</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>end</strong><span><br></span>
+<span class='comment'>! terminó select anidado</span><span><br></span>
+<strong>end</strong><span><br></span>
+</body>
+</html>
