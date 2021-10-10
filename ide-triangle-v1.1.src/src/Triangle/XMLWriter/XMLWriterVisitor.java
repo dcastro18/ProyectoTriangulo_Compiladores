@@ -9,6 +9,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -44,8 +46,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -57,6 +61,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -423,7 +428,44 @@ public class XMLWriterVisitor implements Visitor {
         writeLineXML("</SelectCommand>");
         return null; 
     }
-
+    
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
+        writeLineXML("<ProcFuncSDeclaration>");
+        ast.D1.visit(this, null);
+        ast.D2.visit(this, null);
+        writeLineXML("</ProcFuncSDeclaration>");
+        return null;
+        
+    }
+    
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
+        writeLineXML("<CaseLiteralDeclaration>");
+        ast.D1.visit(this, null);
+        writeLineXML("</CaseLiteralDeclaration>");
+        return null;
+    }
+    
+    
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
+        writeLineXML("<LiteralDeclaration>");
+        ast.IL.visit(this, null);
+        writeLineXML("</LiteralDeclaration>");
+        return null;
+    }
+    
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {
+        writeLineXML("<CharDeclaration>");
+        ast.CH.visit(this, null);
+        writeLineXML("</CharDeclaration>");
+        return null;
+    }
+    
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        writeLineXML("<SelectWhen>");
+        ast.D1.visit(this, null);
+        writeLineXML("</SelectWhen>");
+        return null;
+    }
    
     
     
@@ -711,6 +753,14 @@ public class XMLWriterVisitor implements Visitor {
       else
         return operator;
     }
+
+   
+
+   
+
+    
+
+    
 
     
    

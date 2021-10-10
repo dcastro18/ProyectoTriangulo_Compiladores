@@ -26,6 +26,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -61,8 +63,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -74,6 +78,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand; //Se agrego el import RepeatWhileDo
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -250,34 +255,56 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
     return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
   }
   
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-        return layoutBinary("LocalDeclaration", ast.D1, ast.D2); //Se agrego el m�todo
+        return layoutBinary("LocalDeclaration", ast.D1, ast.D2); //Se agrego el metodo
     }
 
     public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        return layoutBinary("VarExpressionDeclaration", ast.E, ast.I); //Se agrego el m�todo
+        return layoutBinary("VarExpressionDeclaration", ast.E, ast.I); //Se agrego el metodo
     }
 
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        return layoutBinary("ProcFuncSDeclaration", ast.D1, ast.D2); //Se agrego el m�todo
+        return layoutBinary("ProcFuncSDeclaration", ast.D1, ast.D2); //Se agrego el metodo
     }
     
     public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-        return layoutUnary("RecursiveDeclaration", ast.D1); //Se agrego el m�todo
+        return layoutUnary("RecursiveDeclaration", ast.D1); //Se agrego el metodo
     }
     
     public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
-        return layoutUnary("RecursiveDeclaration", ast.C); //Se agrego el m�todo
+        return layoutUnary("ElseCaseCommand", ast.C); //Se agrego el metodo
     }
 
     public Object visitSelectCommand(selectCommand ast, Object o) {
-        return layoutBinary("selectCommand", ast.D, ast.E); //Se agrego el m�todo
+        return layoutBinary("selectCommand", ast.D, ast.E); //Se agrego el metodo
     }
   
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
+        return layoutBinary("RangeDeclaration", ast.D1, ast.D2); //Se agrego el metodo
+    }
+    
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
+        return layoutUnary("CaseLiteralDeclaration", ast.D1); //Se agrego el metodo
+    }
+    
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
+        return layoutUnary("LiteralDeclaration", ast.IL); //Se agrego el metodo
+    }
+    
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {
+        return layoutUnary("CharDeclaration", ast.CH); //Se agrego el metodo
+    }
+  
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        return layoutUnary("SelectWhen", ast.D1); //Se agrego el metodo
+    }
+    
+    
+    
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object obj) {
@@ -619,6 +646,13 @@ public class LayoutVisitor implements Visitor {
 
     return r;
   }
+
+  
+
+    
+
+    
+
 
 
     

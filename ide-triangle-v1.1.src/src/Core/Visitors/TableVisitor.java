@@ -14,6 +14,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -49,8 +51,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -62,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -390,12 +395,96 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
+  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
       ast.I.visit(this, null);
       ast.E.visit(this, null);
         
       return(null);
   }
+  
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {//Se agrego el metodo visitLocalDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {//Se agrego el metodo visitVarExpressionDeclaration()
+      ast.I.visit(this, null);
+      ast.E.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {//Se agrego el metodo visitProcFuncSDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {//Se agrego el metodo visitRecursiveDeclaration()
+      ast.D1.visit(this, null);
+        
+      return(null);
+    
+    }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {//Se agrego el metodo visitElseCaseCommand()
+      ast.C.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitSelectCommand(selectCommand ast, Object o) {//Se agrego el metodo visitSelectCommand()
+      ast.D.visit(this, null);
+      ast.E.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {//Se agrego el metodo visitRangeDeclaration()
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {//Se agrego el metodo visitCaseLiteralDeclaration()
+      ast.D1.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {//Se agrego el metodo visitLiteralDeclaration()
+      ast.IL.visit(this, null);
+        
+      return(null);
+    
+    }
+
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {//Se agrego el metodo visitCharDeclaration()
+      ast.CH.visit(this, null);
+        
+      return(null);
+    
+    }
+    
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        ast.D1.visit(this, null);
+        
+        return(null);
+    
+    }
+
+    
   
   // </editor-fold>
 
@@ -711,33 +800,8 @@ public class TableVisitor implements Visitor {
     private DefaultTableModel model;
     // </editor-fold>
 
-    @Override
-    public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
+    
 
-    @Override
-    public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-    @Override
-    public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitSelectCommand(selectCommand aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -14,6 +14,8 @@ import Triangle.AbstractSyntaxTrees.BinaryOperatorDeclaration;
 import Triangle.AbstractSyntaxTrees.BoolTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharTypeDenoter;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
@@ -49,8 +51,10 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.Program;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
 import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
 import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
@@ -62,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -260,10 +265,6 @@ public class TreeVisitor implements Visitor {
         return(createBinary("VarExpressionDeclaration", ast.E, ast.I)); //Se agrego el metodo
     }
 
-    /*public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-        return(createBinary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
-    }*/
-
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
         return(createBinary("ProcFuncSDeclaration", ast.D1, ast.D2)); //Se agrego el metodo
     }
@@ -272,14 +273,33 @@ public class TreeVisitor implements Visitor {
         return(createUnary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
     }
     
-    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
-        return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
-    }
-    
     public Object visitSelectCommand(selectCommand ast, Object o) {
         return(createBinary("selectCommand", ast.D, ast.E)); //Se agrego el metodo
     }
     
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
+        return(createBinary("RangeDeclaration", ast.D1, ast.D2)); //Se agrego el metodo
+    }
+    
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
+        return(createUnary("CaseLiteralDeclaration", ast.D1)); //Se agrego el metodo
+    }
+    
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
+        return(createUnary("ElseCaseCommand", ast.C)); //Se agrego el metodo
+    }
+
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
+        return(createUnary("LiteralDeclaration", ast.IL)); //Se agrego el metodo
+    }
+    
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {
+        return(createUnary("CharDeclaration", ast.CH)); //Se agrego el metodo
+    }
+    
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
+        return(createUnary("SelectWhen", ast.D1)); //Se agrego el metodo
+    }
     
     // </editor-fold>
     
@@ -301,6 +321,9 @@ public class TreeVisitor implements Visitor {
     public Object visitSingleRecordAggregate(SingleRecordAggregate ast, Object obj) {
         return(createBinary("Single Record Aggregate", ast.I, ast.E));
     }
+    
+    
+
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Parameters ">
@@ -521,6 +544,14 @@ public class TreeVisitor implements Visitor {
         return(t);             
     }
     // </editor-fold>
+
+  
+
+    
+
+    
+
+
 
    
 

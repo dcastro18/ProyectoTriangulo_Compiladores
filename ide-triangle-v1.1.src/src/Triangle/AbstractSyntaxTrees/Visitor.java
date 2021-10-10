@@ -121,6 +121,16 @@ public interface Visitor {
 
     public Object visitSelectCommand(selectCommand aThis, Object o);
 
+    public Object visitRangeDeclaration(RangeDeclaration aThis, Object o);
+
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration aThis, Object o);
+
+    public Object visitLiteralDeclaration(LiteralDeclaration aThis, Object o);
+
+    public Object visitCharDeclaration(CharDeclaration aThis, Object o);
+
+    public Object visitSelectWhen(SelectWhen aThis, Object o);
+
 
 
 

@@ -24,6 +24,8 @@ import Triangle.AbstractSyntaxTrees.AssignCommand;
 import Triangle.AbstractSyntaxTrees.BinaryExpression;
 import Triangle.AbstractSyntaxTrees.CallCommand;
 import Triangle.AbstractSyntaxTrees.CallExpression;
+import Triangle.AbstractSyntaxTrees.CaseLiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.CharDeclaration;
 import Triangle.AbstractSyntaxTrees.CharacterExpression;
 import Triangle.AbstractSyntaxTrees.CharacterLiteral;
 import Triangle.AbstractSyntaxTrees.Command;
@@ -51,7 +53,8 @@ import Triangle.AbstractSyntaxTrees.IntegerExpression;
 import Triangle.AbstractSyntaxTrees.IntegerLiteral;
 import Triangle.AbstractSyntaxTrees.LetCommand;
 import Triangle.AbstractSyntaxTrees.LetExpression;
-import Triangle.AbstractSyntaxTrees.LocalDeclaration; // nuevo
+import Triangle.AbstractSyntaxTrees.LiteralDeclaration;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
 import Triangle.AbstractSyntaxTrees.MultipleActualParameterSequence;
 import Triangle.AbstractSyntaxTrees.MultipleArrayAggregate;
 import Triangle.AbstractSyntaxTrees.MultipleFieldTypeDenoter;
@@ -63,18 +66,20 @@ import Triangle.AbstractSyntaxTrees.ProcDeclaration;
 import Triangle.AbstractSyntaxTrees.ProcFormalParameter;
 import Triangle.AbstractSyntaxTrees.ProcFuncSDeclaration; // nuevo
 import Triangle.AbstractSyntaxTrees.Program;
+import Triangle.AbstractSyntaxTrees.RangeDeclaration;
 import Triangle.AbstractSyntaxTrees.RecordAggregate;
 import Triangle.AbstractSyntaxTrees.RecordExpression;
 import Triangle.AbstractSyntaxTrees.RecordTypeDenoter;
-import Triangle.AbstractSyntaxTrees.RecursiveDeclaration; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatInCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand; // nuevo
-import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeDoCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatForRangeUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatInCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
 import Triangle.AbstractSyntaxTrees.SimpleTypeDenoter;
@@ -1052,11 +1057,11 @@ public class Parser {
     return declarationAST;
   }
 
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 //
-// CASES
+// CASES AGREDADOS NUEVOS
 //
-///////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
   
  
   Declaration parseCases() throws SyntaxError{
@@ -1077,6 +1082,7 @@ public class Parser {
         acceptIt();
         casesAST2 = parseCase();
         finish(declarationPos);
+        casesAST2 = new SelectWhen(casesAST2, declarationPos); 
     }
     
     if(currentToken.kind == Token.ELSE){
@@ -1085,12 +1091,12 @@ public class Parser {
         finish(declarationPos);
     }
     
-    
-    return declarationAST;
+    return casesAST1;
   }
   
   Declaration parseCase() throws SyntaxError{
     Declaration dAST = null; // in case there's a syntactic error the user see this
+    Declaration dAST1 = null;
     Declaration dAST2 = null;
     Command cAST = null; 
     
@@ -1099,15 +1105,15 @@ public class Parser {
     
     if (currentToken.kind == Token.RANGE){
         acceptIt();
-        dAST = parseCaseLiteral();
+        dAST1 = parseCaseLiteral();
         accept(Token.DOUBLEDOT); 
         dAST2 = parseCaseLiteral();
-        //finish(declarationPos);
-        //dAST = new caseLiteralDeclaration(dAST, dAST2, declarationPos);     
-    }else if (currentToken.kind == Token.INTLITERAL || currentToken.kind == Token.CHARLITERAL){
-        dAST = parseCaseLiteral();
         finish(declarationPos);
-        //dAST = new caseLiteralDeclaration(dAST, declarationPos);     
+        dAST1 = new RangeDeclaration(dAST1, dAST2, declarationPos);     
+    }else if (currentToken.kind == Token.INTLITERAL || currentToken.kind == Token.CHARLITERAL){
+        dAST1 = parseCaseLiteral();
+        finish(declarationPos);
+        dAST1 = new CaseLiteralDeclaration(dAST1, declarationPos);     
     }else{
         syntacticError("\"%\" expected literal, char or range declaration", currentToken.spelling);  
     }
@@ -1116,7 +1122,7 @@ public class Parser {
     finish(declarationPos);
     
     
-    return dAST;
+    return dAST1;
   }
   
   Command parseElseCase() throws SyntaxError{
@@ -1146,7 +1152,7 @@ public class Parser {
             //acceptIt();
             intAST = parseIntegerLiteral();
             finish(declarationPos);
-            //declarationAST = new ProcFuncSDeclaration(intAST, declarationPos);
+            declarationAST = new LiteralDeclaration(intAST, declarationPos);
         }
         break;
         case Token.CHARLITERAL:
@@ -1154,7 +1160,7 @@ public class Parser {
             //acceptIt();
             charAST = parseCharacterLiteral();
             finish(declarationPos);
-            //declarationAST = new ProcFuncSDeclaration(charAST, declarationPos);
+            declarationAST = new CharDeclaration(charAST, declarationPos);
         }
         break;
         default:
