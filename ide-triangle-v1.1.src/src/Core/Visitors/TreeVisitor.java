@@ -87,7 +87,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -273,8 +273,15 @@ public class TreeVisitor implements Visitor {
         return(createUnary("RecursiveDeclaration", ast.D1)); //Se agrego el metodo
     }
     
-    public Object visitSelectCommand(selectCommand ast, Object o) {
-        return(createBinary("selectCommand", ast.D, ast.E)); //Se agrego el metodo
+    public Object visitSelectCommand(SelectCommand ast, Object o) {
+         //Se agrego el metodo
+         if(ast.C == null)
+        {
+            return(createBinary("SelectCommand", ast.D, ast.E));
+        }
+        else{
+           return(createTernary("SelectCommand", ast.D, ast.E, ast.C)); //Se agrego el metodo
+        }
     }
     
     public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
@@ -298,7 +305,7 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitSelectWhen(SelectWhen ast, Object o) {
-        return(createUnary("SelectWhen", ast.D1)); //Se agrego el metodo
+        return(createBinary("SelectWhen", ast.D1, ast.C1)); //Se agrego el metodo
     }
     
     // </editor-fold>

@@ -18,10 +18,11 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class SelectWhen extends Declaration {
     
-  public SelectWhen (Declaration d1AST,
+  public SelectWhen (Declaration d1AST, Command c1AST,
                     SourcePosition thePosition) {
     super (thePosition);
     D1 = d1AST;
+    C1 = c1AST;
   }
 
   public Object visit(Visitor v, Object o) {
@@ -29,4 +30,5 @@ public class SelectWhen extends Declaration {
   }
 
   public Declaration D1;
+  public Command C1;
 }

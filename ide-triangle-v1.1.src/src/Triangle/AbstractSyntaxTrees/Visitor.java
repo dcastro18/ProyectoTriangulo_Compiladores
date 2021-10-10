@@ -119,7 +119,7 @@ public interface Visitor {
 
     public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o);
 
-    public Object visitSelectCommand(selectCommand aThis, Object o);
+    public Object visitSelectCommand(SelectCommand aThis, Object o);
 
     public Object visitRangeDeclaration(RangeDeclaration aThis, Object o);
 

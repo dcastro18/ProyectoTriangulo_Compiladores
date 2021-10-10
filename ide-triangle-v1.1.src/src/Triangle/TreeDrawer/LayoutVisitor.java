@@ -99,7 +99,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 
 public class LayoutVisitor implements Visitor {
 
@@ -279,8 +279,15 @@ public class LayoutVisitor implements Visitor {
         return layoutUnary("ElseCaseCommand", ast.C); //Se agrego el metodo
     }
 
-    public Object visitSelectCommand(selectCommand ast, Object o) {
-        return layoutBinary("selectCommand", ast.D, ast.E); //Se agrego el metodo
+    public Object visitSelectCommand(SelectCommand ast, Object o) {
+        if(ast.C == null)
+        {
+            return layoutBinary("SelectCommand", ast.D, ast.E);
+        }
+        else{
+            return layoutTernary("SelectCommand", ast.D, ast.E, ast.C); //Se agrego el metodo
+        }
+        
     }
   
     public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
@@ -300,7 +307,7 @@ public class LayoutVisitor implements Visitor {
     }
   
     public Object visitSelectWhen(SelectWhen ast, Object o) {
-        return layoutUnary("SelectWhen", ast.D1); //Se agrego el metodo
+        return layoutBinary("SelectWhen", ast.D1, ast.C1); //Se agrego el metodo
     }
     
     

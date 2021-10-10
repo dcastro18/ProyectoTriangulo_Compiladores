@@ -100,7 +100,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand; // nuevo
+import Triangle.AbstractSyntaxTrees.SelectCommand; // nuevo
 
 public class Parser {
 
@@ -357,9 +357,14 @@ public class Parser {
         Expression eAST = parseExpression();
         accept(Token.FROM);
         Declaration casesAST = parseCases();
+        Command cAST = null;
+        if(currentToken.kind == Token.ELSE){
+            acceptIt();
+            cAST = parseElseCase();
+        }
         accept(Token.END);
         finish(commandPos);
-        commandAST = new selectCommand(casesAST,eAST, commandPos);
+        commandAST = new SelectCommand(casesAST,eAST,cAST, commandPos);
         
     }
    break;
@@ -1069,58 +1074,55 @@ public class Parser {
   
     Declaration casesAST1 = null;
     Declaration casesAST2 = null;
-    Command casesAST3 = null;
+    Declaration casesAST3 = null;
+    Command cAST = null; 
     
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
       
-    accept(Token.WHEN);
-    casesAST1 = parseCase();
-    finish(declarationPos);
-    
     while (currentToken.kind == Token.WHEN){
         acceptIt();
         casesAST2 = parseCase();
+        accept(Token.THEN);
+        cAST = parseCommand();
         finish(declarationPos);
-        casesAST2 = new SelectWhen(casesAST2, declarationPos); 
-    }
-    
-    if(currentToken.kind == Token.ELSE){
-        acceptIt();
-        casesAST3 = parseElseCase();
-        finish(declarationPos);
-    }
-    
-    return casesAST1;
+        casesAST3 = new SelectWhen(casesAST2,cAST,declarationPos);
+    } 
+    return casesAST3;
   }
   
   Declaration parseCase() throws SyntaxError{
     Declaration dAST = null; // in case there's a syntactic error the user see this
     Declaration dAST1 = null;
     Declaration dAST2 = null;
-    Command cAST = null; 
+    
     
     SourcePosition declarationPos = new SourcePosition();
     start(declarationPos);
     
-    if (currentToken.kind == Token.RANGE){
-        acceptIt();
-        dAST1 = parseCaseLiteral();
-        accept(Token.DOUBLEDOT); 
-        dAST2 = parseCaseLiteral();
-        finish(declarationPos);
-        dAST1 = new RangeDeclaration(dAST1, dAST2, declarationPos);     
-    }else if (currentToken.kind == Token.INTLITERAL || currentToken.kind == Token.CHARLITERAL){
-        dAST1 = parseCaseLiteral();
-        finish(declarationPos);
-        dAST1 = new CaseLiteralDeclaration(dAST1, declarationPos);     
-    }else{
-        syntacticError("\"%\" expected literal, char or range declaration", currentToken.spelling);  
-    }
-    accept(Token.THEN);
-    cAST = parseCommand();
-    finish(declarationPos);
-    
+      switch (currentToken.kind) {
+          case Token.RANGE:
+              acceptIt();
+              dAST1 = parseCaseLiteral();
+              accept(Token.DOUBLEDOT);
+              dAST2 = parseCaseLiteral();
+              finish(declarationPos);
+              dAST1 = new RangeDeclaration(dAST1, dAST2, declarationPos);
+              //return dAST1;
+              break;
+              
+          case Token.INTLITERAL:
+          case Token.CHARLITERAL:
+              dAST1 = parseCaseLiteral();
+              finish(declarationPos);
+              dAST1 = new CaseLiteralDeclaration(dAST1, declarationPos);
+              //return dAST1;
+              break;
+              
+          default:
+              syntacticError("\"%\" expected literal, char or range declaration", currentToken.spelling);
+              break;
+      }   
     
     return dAST1;
   }

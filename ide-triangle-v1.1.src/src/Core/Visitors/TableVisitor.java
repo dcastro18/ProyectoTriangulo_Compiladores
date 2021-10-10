@@ -66,6 +66,7 @@ import Triangle.AbstractSyntaxTrees.RepeatForRangeWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatInCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatWhileDoCommand;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import Triangle.AbstractSyntaxTrees.SelectWhen;
 import Triangle.AbstractSyntaxTrees.SequentialCommand;
 import Triangle.AbstractSyntaxTrees.SequentialDeclaration;
@@ -87,7 +88,6 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand;
 import Triangle.CodeGenerator.Field;
 import Triangle.CodeGenerator.KnownAddress;
 import Triangle.CodeGenerator.KnownRoutine;
@@ -440,10 +440,15 @@ public class TableVisitor implements Visitor {
     
     }
 
-    public Object visitSelectCommand(selectCommand ast, Object o) {//Se agrego el metodo visitSelectCommand()
-      ast.D.visit(this, null);
-      ast.E.visit(this, null);
-        
+    public Object visitSelectCommand(SelectCommand ast, Object o) {//Se agrego el metodo visitSelectCommand()
+      if(ast.C == null){
+            ast.E.visit(this, null);
+            ast.D.visit(this, null);
+        }else{
+            ast.C.visit(this, null);
+            ast.D.visit(this, null);
+            ast.E.visit(this, null);
+        }
       return(null);
     
     }
@@ -479,6 +484,7 @@ public class TableVisitor implements Visitor {
     
     public Object visitSelectWhen(SelectWhen ast, Object o) {
         ast.D1.visit(this, null);
+        ast.C1.visit(this, null);
         
         return(null);
     

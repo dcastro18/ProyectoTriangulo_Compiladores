@@ -16,12 +16,21 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class selectCommand extends Command {
+public class SelectCommand extends Command {
 
-  public selectCommand (Declaration dAST, Expression eAST, SourcePosition thePosition) {
+  public SelectCommand (Declaration dAST, Expression eAST, Command c1AST, SourcePosition thePosition) {
     super (thePosition);
-    D = dAST;
-    E = eAST;
+    if(c1AST == null)
+    {
+        D = dAST;
+        E = eAST;
+    }else{
+        D = dAST;
+        E = eAST;
+        C = c1AST;
+    }
+    
+    
   }
 
   public Object visit(Visitor v, Object o) {
@@ -30,4 +39,5 @@ public class selectCommand extends Command {
 
   public Declaration D;
   public Expression E;
+  public Command C;
 }

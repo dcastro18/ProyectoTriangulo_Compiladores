@@ -82,7 +82,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import Triangle.AbstractSyntaxTrees.selectCommand;
+import Triangle.AbstractSyntaxTrees.SelectCommand;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -421,10 +421,16 @@ public class XMLWriterVisitor implements Visitor {
         return null;    
     }
     
-    public Object visitSelectCommand(selectCommand ast, Object o) {
+    public Object visitSelectCommand(SelectCommand ast, Object o) {
         writeLineXML("<SelectCommand>");
-        ast.D.visit(this, null);
-        ast.E.visit(this, null);
+        if(ast.C == null){
+            ast.E.visit(this, null);
+            ast.D.visit(this, null);
+        }else{
+            ast.C.visit(this, null);
+            ast.D.visit(this, null);
+            ast.E.visit(this, null);
+        }
         writeLineXML("</SelectCommand>");
         return null; 
     }
@@ -463,6 +469,7 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitSelectWhen(SelectWhen ast, Object o) {
         writeLineXML("<SelectWhen>");
         ast.D1.visit(this, null);
+        ast.C1.visit(this, null);
         writeLineXML("</SelectWhen>");
         return null;
     }
