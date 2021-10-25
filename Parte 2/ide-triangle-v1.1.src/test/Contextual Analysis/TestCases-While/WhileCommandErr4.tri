@@ -1,0 +1,6 @@
+! Test of while command
+! It doesn't run correctly
+
+while 'a' do ! Contextual error, should be a boolean expression
+  
+  putint (1) 

@@ -1,0 +1,7 @@
+! Test of while command
+! It doesn't run correctly
+
+while puteol() do
+    putint(1)
+
+! Contextual Error, puteol() is not a function so it doesn't has a return value

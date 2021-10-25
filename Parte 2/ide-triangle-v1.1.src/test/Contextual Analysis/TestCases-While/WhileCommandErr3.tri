@@ -1,0 +1,9 @@
+! Error: while expects a boolean expression
+let
+   var n: Integer
+in
+begin
+   n := 0;
+   while n + 5 do ! Error: n + 5 is an integer expression
+	  n := n + 1
+end

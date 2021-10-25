@@ -1,0 +1,12 @@
+! Test of while command
+!I doesn't run correctly
+
+let 
+    var a : Integer
+in
+    begin
+        a := 2; 
+        while a < 5 do 
+            put(a); !should be putint
+            a := a + 1
+    end

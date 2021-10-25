@@ -1,0 +1,12 @@
+! Test of while command
+! It doesn't run correctly
+let
+   type Fecha ~ 
+      record
+        d: Integer,
+        m: Char,
+        a: Integer
+      end;
+   var f: Fecha
+in
+    while f.m do putint(f.a) !boolean expression expected

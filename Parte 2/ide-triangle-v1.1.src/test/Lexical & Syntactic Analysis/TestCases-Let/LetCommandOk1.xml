@@ -1,0 +1,23 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<LetCommand>
+<ConstDeclaration>
+<Identifier value="x"/>
+<CharacterExpression>
+<CharacterLiteral value="'x'"/>
+</CharacterExpression>
+</ConstDeclaration>
+<CallCommand>
+<Identifier value="put"/>
+<SingleActualParameterSequence>
+<ConstActualParameter>
+<VnameExpression>
+<SimpleVname>
+<Identifier value="x"/>
+</SimpleVname>
+</VnameExpression>
+</ConstActualParameter>
+</SingleActualParameterSequence>
+</CallCommand>
+</LetCommand>
+</Program>

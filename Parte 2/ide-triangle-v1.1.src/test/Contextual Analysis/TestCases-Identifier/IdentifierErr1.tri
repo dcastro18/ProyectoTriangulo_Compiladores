@@ -1,0 +1,7 @@
+! Identifier error test
+
+let
+  const x ~ 2;
+  var y : Integer
+in
+  putint(x, y) ! putint only takes one parameter

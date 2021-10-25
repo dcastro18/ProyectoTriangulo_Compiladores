@@ -1,0 +1,8 @@
+! Test of type validation in proc declarations
+! It runs correctly
+
+let
+  func F (x: Integer) : Integer ~ x;
+  proc P (func x(x: Integer) : Integer) ~ ! expects a function by reference
+    putint(x(10))
+in

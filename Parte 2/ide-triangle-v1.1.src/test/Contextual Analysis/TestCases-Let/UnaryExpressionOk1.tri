@@ -1,0 +1,5 @@
+! Test of Unary Expression, it works
+let
+   func a(b: Boolean): Boolean ~
+        \b
+in

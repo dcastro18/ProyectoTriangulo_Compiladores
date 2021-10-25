@@ -1,0 +1,11 @@
+! If Expression error test
+
+let
+  var c : Boolean
+in
+begin
+  c := if (c) then ! Contextual error, assigning integer to boolean variable
+    8
+  else
+    10
+end

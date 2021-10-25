@@ -1,0 +1,9 @@
+! Identifier error test
+
+let
+
+  const a ~ 3
+
+in
+
+  getint(const a) ! getint() receives only variables by reference

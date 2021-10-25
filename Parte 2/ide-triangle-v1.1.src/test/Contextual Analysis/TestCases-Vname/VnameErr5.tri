@@ -1,0 +1,11 @@
+! Vname Error Test
+
+let
+    var a : Char
+in
+    begin
+        let 
+            var a : Integer ! redeclaration in different scope
+        in
+            a := 'b'; ! in this scope a is an Integer
+    end

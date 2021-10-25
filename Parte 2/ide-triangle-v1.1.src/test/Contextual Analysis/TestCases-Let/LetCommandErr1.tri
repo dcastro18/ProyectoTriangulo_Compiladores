@@ -1,0 +1,23 @@
+! Error: Variable used outside of scope
+
+let
+   proc p() ~ let
+                 var x: Integer in
+                 begin
+                   getint(var x);
+                   putint(x)
+                 end;
+   var x: Char
+in
+begin
+  get(var x);
+  put(x);
+  let
+    var y: Integer 
+  in
+  begin
+    getint(var y);
+    putint(y)
+  end;
+  putint(y) !y is not declared here
+end

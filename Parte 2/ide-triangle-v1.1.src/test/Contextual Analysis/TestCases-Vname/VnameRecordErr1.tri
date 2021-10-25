@@ -1,0 +1,12 @@
+! Vname.Identifier error test
+! error: birthday must be a record type
+
+let
+   var birthday: array 3 of Integer
+in
+  begin
+    birthday.d := 20; ! its an array not a record
+    birthday.m := 06;
+    birthday.y := 2001;
+    putint(birthday.d)
+  end

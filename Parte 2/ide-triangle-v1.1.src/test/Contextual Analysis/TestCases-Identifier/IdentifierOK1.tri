@@ -1,0 +1,12 @@
+! Identifier Successful Test
+
+let
+    var a : Char
+in
+    begin
+        let 
+            var a : Integer ! redeclaration in different scope
+        in
+            putint(a);
+        put(a)
+    end

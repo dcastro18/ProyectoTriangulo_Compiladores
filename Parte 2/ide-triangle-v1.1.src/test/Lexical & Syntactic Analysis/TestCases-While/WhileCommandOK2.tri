@@ -1,0 +1,4 @@
+! Test of while command, it runs correctly
+repeat while 1=1 
+do puteol()
+end

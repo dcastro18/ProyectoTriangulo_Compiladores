@@ -1,0 +1,10 @@
+! If Command successful test
+
+let
+  var a : Integer;
+  var b : Integer
+in
+  if ( a / b = 2 ) then ! boolean xpression
+    putint(a)
+  else
+    putint(b)

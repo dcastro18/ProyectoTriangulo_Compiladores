@@ -1,0 +1,8 @@
+! Test of type checking inside let command
+! It does not run correctly
+
+let
+  var a : Char;
+  const b ~ 2
+in
+  putint(a + 2) ! a is a char, this expression is for integers

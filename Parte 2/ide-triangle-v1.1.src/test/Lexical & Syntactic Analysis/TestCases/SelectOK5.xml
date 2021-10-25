@@ -1,0 +1,13 @@
+<?xml version="1.0" standalone="yes"?>
+<Program>
+<SelectCommand>
+<CaseLiteralDeclaration>
+<LiteralDeclaration>
+<IntegerLiteral value="123"/>
+</LiteralDeclaration>
+</CaseLiteralDeclaration>
+<IntegerExpression>
+<IntegerLiteral value="0"/>
+</IntegerExpression>
+</SelectCommand>
+</Program>

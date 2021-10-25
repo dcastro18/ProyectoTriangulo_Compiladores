@@ -1,0 +1,6 @@
+! Type Declaration Error Test
+
+let
+    var a : array 10 of True; ! Declarations are sequential, so True is not a type identifier
+    type True ~ Integer
+in
