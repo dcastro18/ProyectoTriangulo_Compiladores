@@ -1,7 +1,0 @@
-! Test of constant declaration, it works
-let
-   const t ~ 'a'
-in
-begin
-  put(t)
-end

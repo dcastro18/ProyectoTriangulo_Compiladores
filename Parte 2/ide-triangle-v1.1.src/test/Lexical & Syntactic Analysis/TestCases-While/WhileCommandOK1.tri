@@ -1,8 +1,0 @@
-! Test of while command, it runs correctly
-
-repeat do
-      putint(5)
-    while true
-end
-
-

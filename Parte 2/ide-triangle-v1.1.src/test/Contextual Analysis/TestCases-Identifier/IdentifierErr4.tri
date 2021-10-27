@@ -1,7 +1,0 @@
-! Identifier error test
-
-let
-    const x ~ 2
-in
-    putint(x);
-    putint(x) ! Let is single-command, here x is outside the scope 

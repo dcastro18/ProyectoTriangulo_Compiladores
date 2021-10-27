@@ -1,3 +1,0 @@
-! Test of while command, doesn't run correctly.
-
-while true then putint (1)  ! there's then instead of do

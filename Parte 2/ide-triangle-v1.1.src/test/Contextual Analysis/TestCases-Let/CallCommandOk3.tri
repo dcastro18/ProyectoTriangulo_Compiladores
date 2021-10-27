@@ -1,7 +1,0 @@
-! Ok: Procedure call with an integer literal
-
-let
-  proc P (x : Integer) ~
-    putint (x * 2)
-in
-  P (10) ! Ok: proc can receive constant values

@@ -1,3 +1,0 @@
-! Identifier error test
-
-getint(1) ! getint only takes variables

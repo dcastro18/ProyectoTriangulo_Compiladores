@@ -1,8 +1,0 @@
-! Call Command successful test
-
-let
-  func F () : Integer ~ 10;
-  proc P (x : Integer) ~
-    putint (x * 2)
-in
-  P (F()) ! OK: P expects a value so it can receive the result of a func

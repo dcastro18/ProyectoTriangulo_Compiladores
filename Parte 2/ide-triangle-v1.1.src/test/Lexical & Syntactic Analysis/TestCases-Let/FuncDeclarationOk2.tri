@@ -1,6 +1,0 @@
-! Test of function declaration, it works
-let
-   func x(a: Integer): Integer ~
-       a*a
-in
-  putint(x(16))

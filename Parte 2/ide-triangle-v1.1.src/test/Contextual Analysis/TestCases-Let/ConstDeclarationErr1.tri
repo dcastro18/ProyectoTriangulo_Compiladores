@@ -1,6 +1,0 @@
-! Error: Constant cannot be modified
-
-let
-  const x ~ 2
-in
-  x := 3; !x is a constant, it can not be modified

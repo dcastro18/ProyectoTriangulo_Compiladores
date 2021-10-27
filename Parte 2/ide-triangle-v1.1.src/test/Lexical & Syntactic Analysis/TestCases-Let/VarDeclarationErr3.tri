@@ -1,6 +1,0 @@
-! Test of type declaration, it fails
-
-let
-   var m: 'x' ! Expecte type, got expression
-in
-   put('z')

@@ -1,6 +1,0 @@
-! Error: proc called does not exists
-
-let
-  proc F () ~ putint(1)
-in
-  P () ! Error: p does not exists

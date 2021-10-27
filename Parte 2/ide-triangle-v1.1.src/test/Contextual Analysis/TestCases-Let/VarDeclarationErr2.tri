@@ -1,8 +1,0 @@
-! Error: Variable declared twice in the same scope
-
-let
-  var x : Integer;
-  var y : Char;
-  var x : Char ! redeclaration of variable
-in 
-    get (var x) 

@@ -1,3 +1,0 @@
-repeat for i := range 5 .. 6 skip ; skip end
-
-! falta do

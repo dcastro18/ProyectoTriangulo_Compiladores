@@ -1,7 +1,0 @@
-! Test of const declaration
-! it runs correctly
-
-let
-  const x ~ 5
-in
-  putint(x)

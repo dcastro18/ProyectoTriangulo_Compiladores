@@ -1,7 +1,0 @@
-! Test of array expression, it fails
-! Type not declared
-let
-
-  var b : array 10 of hora ! hora is not declared
-
-in

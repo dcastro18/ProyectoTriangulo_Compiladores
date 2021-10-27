@@ -1,9 +1,0 @@
-! Error: Function called with wrong type on parameters
-let
-   func media(a: Integer, b: Integer): Integer ~ (a+b)/2;
-   var x: Integer
-in
-begin
-  x:= media('a','b'); !media parameters were declared as integers
-  putint(x)
-end

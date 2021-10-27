@@ -1,6 +1,0 @@
-! Error: Variable not declared
-
-let
-  var x : Integer
-in
-  putint(X) ! X (in all caps) is not declared

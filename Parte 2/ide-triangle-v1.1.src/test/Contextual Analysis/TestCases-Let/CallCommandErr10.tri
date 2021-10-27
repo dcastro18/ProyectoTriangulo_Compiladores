@@ -1,7 +1,0 @@
-! Error: proc called with less parameters than expected
-
-let
-  proc P (x : Integer) ~
-    putint (x * 2)
-in
-  P () ! P must be called with one parameter

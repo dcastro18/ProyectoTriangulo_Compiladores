@@ -1,6 +1,0 @@
-! Test of type declaration, it works
-
-let
-  type Entero; ! Type of declaration missing
-in
-

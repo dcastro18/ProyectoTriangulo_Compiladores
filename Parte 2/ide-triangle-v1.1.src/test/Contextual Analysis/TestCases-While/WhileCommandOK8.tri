@@ -1,9 +1,0 @@
-! Test of while command, it runs correctly.
-
-while 
-    let
-        const i ~ 5
-    in 
-        (i / 2) > 5
-do
-    putint(1)

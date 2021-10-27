@@ -1,6 +1,0 @@
-! Type Declaration Successful Test
-
-let
-    type True ~ Integer;
-    var a : array 10 of True ! True is a declared type identifier
-in

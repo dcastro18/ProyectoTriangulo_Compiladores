@@ -1,6 +1,0 @@
-! Error: Procedure called with undeclared variable
-let
-  proc P (x : Integer) ~
-    putint (x * 2)
-in
-  P (x) ! Error: x is not visible here

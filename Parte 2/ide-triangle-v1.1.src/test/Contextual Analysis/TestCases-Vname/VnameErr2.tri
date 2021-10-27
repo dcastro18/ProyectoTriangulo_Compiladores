@@ -1,3 +1,0 @@
-! Vname error test
-
-b := 23 ! Not declared, contextual error

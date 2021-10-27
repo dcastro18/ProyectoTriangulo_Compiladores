@@ -1,8 +1,0 @@
-! Test of actual parameters types in proc declaration
-! It runs correctly
-
-let
-  var k : Integer;
-  proc P (var x : Integer) ~ ! P expects a variable by reference
-    putint (x * 2)
-in

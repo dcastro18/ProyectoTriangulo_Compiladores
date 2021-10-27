@@ -1,9 +1,0 @@
-! Test of begin and let scopes
-! It runs correctly
-
-begin
-    let
-        var i : Char
-    in 
-        i := '1'
-end

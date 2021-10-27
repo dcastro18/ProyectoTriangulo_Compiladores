@@ -1,7 +1,0 @@
-! Test of while command, it runs correctly
-
-while true do
-    let                 ! this is a Let-Command
-        var i : Integer
-    in 
-        i := 2

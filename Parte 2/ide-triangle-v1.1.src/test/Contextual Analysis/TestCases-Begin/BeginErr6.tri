@@ -1,8 +1,0 @@
-! Test of begin variable declarations
-! It doesn't run correctly
-
-begin
-    if (a=1) !a is not declared
-    then putint(a)              
-    else a := 1 
-end

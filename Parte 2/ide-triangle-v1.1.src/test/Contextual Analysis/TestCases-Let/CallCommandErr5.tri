@@ -1,8 +1,0 @@
-! Error: proc called with proc argument instead of an integer value
-
-let
-  proc F () ~ putint(1) ;
-  proc P (x : Integer) ~
-    putint (x * 2)
-in
-  P (F) ! Error: x is supposed to be an integer but got a proc

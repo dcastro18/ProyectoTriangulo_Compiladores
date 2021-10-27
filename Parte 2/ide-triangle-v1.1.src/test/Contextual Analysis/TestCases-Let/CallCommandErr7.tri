@@ -1,9 +1,0 @@
-! Error: a type cannot be passed as a variable
-
-let
-  type Entero ~ Integer;
-  proc P (var x : Integer) ~
-    putint (x * 2)
-in
-  P (Entero) ! Error: proc cannot receive types
-

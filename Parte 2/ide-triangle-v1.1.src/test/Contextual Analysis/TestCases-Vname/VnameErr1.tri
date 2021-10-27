@@ -1,4 +1,0 @@
-! Vname error test
-! variable not declared in begin
-
-begin a := 23 end ! Not declared, contextual error

@@ -1,6 +1,0 @@
-! Vname error test
-
-let
-    const x ~ 2 ! constant
-in
-    x := 3 ! not a variable

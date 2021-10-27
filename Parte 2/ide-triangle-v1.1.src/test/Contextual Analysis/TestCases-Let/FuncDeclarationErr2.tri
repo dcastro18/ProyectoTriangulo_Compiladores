@@ -1,6 +1,0 @@
-! Error: expression with different type
-
-let
-  func a(var par1 : Char, var par2 : Integer): Char ~ 1 ! Expected char, got integer
-in
-   ! Empty Command

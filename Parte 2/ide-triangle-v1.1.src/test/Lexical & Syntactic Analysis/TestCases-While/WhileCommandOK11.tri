@@ -1,7 +1,0 @@
-! Test of while command, it runs correctly.
-
-while puteol() do
-    putint(1)
-
-! OK lexical and syntactic analysis
-! Contextual Error, puteol() is not a function (doesn't has a return value)

@@ -1,3 +1,0 @@
-! Identifier error test
-
-putint(1 - 'b') ! b is not an integer

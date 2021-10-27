@@ -1,7 +1,0 @@
-! Test of while Command
-! It doesn't run correctly
-
-while true do
-    if (a=1) ! a is not declared
-    then putint(1)
-    else putint(2) 

@@ -1,6 +1,0 @@
-! Test of array expression, it runs
-let
-
-  var b : array 'a' of Integer! Expected size got character instead
-
-in

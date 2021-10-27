@@ -1,7 +1,0 @@
-! Test of function declaration, it fails
-
-let
-   func f(): func ~ ! 'func' is not a Type Denoter
-        'e'
-in
-  put(f())

@@ -1,3 +1,0 @@
-repeat for i := range 5 ... 6 while i < 5  skip ; skip end
-
-!falta el do

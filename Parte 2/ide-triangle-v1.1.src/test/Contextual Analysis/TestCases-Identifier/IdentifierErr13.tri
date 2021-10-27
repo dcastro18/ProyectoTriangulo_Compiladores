@@ -1,9 +1,0 @@
-! Identifier error test
-
-let
-
-  func a(): Integer ~ 1
-
-in
-
-  getint( a() ) ! getint() receives only variables by reference
