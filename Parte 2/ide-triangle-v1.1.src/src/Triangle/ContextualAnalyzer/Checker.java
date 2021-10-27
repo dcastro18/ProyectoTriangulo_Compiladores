@@ -122,7 +122,7 @@ public final class Checker implements Visitor {
       reporter.reportError ("assignment incompatibilty", "", ast.position);
     return null;
   }
-
+// hola
 
   public Object visitCallCommand(CallCommand ast, Object o) {
 
