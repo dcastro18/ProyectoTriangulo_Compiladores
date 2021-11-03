@@ -10,7 +10,6 @@ let
            b: Char
           end
 in
-begin
    v:= true;
    w:= 5;
    x:= '?';

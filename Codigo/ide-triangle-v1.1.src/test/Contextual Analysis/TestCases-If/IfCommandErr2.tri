@@ -6,10 +6,8 @@ let
   var b : Char
 in
   if a then  ! expression is not boolean
-    begin
-      putint(a);
-    end
+      putint(a)
   else 
-    begin
-      put(b);
-    end
+      put(b)
+  end
+end

@@ -2,22 +2,21 @@
 
 let
    proc p() ~ let
-                 var x: Integer in
-                 begin
+                 var x: Integer 
+	       in
                    getint(var x);
                    putint(x)
-                 end;
+               end;
+
    var x: Char;
    var y: Integer
 in
-begin
   get(var x);
   put(x);
   let
     var y: Integer 
-  in;
-  begin
+  in
     getint(var y);
     putint(y) ! It uses the first declaration
-  end;
+  end
 end

@@ -2,10 +2,11 @@
 
 let
   var a : Integer
-in;
-
-if ( a = true ) ! a is not declared
-then
-    put('t')
-else
-    put('f')
+in
+	if ( a = true ) ! a is not declared
+	then
+    		put('t')
+	else
+    		put('f')
+	end
+end
