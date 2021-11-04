@@ -15,11 +15,15 @@
 package Triangle.ContextualAnalyzer;
 
 import Triangle.AbstractSyntaxTrees.Declaration;
+import java.util.ArrayList;
 
 public final class IdentificationTable {
 
   private int level;
-  private IdEntry latest;
+  IdEntry latest;
+  public boolean localDeclaration2 = false;                         //nuevo
+  public ArrayList<IdEntry> entrys = new ArrayList<IdEntry>();      //nuevo
+  public ArrayList<IdEntry> latests = new ArrayList<IdEntry>();     //nuevo
 
   public IdentificationTable () {
     level = 0;
@@ -76,6 +80,16 @@ public final class IdentificationTable {
     // Add new entry ...
     entry = new IdEntry(id, attr, this.level, this.latest);
     this.latest = entry;
+    if(localDeclaration2 == true){
+        entrys.add(entry);
+        this.localDeclaration2 = false;
+    }
+  }
+  
+  public void to_assign() {
+      for (int counter = 0; counter < entrys.size(); counter++) { 		      
+          entrys.get(counter).previous = latests.get(counter); 		
+      }
   }
 
   // Finds an entry for the given identifier in the identification table,
