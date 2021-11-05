@@ -21,11 +21,8 @@ public final class IdentificationTable {
 
   private int level;
   IdEntry latest;
-  public boolean localDeclaration2 = false;                         //nuevo
-  public ArrayList<IdEntry> entrys = new ArrayList<IdEntry>();      //nuevo
-  public ArrayList<IdEntry> latests = new ArrayList<IdEntry>();     //nuevo
 
-  public IdentificationTable () {
+  public IdentificationTable() {
     level = 0;
     latest = null;
   }
@@ -33,15 +30,15 @@ public final class IdentificationTable {
   // Opens a new level in the identification table, 1 higher than the
   // current topmost level.
 
-  public void openScope () {
+  public void openScope() {
 
-    level ++;
+    level++;
   }
 
   // Closes the topmost level in the identification table, discarding
   // all entries belonging to that level.
 
-  public void closeScope () {
+  public void closeScope() {
 
     IdEntry entry, local;
 
@@ -60,7 +57,7 @@ public final class IdentificationTable {
   // duplicated is set to to true iff there is already an entry for the
   // same identifier at the current level.
 
-  public void enter (String id, Declaration attr) {
+  public void enter(String id, Declaration attr) {
 
     IdEntry entry = this.latest;
     boolean present = false, searching = true;
@@ -72,24 +69,37 @@ public final class IdentificationTable {
       else if (entry.id.equals(id)) {
         present = true;
         searching = false;
-       } else
-       entry = entry.previous;
+      } else
+        entry = entry.previous;
     }
 
     attr.duplicated = present;
     // Add new entry ...
     entry = new IdEntry(id, attr, this.level, this.latest);
     this.latest = entry;
-    if(localDeclaration2 == true){
-        entrys.add(entry);
-        this.localDeclaration2 = false;
-    }
   }
-  
+
+  // Cambio
   public void to_assign() {
-      for (int counter = 0; counter < entrys.size(); counter++) { 		      
-          entrys.get(counter).previous = latests.get(counter); 		
-      }
+		IdEntry entryDeclaration = this.latest, localDeclaration = entryDeclaration, localEntry;
+
+		// There are two declarations in this scope, local needs to be "rewound"
+		// to the first declaration.
+		while (entryDeclaration.level == this.level) {
+			localDeclaration = entryDeclaration;
+			localDeclaration.level = localDeclaration.level - 2;
+			entryDeclaration = localDeclaration.previous;
+		}
+
+		// Get all the entries that belong to the local variable.
+		while (entryDeclaration.level == this.level - 1) {
+			localEntry = entryDeclaration;
+			entryDeclaration = localEntry.previous;
+		}
+		localDeclaration.previous = entryDeclaration;
+
+		//Finally, commit the scope level.
+		this.level = level - 2;
   }
 
   // Finds an entry for the given identifier in the identification table,
@@ -98,7 +108,7 @@ public final class IdentificationTable {
   // Returns null iff no entry is found.
   // otherwise returns the attribute field of the entry found.
 
-  public Declaration retrieve (String id) {
+  public Declaration retrieve(String id) {
 
     IdEntry entry;
     Declaration attr = null;
