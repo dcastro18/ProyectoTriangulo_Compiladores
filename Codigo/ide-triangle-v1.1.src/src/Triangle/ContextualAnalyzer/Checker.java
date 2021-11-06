@@ -109,6 +109,9 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public final class Checker implements Visitor {
 
+  public boolean saveId = false;      //NUEVO
+  public boolean recOn = false;       //NUEVO
+
   // Commands
 
   // Always returns null. Does not use the given object.
@@ -424,11 +427,46 @@ public final class Checker implements Visitor {
   }
 
   public Object visitFuncDeclaration(FuncDeclaration ast, Object o) { //HUBO UN CAMBIOOOOOOOOOOOOOO
+    if(this.saveId){
+       this.visitFuncDeclarationID(ast, o);
+    }
+    else if(this.saveId==false){
+        this.visitFuncDeclarationBody(ast, o);
+    }
+    else if(this.recOn==false){
+        this.visitFuncDeclarationID(ast, o);
+        this.visitFuncDeclarationBody(ast, o);
+    }
+    return null;
+  }
+
+  public Object visitProcDeclaration(ProcDeclaration ast, Object o) { //HUBO UN CAMBIOOOOOOOOOOOOOOO
+    if(this.saveId==true & this.recOn==true){
+       this.visitProcDeclarationID(ast, o);
+    }
+    else if(this.saveId==false & this.recOn==true){
+        this.visitProcDeclarationBody(ast, o);
+    }
+    else if(this.recOn==false){
+        this.visitProcDeclarationID(ast, o);
+        this.visitProcDeclarationBody(ast, o);
+    }
+    return null;
+  }
+
+  public Object visitFuncDeclarationID(FuncDeclaration ast, Object o) {
     ast.T = (TypeDenoter) ast.T.visit(this, null);
-    idTable.enter (ast.I.spelling, ast); // permits recursion
+       idTable.enter (ast.I.spelling, ast); // permits recursion
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
                             ast.I.spelling, ast.position);
+    idTable.openScope();
+    ast.FPS.visit(this, null);
+    idTable.closeScope();
+    return null;
+  }
+  
+  public Object visitFuncDeclarationBody(FuncDeclaration ast, Object o) {
     idTable.openScope();
     ast.FPS.visit(this, null);
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
@@ -438,15 +476,22 @@ public final class Checker implements Visitor {
                             ast.I.spelling, ast.E.position);
     return null;
   }
-
-  public Object visitProcDeclaration(ProcDeclaration ast, Object o) { //HUBO UN CAMBIOOOOOOOOOOOOOOO
+  
+  public Object visitProcDeclarationBody(ProcDeclaration ast, Object o) {
+    idTable.openScope();
+    ast.FPS.visit(this, null);
+    ast.C.visit(this, null);
+    idTable.closeScope();
+    return null;
+  }
+  
+  public Object visitProcDeclarationID(ProcDeclaration ast, Object o) {
     idTable.enter (ast.I.spelling, ast); // permits recursion
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
                             ast.I.spelling, ast.position);
     idTable.openScope();
     ast.FPS.visit(this, null);
-    ast.C.visit(this, null);
     idTable.closeScope();
     return null;
   }
@@ -1090,53 +1135,57 @@ public final class Checker implements Visitor {
         return null;
     }
 
-    @Override
     public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+      return null;
+    }
+
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+      this.saveId= true; this.recOn = true;
+      ast.D1.visit(this, null);
+      this.saveId= false;
+      ast.D1.visit(this, null);
+      this.recOn = false;
+      return null;
+    }
+
+    @Override
+    public Object visitElseCaseCommand(ElseCaseCommand ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
+    public Object visitSelectCommand(SelectCommand ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o) {
+    public Object visitRangeDeclaration(RangeDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitSelectCommand(SelectCommand aThis, Object o) {
+    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitRangeDeclaration(RangeDeclaration aThis, Object o) {
+    public Object visitLiteralDeclaration(LiteralDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitCaseLiteralDeclaration(CaseLiteralDeclaration aThis, Object o) {
+    public Object visitCharDeclaration(CharDeclaration ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object visitLiteralDeclaration(LiteralDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitCharDeclaration(CharDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object visitSelectWhen(SelectWhen aThis, Object o) {
+    public Object visitSelectWhen(SelectWhen ast, Object o) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
