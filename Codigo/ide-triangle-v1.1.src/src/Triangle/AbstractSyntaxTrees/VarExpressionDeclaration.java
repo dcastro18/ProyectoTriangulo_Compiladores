@@ -16,11 +16,11 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class VarExpressionDeclaration extends Declaration {
+public class VarExpressionDeclaration extends VarDeclaration {
 
   public VarExpressionDeclaration (Identifier iAST, Expression eAST,
                          SourcePosition thePosition) {
-    super (thePosition);
+    super (iAST, null, thePosition);
     I = iAST;
     E = eAST;
   }
