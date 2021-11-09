@@ -221,7 +221,7 @@ public final class Checker implements Visitor {
   public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
     //Exp debe ser de tipo array InL of TD.
     
-    //Id es conocida como la “variable de iteración”. Id es de tipo TD. Id es declarada en este comando y su alcance es Com; esta declaración de Id no es conocida por Exp.
+    //Id es conocida como la ï¿½variable de iteraciï¿½nï¿½. Id es de tipo TD. Id es declarada en este comando y su alcance es Com; esta declaraciï¿½n de Id no es conocida por Exp.
     idTable.openScope();
     ast.D.visit(this, null);
     ast.C.visit(this, null);
@@ -235,7 +235,7 @@ public final class Checker implements Visitor {
     if(!(eType instanceof IntTypeDenoter)){
         reporter.reportError ("wrong expression type, must be an integer type","", ast.E.position);
     }
-    //Id es declarada en este comando y su alcance es Com; esta declaración de Id no es conocida por Exp1 ni por Exp2.
+    //Id es declarada en este comando y su alcance es Com; esta declaraciï¿½n de Id no es conocida por Exp1 ni por Exp2.
     idTable.openScope();
     ast.D.visit(this, null);
     //Com debe cumplir con las restricciones contextuales
@@ -480,7 +480,7 @@ public final class Checker implements Visitor {
     return null;
   }
   
-    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el método
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el mï¿½todo
       ConstDeclaration binding = new ConstDeclaration(ast.I, ast.E, dummyPos);
         idTable.enter(binding.I.spelling, binding);
         if(binding.duplicated){
@@ -600,16 +600,18 @@ public final class Checker implements Visitor {
 
   // Always returns null. Uses the given FormalParameter.
 
-  public Object visitConstActualParameter(ConstActualParameter ast, Object o) { //HUBO UN CAMBIOOOOOOOOO
-    FormalParameter fp = (FormalParameter) o;
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-
-    if (! (fp instanceof ConstFormalParameter))
-      reporter.reportError ("const actual parameter not expected here", "",
-                            ast.position);
-    else if (! eType.equals(((ConstFormalParameter) fp).T))
-      reporter.reportError ("wrong type for const actual parameter", "",
-                            ast.E.position);
+  public Object visitConstActualParameter(ConstActualParameter ast, Object o) { // HUBO UN CAMBIOOOOOOOOO
+    if(ast != null && o !=null){
+          FormalParameter fp = (FormalParameter) o;
+          TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+          if (! (fp instanceof ConstFormalParameter)){
+              reporter.reportError ("const actual parameter not expected here", "",ast.position);
+          }else  if (!eType.equals(((ConstFormalParameter)fp).T.visit(this, null))){
+              reporter.reportError ("wrong type for const actual parameter", "",ast.E.position);
+          }
+      }
+    
+    
     return null;
   }
 
