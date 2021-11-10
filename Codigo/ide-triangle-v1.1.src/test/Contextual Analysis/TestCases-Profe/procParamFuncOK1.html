@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			p{font-size: 1em; font-family: "Courier New", monospaced;}
+			.literal{color : #004080;}
+			.comment{color: #009933;}
+			.reservedword {font-weight:bold;}
+		</style>
+	</head>
+	<body>
+<span class='comment'>! OK: proc P llamado con argumento que es la llamada a una func F, que devuelve un Integer. P espera parametro Integer.</span><span><br></span>
+<span class='comment'>! Propósito: activar posible defecto latente en compilador de Triángulo original</span><span><br></span>
+<span><br></span>
+<strong>let</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>func</strong><span>&nbsp;</span>
+<span>F</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span>&nbsp;</span>
+<span>~</span>
+<span>&nbsp;</span>
+<span class='literal'>1</span>
+<span class='comment'>! la función devuelve siempre el entero 1</span><span><br></span>
+<span>&nbsp;</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>proc</strong><span>&nbsp;</span>
+<span>P</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>x</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>~</span>
+<span>&nbsp;</span>
+<span class='comment'>! P espera paso por constante</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>putint</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>x</span>
+<span>&nbsp;</span>
+<span>*</span>
+<span>&nbsp;</span>
+<span class='literal'>2</span>
+<span>)</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>end</strong><span><br></span>
+<strong>in</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>P</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>F</span>
+<span>(</span>
+<span>)</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span class='comment'>! F es una función y su resultado es entero; sirve como parámetro real constante (valor entero)</span><span><br></span>
+<strong>end</strong><span><br></span>
+</body>
+</html>
