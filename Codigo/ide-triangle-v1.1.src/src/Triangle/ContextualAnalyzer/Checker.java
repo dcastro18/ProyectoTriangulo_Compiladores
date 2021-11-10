@@ -226,7 +226,7 @@ public final class Checker implements Visitor {
     ast.D.visit(this, null);
     ast.C.visit(this, null);
     idTable.closeScope();
-      return null;
+    return null;
   }
   
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
@@ -480,18 +480,18 @@ public final class Checker implements Visitor {
     return null;
   }
   
-    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo
-      ConstDeclaration binding = new ConstDeclaration(ast.I, ast.E, dummyPos);
-        idTable.enter(binding.I.spelling, binding);
-        if(binding.duplicated){
-            reporter.reportError ("identifier already declared",binding.I.spelling, binding.position);
+   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    if(!(eType instanceof ArrayTypeDenoter)){
+         reporter.reportError ("Array is missing","", ast.E.position);
+    }
+    else {
+        idTable.enter(ast.I.spelling, ast);
+        if (ast.duplicated){
+            reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
         }
-        //Exp1 debe ser de tipo entero
-        TypeDenoter eType2 = (TypeDenoter) ast.E.visit(this, null);
-        if(!(eType2 instanceof IntTypeDenoter)){
-            reporter.reportError ("wrong expression type, must be an integer type","", ast.E.position);
-        }
-        return null;
+    }
+    return null;
   }
 
   // Array Aggregates
@@ -851,12 +851,19 @@ public final class Checker implements Visitor {
       } else if (binding instanceof VarDeclaration) {
         ast.type = ((VarDeclaration) binding).T;
         ast.variable = true;
+      } else if (binding instanceof VarExpressionDeclaration) {
+        ast.type = ((VarExpressionDeclaration) binding).T;
+        ast.variable = true;
       } else if (binding instanceof ConstFormalParameter) {
         ast.type = ((ConstFormalParameter) binding).T;
         ast.variable = false;
       } else if (binding instanceof VarFormalParameter) {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
+      } else if (binding instanceof ForRangeIdentifierExpression) {
+        ArrayTypeDenoter ATD = (ArrayTypeDenoter) ((ForRangeIdentifierExpression) binding).E.type;
+        ast.type = ATD.T;
+        ast.variable = false;
       } else
         reporter.reportError ("\"%\" is not a const or var identifier",
                               ast.I.spelling, ast.I.position);
@@ -1089,7 +1096,12 @@ public final class Checker implements Visitor {
 
     @Override
     public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ast.T = (TypeDenoter) ast.E.visit(this, null);
+        idTable.enter(ast.I.spelling, ast);
+        if (ast.duplicated)
+            reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
+
+    return null;
     }
 
     @Override
