@@ -9,6 +9,8 @@ in
     put ('2')
   | a = m then ! error: m no declarada
       put ('0')
+  | a = m then ! error: m no declarada
+      put ('0')
   else
       put ('1')
   end ! del if

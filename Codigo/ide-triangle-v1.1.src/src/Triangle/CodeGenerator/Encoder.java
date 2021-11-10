@@ -49,6 +49,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -412,6 +413,9 @@ public final class Encoder implements Visitor {
     return null;
   }
 
+  public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForInIdentifierExpression()
+    return null;
+  }
 
   // Array Aggregates
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast,

@@ -40,6 +40,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.Expression;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.ForRangeIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
@@ -341,6 +342,7 @@ public class Parser {
             accept(Token.THEN);
             c2AST = parseCommand();
             c3AST = c2AST;
+         
         }
        
         accept(Token.ELSE);
@@ -519,7 +521,7 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                Declaration InVarDecl = new ForRangeIdentifierExpression(iAST, eAST, commandPos);
+                Declaration InVarDecl = new ForInIdentifierExpression(iAST, eAST, commandPos);
                 commandAST = new RepeatInCommand(InVarDecl, cAST, commandPos); //Metodo agregado al AST
 
             }

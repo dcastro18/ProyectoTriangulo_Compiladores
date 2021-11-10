@@ -131,6 +131,8 @@ public interface Visitor {
 
     public Object visitSelectWhen(SelectWhen aThis, Object o);
 
+    public Object visitForInIdentifierExpression(ForInIdentifierExpression aThis, Object o);
+
 
 
 

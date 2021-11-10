@@ -24,6 +24,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -380,6 +381,14 @@ public class XMLWriterVisitor implements Visitor {
         ast.I.visit(this, null);
         ast.E.visit(this, null);
         writeLineXML("</ForRangeIdentifierExpression>");
+        return null;
+    }
+    
+    public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object obj) { //Se agrego el metodo visitForRangeIdentifierExpression()
+        writeLineXML("<ForInIdentifierExpression>");
+        ast.I.visit(this, null);
+        ast.E.visit(this, null);
+        writeLineXML("</ForInIdentifierExpression>");
         return null;
     }
     

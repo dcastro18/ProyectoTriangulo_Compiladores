@@ -29,6 +29,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -395,13 +396,21 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-  public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
-      ast.I.visit(this, null);
-      ast.E.visit(this, null);
-        
-      return(null);
-  }
-  
+    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
+        ast.I.visit(this, null);
+        ast.E.visit(this, null);
+
+        return(null);
+    }
+    
+    public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el metodo visitForInIdentifierExpression()
+        ast.I.visit(this, null);
+        ast.E.visit(this, null);
+
+        return(null);
+    }
+
+
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {//Se agrego el metodo visitLocalDeclaration()
       ast.D1.visit(this, null);
       ast.D2.visit(this, null);

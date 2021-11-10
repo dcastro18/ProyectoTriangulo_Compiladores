@@ -41,6 +41,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -257,6 +258,10 @@ public class LayoutVisitor implements Visitor {
 
   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo visitForRangeIdentifierExpression()
     return layoutBinary("ForRangeIdentifierExpressionDecl", ast.I, ast.E);
+  }
+  
+  public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el metodo visitForInIdentifierExpression()
+    return layoutBinary("ForInIdentifierExpressionDecl", ast.I, ast.E);
   }
   
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {

@@ -29,6 +29,7 @@ import Triangle.AbstractSyntaxTrees.EmptyCommand;
 import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
 import Triangle.AbstractSyntaxTrees.FuncDeclaration;
 import Triangle.AbstractSyntaxTrees.FuncFormalParameter;
@@ -255,6 +256,10 @@ public class TreeVisitor implements Visitor {
     
     public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object obj) { //Se agrego el metodo visitForRangeIdentifierExpression()
         return(createBinary("For Range Identifier Expression Declaration", ast.I, ast.E));
+    }
+    
+    public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object obj) { //Se agrego el metodo visitForInIdentifierExpression()
+        return(createBinary("For In Identifier Expression Declaration", ast.I, ast.E));
     }
     
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {

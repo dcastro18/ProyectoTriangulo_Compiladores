@@ -42,6 +42,7 @@ import Triangle.AbstractSyntaxTrees.EmptyExpression;
 import Triangle.AbstractSyntaxTrees.EmptyFormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.ErrorTypeDenoter;
 import Triangle.AbstractSyntaxTrees.FieldTypeDenoter;
+import Triangle.AbstractSyntaxTrees.ForInIdentifierExpression;
 import Triangle.AbstractSyntaxTrees.FormalParameter;
 import Triangle.AbstractSyntaxTrees.FormalParameterSequence;
 import Triangle.AbstractSyntaxTrees.FuncActualParameter;
@@ -482,6 +483,21 @@ public final class Checker implements Visitor {
   
    public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    if (! eType.equals(StdEnvironment.integerType)){
+          reporter.reportError ("Integer expression expected here", "",
+				ast.E.position);
+    }
+    else {
+        idTable.enter(ast.I.spelling, ast);
+        if (ast.duplicated){
+            reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
+        }
+    }
+    return null;
+  }
+   
+   public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el m�todo
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     if(!(eType instanceof ArrayTypeDenoter)){
          reporter.reportError ("Array is missing","", ast.E.position);
     }
@@ -861,7 +877,10 @@ public final class Checker implements Visitor {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
       } else if (binding instanceof ForRangeIdentifierExpression) {
-        ArrayTypeDenoter ATD = (ArrayTypeDenoter) ((ForRangeIdentifierExpression) binding).E.type;
+        ast.type = ((ForRangeIdentifierExpression) binding).E.type;
+        ast.variable = false;
+      } else if (binding instanceof ForInIdentifierExpression) {
+        ArrayTypeDenoter ATD = (ArrayTypeDenoter) ((ForInIdentifierExpression) binding).E.type;
         ast.type = ATD.T;
         ast.variable = false;
       } else
