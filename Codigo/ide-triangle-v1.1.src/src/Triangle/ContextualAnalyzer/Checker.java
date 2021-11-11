@@ -148,8 +148,9 @@ public final class Checker implements Visitor {
 
   public Object visitIfCommand(IfCommand ast, Object o) {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-    if (!eType.equals(StdEnvironment.booleanType))
-      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    if (!eType.equals(StdEnvironment.booleanType)){
+        reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    }      
     ast.C1.visit(this, null);
     ast.C2.visit(this, null);
     return null;
@@ -227,8 +228,8 @@ public final class Checker implements Visitor {
                                                                       // AST
     // Exp debe ser de tipo array InL of TD.
 
-    // Id es conocida como la �variable de iteraci�n�. Id es de tipo TD. Id es
-    // declarada en este comando y su alcance es Com; esta declaraci�n de Id no es
+    // Id es conocida como la variable de iteracion. Id es de tipo TD. Id es
+    // declarada en este comando y su alcance es Com; esta declaracion de Id no es
     // conocida por Exp.
     idTable.openScope();
     ast.D.visit(this, null);
@@ -240,57 +241,62 @@ public final class Checker implements Visitor {
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { // Se agrego el metodo
                                                                                       // visitRepeatForRangeCommand() al
                                                                                       // AST
-    // E debe ser de tipo entero
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-    if (!(eType instanceof IntTypeDenoter)) {
-      reporter.reportError("wrong expression type, must be an integer type", "", ast.E.position);
+    if (!eType.equals(StdEnvironment.integerType))
+        reporter.reportError("integer expression expected in second expression", "", ast.E.position);
+    else {
+        idTable.openScope();
+        ast.D.visit(this, null);
+        ast.C.visit(this, null);
+        idTable.closeScope();
     }
-    //Id es declarada en este comando y su alcance es Com; esta declaraci�n de Id no es conocida por Exp1 ni por Exp2.
-    idTable.openScope();
-    ast.D.visit(this, null);
-    // Com debe cumplir con las restricciones contextuales
-    ast.C.visit(this, null);
-    idTable.closeScope();
     return null;
+
   }
 
   // CAMBIO
   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { // Se agrego el metodo
                                                                                             // visitRepeatForRangeWhileCommand()
     TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
-    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
-    // Exp3 debe ser de tipo booleano. El tipo de Exp3 debe ser determinado en el
-    // contexto en el que aparece este
-    // comando repeat_for_range_do_end, extendido por la variable de control Id.
+    
+    if (!e1Type.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E1.position);
+    else {
+        idTable.openScope();
+            ast.D.visit(this, null);
+            TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+            if (!e2Type.equals(StdEnvironment.booleanType))
+                reporter.reportError("Boolean expression expected here", "", ast.E2.position);
 
-    if (!e2Type.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+            ast.C.visit(this, null);
+        idTable.closeScope();
+        
     }
-    idTable.openScope();
-    ast.D.visit(this, null);
-    ast.C.visit(this, null);
-    idTable.closeScope();
+    
     return null;
-
   }
 
   // CAMBIO
   public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { // Se agrego el metodo
                                                                                             // visitRepeatForRangeUntilCommand()
     TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
-    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
-    // Exp3 debe ser de tipo booleano. El tipo de Exp3 debe ser determinado en el
-    // contexto en el que aparece este
-    // comando repeat_for_range_do_end, extendido por la variable de control Id.
+    
+    if (!e1Type.equals(StdEnvironment.integerType))
+        reporter.reportError("Integer expression expected here", "", ast.E1.position);
+    else {
+        idTable.openScope();
+            ast.D.visit(this, null);
+            TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+            if (!e2Type.equals(StdEnvironment.booleanType))
+                reporter.reportError("Boolean expression expected here", "", ast.E2.position);
 
-    if (!e2Type.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+            ast.C.visit(this, null);
+        idTable.closeScope();
+        
     }
-    idTable.openScope();
-    ast.D.visit(this, null);
-    ast.C.visit(this, null);
-    idTable.closeScope();
+    
     return null;
+                                                                                           
   }
 
   // Expressions
@@ -515,20 +521,19 @@ public final class Checker implements Visitor {
     return null;
   }
   
-   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
-    if (! eType.equals(StdEnvironment.integerType)){
-          reporter.reportError ("Integer expression expected here", "",
-				ast.E.position);
-    }
-    else {
-        idTable.enter(ast.I.spelling, ast);
-        if (ast.duplicated){
-            reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
-        }
-    }
-    return null;
+   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el metodo
+       TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+       if (!eType.equals(StdEnvironment.integerType))
+           reporter.reportError ("Integer expression expected in first expression", "", ast.E.position);
+       else {
+           idTable.enter(ast.I.spelling, ast);
+           if (ast.duplicated)
+               reporter.reportError("identifier \"%\" already declared", ast.I.spelling, ast.position);
+       }
+       return null;
   }
+  
+  
    
    public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el m�todo
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
