@@ -180,19 +180,50 @@ public final class Encoder implements Visitor {
   }
   
   public Object visitRepeatWhileDo(RepeatWhileDoCommand ast, Object o) {  //Se agrego el metodo visitRepeatWhileDo() al AST
-      return null;
+    Frame frame = (Frame) o;
+    int jumpAddr, loopAddr;
+    jumpAddr = nextInstrAddr; 
+    emit(Machine.JUMPop, 0, Machine.CBr, 0); // jump to the expression
+    loopAddr = nextInstrAddr;
+    ast.C.visit(this, frame); // execute C
+    patch(jumpAddr, nextInstrAddr);
+    ast.E.visit(this, frame); // evaluate E
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr); // jump to execute C if E equals true
+    return null;
+     
   }
   
   public Object visitRepeatUntilDo(RepeatUntilDoCommand ast, Object o) {  //Se agrego el metodo visitRepeatUntilDo() al AST
-      return null;
+    Frame frame = (Frame) o;
+    int jumpAddr, loopAddr;
+    jumpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, 0); // jump to the expression
+    loopAddr = nextInstrAddr;
+    ast.C.visit(this, frame); // execute C
+    patch(jumpAddr, nextInstrAddr); 
+    ast.E.visit(this, frame); // evaluate E
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr); // jump to execute C if E equals false
+    return null;
   }
   
   public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) { //Se agrego el metodo visitRepeatDoWhileCommand() al AST
-      return null;
+    Frame frame = (Frame) o;
+    int loopAddr;
+    loopAddr = nextInstrAddr;
+    ast.C.visit(this, frame); // execute C
+    ast.E.visit(this, frame); // evaluate E
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr); // jump to execute C if E equals true
+    return null;
   }
   
   public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { //Se agrego el metodo visitRepeatDoUntilCommand() al AST
-      return null;
+    Frame frame = (Frame) o;
+    int loopAddr;
+    loopAddr = nextInstrAddr;
+    ast.C.visit(this, frame); // execute C
+    ast.E.visit(this, frame); // evaluate E
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr); // jump to execute C if E equals false
+    return null;
   }
 
   public Object visitRepeatInCommand(RepeatInCommand ast, Object o) { //Se agrego el metodo visitRepeatInCommand() al AST
@@ -410,7 +441,9 @@ public final class Encoder implements Visitor {
   }
   
   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
-    return null;
+    Frame frame = (Frame) o;
+    Integer valSize = (Integer) ast.E.visit(this, frame);
+    return valSize;
   }
 
   public Object visitForInIdentifierExpression(ForInIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForInIdentifierExpression()
@@ -1064,7 +1097,14 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitVarExpressionDeclaration(VarExpressionDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Frame frame = (Frame) o;
+        int extraSize;
+
+        extraSize = ((Integer) ast.T.visit(this, null)).intValue();
+        emit(Machine.PUSHop, 0, 0, extraSize);
+        ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+        writeTableDetails(ast);
+        return new Integer(extraSize);
     }
 
     @Override
