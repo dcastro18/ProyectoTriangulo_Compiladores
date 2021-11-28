@@ -327,10 +327,10 @@ public class Main extends javax.swing.JFrame {
         buttonRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
         buttonRun.setToolTipText("Run...");
         buttonRun.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        buttonRun.setBorderPainted(false);
-        buttonRun.setEnabled(false);
-        buttonRun.setFocusPainted(false);
-        buttonRun.setFocusable(false);
+        buttonRun.setBorderPainted(true);
+        buttonRun.setEnabled(true);
+        buttonRun.setFocusPainted(true);
+        buttonRun.setFocusable(true);
         buttonRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runMenuItemActionPerformed(evt);
@@ -479,7 +479,7 @@ public class Main extends javax.swing.JFrame {
         runMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
         runMenuItem.setMnemonic('R');
         runMenuItem.setText("Run");
-        runMenuItem.setEnabled(false);
+        runMenuItem.setEnabled(true);
         runMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runMenuItemActionPerformed(evt);
@@ -620,8 +620,8 @@ public class Main extends javax.swing.JFrame {
                 ((FileFrame)desktopPane.getSelectedFrame()).setTree((DefaultMutableTreeNode)treeVisitor.visitProgram(compiler.getAST(), null));
                 ((FileFrame)desktopPane.getSelectedFrame()).setTable(tableVisitor.getTable(compiler.getAST()));
                 
-                runMenuItem.setEnabled(false);
-                buttonRun.setEnabled(false);
+                runMenuItem.setEnabled(true);
+                buttonRun.setEnabled(true);
             } else {
                 ((FileFrame)desktopPane.getSelectedFrame()).highlightError(compiler.getErrorPosition());
                 runMenuItem.setEnabled(true);
