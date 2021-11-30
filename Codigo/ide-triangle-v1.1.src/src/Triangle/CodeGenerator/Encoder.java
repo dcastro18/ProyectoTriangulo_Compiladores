@@ -253,8 +253,11 @@ public final class Encoder implements Visitor {
     //Evalcond
     int evalcond = nextInstrAddr;
     patch(jumpAddr,evalcond);
-    emit(Machine.LOADop, 2, Machine.STr, -2);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADop, 1, Machine.STr, -3);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.leDisplacement);
+    //emit(Machine.LOADop, 2, Machine.STr, -2);
+    //emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
 
     //Exit
@@ -529,6 +532,8 @@ public final class Encoder implements Visitor {
   public Object visitForRangeIdentifierExpression(ForRangeIdentifierExpression ast, Object o) { //Se agrego el m�todo visitForRangeIdentifierExpression()
     Frame frame = (Frame) o;
     Integer valSize = (Integer) ast.E.visit(this, frame);
+    ast.entity = new KnownAddress(valSize, frame.level, frame.size);
+    writeTableDetails(ast);
     return valSize;
   }
 
