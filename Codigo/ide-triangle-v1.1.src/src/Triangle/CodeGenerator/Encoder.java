@@ -270,13 +270,15 @@ public final class Encoder implements Visitor {
    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()
     int jumpAddr, loopAddr;
     Frame frame = (Frame) o;
+    
+    int e2size = (Integer) ast.E2.visit(this, frame);
+    frame = new Frame(frame,e2size);
+    
+    int e1size = (Integer)ast.D.visit(this, frame); 
+    frame = new Frame(frame,e1size);
 
-    ast.E1.visit(this, frame); // evaluate E2
-    ast.D.visit(this, frame); // evaluate E1
-    ast.E2.visit(this, frame);
 
-
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0); // is the expression is false exit the loop
+    //emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0); // is the expression is false exit the loop
 
     //JUMP to evalcond
     jumpAddr = nextInstrAddr; 
@@ -290,8 +292,11 @@ public final class Encoder implements Visitor {
     //Evalcond
     int evalcond = nextInstrAddr;
     patch(jumpAddr,evalcond);
-    emit(Machine.LOADop, 2, Machine.STr, -2);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
+    emit(Machine.LOADop, 1, Machine.STr, -1);
+    emit(Machine.LOADop, 1, Machine.STr, -3);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.leDisplacement);
+    //emit(Machine.LOADop, 2, Machine.STr, -2);
+    //emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
     emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
 
     //Exit

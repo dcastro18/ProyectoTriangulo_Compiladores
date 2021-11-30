@@ -163,7 +163,7 @@ public class LayoutVisitor implements Visitor {
   }
   
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
-      return layoutTernary("RepeatForRangeDoCom", ast.D, ast.E, ast.C);
+      return layoutTernary("RepeatForRangeDoCom", ast.D, ast.E2, ast.C);
   }
   
   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()
