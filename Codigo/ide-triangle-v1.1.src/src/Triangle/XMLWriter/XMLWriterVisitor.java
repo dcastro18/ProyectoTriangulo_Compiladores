@@ -194,7 +194,7 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) {
         writeLineXML("<RepeatForRangeCommand>");
         ast.D.visit(this, null);
-        ast.E.visit(this, null);
+        ast.E2.visit(this, null);
         ast.C.visit(this, null);
         writeLineXML("</RepeatForRangeCommand>");
         return null;

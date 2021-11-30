@@ -199,7 +199,7 @@ public class TableVisitor implements Visitor {
     
     public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeCommand() al AST
         ast.D.visit(this, null);
-        ast.E.visit(this, null);
+        ast.E2.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);

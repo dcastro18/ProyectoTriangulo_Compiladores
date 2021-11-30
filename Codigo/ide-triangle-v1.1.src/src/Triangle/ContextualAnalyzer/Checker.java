@@ -241,12 +241,13 @@ public final class Checker implements Visitor {
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { // Se agrego el metodo
                                                                                       // visitRepeatForRangeCommand() al
                                                                                       // AST
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    TypeDenoter eType = (TypeDenoter) ast.E2.visit(this, null);
     if (!eType.equals(StdEnvironment.integerType))
-        reporter.reportError("integer expression expected in second expression", "", ast.E.position);
+        reporter.reportError("integer expression expected in second expression", "", ast.E2.position);
     else {
         idTable.openScope();
         ast.D.visit(this, null);
+        ast.E1.visit(this, null);
         ast.C.visit(this, null);
         idTable.closeScope();
     }

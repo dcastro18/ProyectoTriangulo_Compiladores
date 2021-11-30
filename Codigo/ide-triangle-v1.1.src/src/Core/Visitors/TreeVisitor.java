@@ -158,7 +158,7 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) {
-        return(createTernary("Repeat For Range Do Command", ast.D, ast.E, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
+        return(createTernary("Repeat For Range Do Command", ast.D, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeCommand()
     }
     
     public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) {

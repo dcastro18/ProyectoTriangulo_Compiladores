@@ -232,19 +232,23 @@ public final class Encoder implements Visitor {
   
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
     
-    int jumpAddr, loopAddr;
+    int jumpAddr, loopAddr, exitAdr;
     Frame frame = (Frame) o;
     
-    ast.E.visit(this, frame); // evaluate E2
-    ast.D.visit(this, frame); // evaluate E1
+    int e2size = (Integer) ast.E2.visit(this, frame);
+    frame = new Frame(frame,e2size);
     
+    int e1size = (Integer)ast.D.visit(this, frame); 
+    frame = new Frame(frame,e1size);
+    
+   
     //JUMP to evalcond
     jumpAddr = nextInstrAddr; 
     emit(Machine.JUMPop, 0,Machine.CBr,0);
     loopAddr = nextInstrAddr;
 
-    ast.C.visit(this, frame); // execute C
-    emit(Machine.CALLop, 0, Machine.PBr, Machine.succDisplacement);
+    ast.C.visit(this, frame);
+    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement);
 
     //Evalcond
     int evalcond = nextInstrAddr;

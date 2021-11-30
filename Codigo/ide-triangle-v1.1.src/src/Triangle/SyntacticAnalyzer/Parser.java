@@ -551,7 +551,7 @@ public class Parser {
                 Command cAST = parseCommand();
                 accept(Token.END);
                 finish(commandPos);
-                Declaration RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
+                ForRangeIdentifierExpression RangeVarDecl = new ForRangeIdentifierExpression(iAST, e1AST, commandPos);
                 commandAST = new RepeatForRangeDoCommand(RangeVarDecl, e2AST, cAST, commandPos);
             }
             break;
