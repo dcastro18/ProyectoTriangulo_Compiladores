@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			p{font-size: 1em; font-family: "Courier New", monospaced;}
+			.literal{color : #004080;}
+			.comment{color: #009933;}
+			.reservedword {font-weight:bold;}
+		</style>
+	</head>
+	<body>
+<span class='comment'>! revisar cómo se muestra Table Details</span><span><br></span>
+<span class='comment'>! POR EJEMPLO:</span><span><br></span>
+<span class='comment'>!     i          (56) knownAddress size=1 address=(0,0)</span><span><br></span>
+<span class='comment'>!     i          (117) knownAddress size=1 address=(0,1)</span><span><br></span>
+<span><br></span>
+<span><br></span>
+<strong>let</strong><span>&nbsp;</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>var</strong><span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span><br></span>
+<strong>in</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>:=</span>
+<span>&nbsp;</span>
+<span class='literal'>0</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span class='comment'>! i global en 0</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>let</strong><span>&nbsp;</span>
+<strong>var</strong><span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span>&nbsp;</span>
+<span class='comment'>! re-declaración de i, en un alcance más anidado</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>in</strong><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>:=</span>
+<span>&nbsp;</span>
+<span class='literal'>9</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span class='comment'>! i local en 9</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>put</span>
+<span>(</span>
+<span class='literal'>'n'</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span class='comment'>! primera letra de nueve</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>putint</span>
+<span>(</span>
+<span>i</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span class='comment'>! debe imprimir 9</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>puteol</span>
+<span>(</span>
+<span>)</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>end</strong><span>&nbsp;</span>
+<span>;</span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>:=</span>
+<span>&nbsp;</span>
+<span>i</span>
+<span>&nbsp;</span>
+<span>+</span>
+<span>&nbsp;</span>
+<span class='literal'>1</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span class='comment'>! i global se incrementa a 1</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>put</span>
+<span>(</span>
+<span class='literal'>'u'</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span class='comment'>! primera letra de uno</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>putint</span>
+<span>(</span>
+<span>i</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span class='comment'>! debe imprimir 1</span><span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>puteol</span>
+<span>(</span>
+<span>)</span>
+<span><br></span>
+<strong>end</strong></body>
+</html>

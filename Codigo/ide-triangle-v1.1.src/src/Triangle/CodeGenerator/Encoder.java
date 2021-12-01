@@ -240,7 +240,6 @@ public final class Encoder implements Visitor {
     
     int e2size = (Integer) ast.D.visit(this, frame);// visit to expression
     frame = new Frame(frame,e2size);    
- 
 
     jumpAddr = nextInstrAddr;
     emit(Machine.JUMPop, 0, Machine.CBr, 0);
@@ -255,7 +254,6 @@ public final class Encoder implements Visitor {
     emit(Machine.LOADop, 1, Machine.STr, -3);
     emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
     emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr, loopAddr);
-    //emit(Machine.STOREop,0,Machine.CBr,2);
     //writeTableDetails(ast);
     emit(Machine.POPop,0,0,2);//CLEAR THE STACK
     return null;
@@ -311,9 +309,9 @@ public final class Encoder implements Visitor {
     emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
     //Validation
     patch(jumpAddr, nextInstrAddr);
-    ast.D.E.visit(this, frame);
+    ast.D.visit(this, frame);
     int e1size = (Integer) ast.E2.visit(this, frame);// visit to expression
-    frame = new Frame(frame,e1size);
+   // frame = new Frame(frame,e1size);
     emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
     emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr, loopAddr);
     //writeTableDetails(ast);
@@ -1188,7 +1186,7 @@ public final class Encoder implements Visitor {
 
         extraSize = ((Integer) ast.T.visit(this, null)).intValue();
         emit(Machine.PUSHop, 0, 0, extraSize);
-        ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
+        ast.entity = new KnownAddress(extraSize, frame.level, frame.size);
         writeTableDetails(ast);
         return new Integer(extraSize);
     }
