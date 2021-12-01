@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			p{font-size: 1em; font-family: "Courier New", monospaced;}
+			.literal{color : #004080;}
+			.comment{color: #009933;}
+			.reservedword {font-weight:bold;}
+		</style>
+	</head>
+	<body>
+<span class='comment'>! Procedimientos mutuamente recursivos</span><span><br></span>
+<span><br></span>
+<span><br></span>
+<strong>let</strong><span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>recursive</strong><span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>proc</strong><span>&nbsp;</span>
+<span>Ping</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>x</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>~</span>
+<span>&nbsp;</span>
+<strong>if</strong><span>&nbsp;</span>
+<span>x</span>
+<span>&nbsp;</span>
+<span>></span>
+<span>&nbsp;</span>
+<span class='literal'>0</span>
+<span>&nbsp;</span>
+<strong>then</strong><span>&nbsp;</span>
+<span>put</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>'I'</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>Pong</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>x</span>
+<span>&nbsp;</span>
+<span>-</span>
+<span>&nbsp;</span>
+<span class='literal'>1</span>
+<span>)</span>
+<span>&nbsp;</span>
+<strong>else</strong><span>&nbsp;</span>
+<strong>skip</strong><span>&nbsp;</span>
+<strong>end</strong><span>&nbsp;</span>
+<strong>end</strong><span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>|</span>
+<span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>proc</strong><span>&nbsp;</span>
+<span>Pong</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>a</span>
+<span>&nbsp;</span>
+<span>:</span>
+<span>&nbsp;</span>
+<span>Integer</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>~</span>
+<span>&nbsp;</span>
+<strong>if</strong><span>&nbsp;</span>
+<span>a</span>
+<span>&nbsp;</span>
+<span>></span>
+<span>&nbsp;</span>
+<span class='literal'>0</span>
+<span>&nbsp;</span>
+<strong>then</strong><span>&nbsp;</span>
+<span>put</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>'O'</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span>;</span>
+<span>&nbsp;</span>
+<span>Ping</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span>a</span>
+<span>&nbsp;</span>
+<span>-</span>
+<span>&nbsp;</span>
+<span class='literal'>1</span>
+<span>)</span>
+<span>&nbsp;</span>
+<strong>else</strong><span>&nbsp;</span>
+<strong>skip</strong><span>&nbsp;</span>
+<strong>end</strong><span>&nbsp;</span>
+<strong>end</strong><span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<strong>end</strong><span><br></span>
+<span><br></span>
+<strong>in</strong><span><br></span>
+<span><br></span>
+<span>&nbsp;</span>
+<span>&nbsp;</span>
+<span>Ping</span>
+<span>&nbsp;</span>
+<span>(</span>
+<span class='literal'>4</span>
+<span>)</span>
+<span>&nbsp;</span>
+<span class='comment'>! imprime IOIO, ver TAM</span><span><br></span>
+<span><br></span>
+<strong>end</strong><span><br></span>
+</body>
+</html>
