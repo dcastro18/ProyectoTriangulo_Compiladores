@@ -203,8 +203,8 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) {
         writeLineXML("<RepeatForRangeWhileCommand>");
         ast.D.visit(this, null);
-        ast.E1.visit(this, null);
         ast.E2.visit(this, null);
+        ast.E3.visit(this, null);
         ast.C.visit(this, null);
         writeLineXML("</RepeatForRangeWhileCommand>");
         return null;
@@ -213,8 +213,8 @@ public class XMLWriterVisitor implements Visitor {
     public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) {
         writeLineXML("<RepeatForRangeUntilCommand>");
         ast.D.visit(this, null);
-        ast.E1.visit(this, null);
         ast.E2.visit(this, null);
+        ast.E3.visit(this, null);
         ast.C.visit(this, null);
         writeLineXML("</RepeatForRangeUntilCommand>");
         return null;

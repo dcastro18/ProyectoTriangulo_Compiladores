@@ -13,12 +13,13 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
  */
 public class RepeatForRangeUntilCommand extends Command {
     
-    public RepeatForRangeUntilCommand (Declaration dAST, Expression e1AST, Expression e2AST, 
+    public RepeatForRangeUntilCommand (ForRangeIdentifierExpression dAST, Expression e1AST, Expression e2AST, 
                                         Command cAST, SourcePosition thePosition) {
         super (thePosition);
         D = dAST;
-        E1 = e1AST;
-        E2 = e2AST;
+        E1 = dAST.E;
+        E2 = e1AST;
+        E3 = e2AST;
         C = cAST;
     }
     
@@ -26,8 +27,8 @@ public class RepeatForRangeUntilCommand extends Command {
         return v.visitRepeatForRangeUntilCommand(this, o);
     }
     
-    public Declaration D;
-    public Expression E1, E2;
+    public ForRangeIdentifierExpression D;
+    public Expression E1, E2, E3;
     public Command C;
     
 }

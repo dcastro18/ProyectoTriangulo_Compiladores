@@ -162,11 +162,11 @@ public class TreeVisitor implements Visitor {
     }
     
     public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) {
-        return(createQuaternary("Repeat For Range While Command", ast.D, ast.E1, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeWhileCommand()
+        return(createQuaternary("Repeat For Range While Command", ast.D, ast.E2, ast.E3, ast.C)); //Se agrego el metodo visitRepeatForRangeWhileCommand()
     }
     
     public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) {
-        return(createQuaternary("Repeat For Range Until Command", ast.D, ast.E1, ast.E2, ast.C)); //Se agrego el metodo visitRepeatForRangeUntilCommand()
+        return(createQuaternary("Repeat For Range Until Command", ast.D, ast.E2, ast.E3, ast.C)); //Se agrego el metodo visitRepeatForRangeUntilCommand()
     }
     
 

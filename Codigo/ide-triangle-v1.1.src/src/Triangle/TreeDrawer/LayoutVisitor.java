@@ -167,7 +167,7 @@ public class LayoutVisitor implements Visitor {
   }
   
   public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()
-      return layoutQuaternary("RepeatForRangeWhileCom", ast.D, ast.E1, ast.E2, ast.C);
+      return layoutQuaternary("RepeatForRangeWhileCom", ast.D, ast.E2, ast.E3, ast.C);
   }
   
   public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) {

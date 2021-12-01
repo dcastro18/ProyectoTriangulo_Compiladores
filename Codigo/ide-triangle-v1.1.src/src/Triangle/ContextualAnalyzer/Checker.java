@@ -265,9 +265,10 @@ public final class Checker implements Visitor {
     else {
         idTable.openScope();
             ast.D.visit(this, null);
-            TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+            ast.E2.visit(this, null);
+            TypeDenoter e2Type = (TypeDenoter) ast.E3.visit(this, null);
             if (!e2Type.equals(StdEnvironment.booleanType))
-                reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+                reporter.reportError("Boolean expression expected here", "", ast.E3.position);
 
             ast.C.visit(this, null);
         idTable.closeScope();
@@ -287,9 +288,10 @@ public final class Checker implements Visitor {
     else {
         idTable.openScope();
             ast.D.visit(this, null);
-            TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+            ast.E2.visit(this, null);
+            TypeDenoter e2Type = (TypeDenoter) ast.E3.visit(this, null);
             if (!e2Type.equals(StdEnvironment.booleanType))
-                reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+                reporter.reportError("Boolean expression expected here", "", ast.E3.position);
 
             ast.C.visit(this, null);
         idTable.closeScope();

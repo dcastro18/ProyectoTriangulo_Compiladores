@@ -207,8 +207,8 @@ public class TableVisitor implements Visitor {
     
     public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()
         ast.D.visit(this, null);
-        ast.E1.visit(this, null);
         ast.E2.visit(this, null);
+        ast.E3.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);
@@ -216,8 +216,8 @@ public class TableVisitor implements Visitor {
     
     public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeUntilCommand()
         ast.D.visit(this, null);
-        ast.E1.visit(this, null);
         ast.E2.visit(this, null);
+        ast.E3.visit(this, null);
         ast.C.visit(this, null);
         
         return(null);

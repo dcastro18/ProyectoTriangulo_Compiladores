@@ -232,108 +232,96 @@ public final class Encoder implements Visitor {
   
   public Object visitRepeatForRangeDoCommand(RepeatForRangeDoCommand ast, Object o) { //Se agrego el metodo visitRepeatForRangeCommand() al AST
     
-    int jumpAddr, loopAddr, exitAdr;
-    Frame frame = (Frame) o;
+    Frame frame =  (Frame) o;
+    int jumpAddr,loopAddr;
     
-    int e2size = (Integer) ast.E2.visit(this, frame);
-    frame = new Frame(frame,e2size);
-    
-    int e1size = (Integer)ast.D.visit(this, frame); 
+    int e1size = (Integer) ast.E2.visit(this, frame);// visit to expression
     frame = new Frame(frame,e1size);
     
-   
-    //JUMP to evalcond
-    jumpAddr = nextInstrAddr; 
-    emit(Machine.JUMPop, 0,Machine.CBr,0);
-    loopAddr = nextInstrAddr;
+    int e2size = (Integer) ast.D.visit(this, frame);// visit to expression
+    frame = new Frame(frame,e2size);    
+ 
 
+    jumpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    loopAddr = nextInstrAddr;		 
+    //VISIT COMMAND
     ast.C.visit(this, frame);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.succDisplacement);
-
-    //Evalcond
-    int evalcond = nextInstrAddr;
-    patch(jumpAddr,evalcond);
+    //INCRESE LOCAL COUNTER
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
+    //Validation
+    patch(jumpAddr, nextInstrAddr);
     emit(Machine.LOADop, 1, Machine.STr, -1);
     emit(Machine.LOADop, 1, Machine.STr, -3);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.leDisplacement);
-    //emit(Machine.LOADop, 2, Machine.STr, -2);
-    //emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
-    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
-
-    //Exit
-    emit(Machine.POPop, 0, 0, 2);
-      
-      
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
+    emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr, loopAddr);
+    //emit(Machine.STOREop,0,Machine.CBr,2);
+    //writeTableDetails(ast);
+    emit(Machine.POPop,0,0,2);//CLEAR THE STACK
     return null;
+    
   }
   
    public Object visitRepeatForRangeWhileCommand(RepeatForRangeWhileCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeWhileCommand()
-    int jumpAddr, loopAddr;
-    Frame frame = (Frame) o;
-    
-    int e2size = (Integer) ast.E2.visit(this, frame);
-    frame = new Frame(frame,e2size);
-    
-    int e1size = (Integer)ast.D.visit(this, frame); 
+    Frame frame =  (Frame) o;
+    int jumpAddr,loopAddr,exit;
+    ast.D.visit(this, frame);
+    //frame = new Frame(frame,e1size);
+
+    jumpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    loopAddr = nextInstrAddr;	
+    ast.E3.visit(this, frame);
+    exit = nextInstrAddr;
+    emit(Machine.JUMPIFop, Machine.falseRep,Machine.CBr,0);
+    //VISIT COMMAND
+    ast.C.visit(this, frame);
+    //INCRESE LOCAL COUNTER
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
+    //Validation
+    patch(jumpAddr, nextInstrAddr);
+    ast.D.E.visit(this, frame);
+    int e1size = (Integer) ast.E2.visit(this, frame);// visit to expression
     frame = new Frame(frame,e1size);
-
-
-    //emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0); // is the expression is false exit the loop
-
-    //JUMP to evalcond
-    jumpAddr = nextInstrAddr; 
-    emit(Machine.JUMPop, 0,Machine.CBr,0);
-    loopAddr = nextInstrAddr;
-
-    //loop
-    ast.C.visit(this, frame); // execute C
-    emit(Machine.CALLop, 0, Machine.PBr, Machine.succDisplacement);
-
-    //Evalcond
-    int evalcond = nextInstrAddr;
-    patch(jumpAddr,evalcond);
-    emit(Machine.LOADop, 1, Machine.STr, -1);
-    emit(Machine.LOADop, 1, Machine.STr, -3);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.leDisplacement);
-    //emit(Machine.LOADop, 2, Machine.STr, -2);
-    //emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
-    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
-
-    //Exit
-    emit(Machine.POPop, 0, 0, 2);
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
+    emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr, loopAddr);
+    //writeTableDetails(ast);
+    
+    emit(Machine.POPop,0,0,2);//CLEAR THE STACK
+    patch(exit,nextInstrAddr);
     return null;
    }
    
    public Object visitRepeatForRangeUntilCommand(RepeatForRangeUntilCommand ast, Object o) { //Se agrego el m�todo visitRepeatForRangeUntilCommand()
-    int jumpAddr, loopAddr;
-    Frame frame = (Frame) o;
+ 
+    Frame frame =  (Frame) o;
+    int jumpAddr,loopAddr,exit;
+    ast.D.visit(this, frame);
+    //frame = new Frame(frame,e1size);
 
-    ast.E1.visit(this, frame); // evaluate E2
-    ast.D.visit(this, frame); // evaluate E1
-    ast.E2.visit(this, frame);
-
-
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, 0); // is the expression is false exit the loop
-
-    //JUMP to evalcond
-    jumpAddr = nextInstrAddr; 
-    emit(Machine.JUMPop, 0,Machine.CBr,0);
-    loopAddr = nextInstrAddr;
-
-    //loop
-    ast.C.visit(this, frame); // execute C
-    emit(Machine.CALLop, 0, Machine.PBr, Machine.succDisplacement);
-
-    //Evalcond
-    int evalcond = nextInstrAddr;
-    patch(jumpAddr,evalcond);
-    emit(Machine.LOADop, 2, Machine.STr, -2);
-    emit(Machine.CALLop, Machine.SBr, Machine.PBr, Machine.geDisplacement);
-    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
-
-    //Exit
-    emit(Machine.POPop, 0, 0, 2);
+    jumpAddr = nextInstrAddr;
+    emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    loopAddr = nextInstrAddr;	
+    ast.E3.visit(this, frame);
+    exit = nextInstrAddr;
+    emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr,0);
+    //VISIT COMMAND
+    ast.C.visit(this, frame);
+    //INCRESE LOCAL COUNTER
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.succDisplacement);
+    //Validation
+    patch(jumpAddr, nextInstrAddr);
+    ast.D.E.visit(this, frame);
+    int e1size = (Integer) ast.E2.visit(this, frame);// visit to expression
+    frame = new Frame(frame,e1size);
+    emit(Machine.CALLop,Machine.SBr,Machine.PBr,Machine.leDisplacement);
+    emit(Machine.JUMPIFop, Machine.trueRep,Machine.CBr, loopAddr);
+    //writeTableDetails(ast);
+    
+    emit(Machine.POPop,0,0,2);//CLEAR THE STACK
+    patch(exit,nextInstrAddr);
     return null;
+
    }
    
 
