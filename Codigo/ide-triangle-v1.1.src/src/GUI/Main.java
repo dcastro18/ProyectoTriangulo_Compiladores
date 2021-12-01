@@ -327,10 +327,10 @@ public class Main extends javax.swing.JFrame {
         buttonRun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
         buttonRun.setToolTipText("Run...");
         buttonRun.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        buttonRun.setBorderPainted(true);
-        buttonRun.setEnabled(true);
-        buttonRun.setFocusPainted(true);
-        buttonRun.setFocusable(true);
+        buttonRun.setBorderPainted(false);
+        buttonRun.setEnabled(false);
+        buttonRun.setFocusPainted(false);
+        buttonRun.setFocusable(false);
         buttonRun.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runMenuItemActionPerformed(evt);
@@ -479,7 +479,7 @@ public class Main extends javax.swing.JFrame {
         runMenuItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Icons/iconTriangleRun.gif")));
         runMenuItem.setMnemonic('R');
         runMenuItem.setText("Run");
-        runMenuItem.setEnabled(true);
+        runMenuItem.setEnabled(false);
         runMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 runMenuItemActionPerformed(evt);
