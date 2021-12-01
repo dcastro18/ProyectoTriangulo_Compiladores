@@ -1181,11 +1181,11 @@ public final class Encoder implements Visitor {
     @Override
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
       Frame frame = (Frame) o; // level displacement
-      int extraSize1, extraSize2;
-      extraSize1 = ((Integer) ast.D1.visit(this, frame)).intValue(); // d1 size
-      Frame frame1 = new Frame (frame, extraSize1); // frame for d2
-      extraSize2 = ((Integer) ast.D2.visit(this, frame1)).intValue(); // d2 = d + s1 size
-      return new Integer(extraSize1 + extraSize2); //size of the new integer
+      int size1, size2;
+      size1 = ((Integer) ast.D1.visit(this, frame)).intValue(); // d1 size
+      Frame frame1 = new Frame (frame, size1); // frame for d2
+      size2 = ((Integer) ast.D2.visit(this, frame1)).intValue(); // d2 = d + s1 size
+      return new Integer(size1 + size2); //size of the new integer
       
     }
 
@@ -1212,17 +1212,12 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-        // Frame frame = (Frame) o;
-        // int currentInstrAddress = nextInstrAddr;
-        // ast.D1.visit(this, frame);
-        // nextInstrAddr = currentInstrAddress;
-        // Integer valSize = (Integer) ast.D1.visit(this, frame);
-        // return valSize;
 
       try{
           Integer valSize ;
           Frame frame = (Frame) o;
           Integer position = nextInstrAddr;
+          ast.D1.visit(this, frame);
           valSize = (Integer) ast.D1.visit(this, frame);
           return valSize;
       }catch(Exception e){
