@@ -113,7 +113,6 @@ import Triangle.AbstractSyntaxTrees.SelectCommand;
 
 public final class Encoder implements Visitor {
 
-
   // Commands
   public Object visitAssignCommand(AssignCommand ast, Object o) {
     Frame frame = (Frame) o;
@@ -1174,9 +1173,20 @@ public final class Encoder implements Visitor {
     }
   }
 
+
+  /* 
+  * New generation routines
+  */
+
     @Override
     public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      Frame frame = (Frame) o; // level displacement
+      int size1, size2;
+      size1 = ((Integer) ast.D1.visit(this, frame)).intValue(); // d1 size
+      Frame frame1 = new Frame (frame, size1); // frame for d2
+      size2 = ((Integer) ast.D2.visit(this, frame1)).intValue(); // d2 = d + s1 size
+      return new Integer(size1 + size2); //size of the new integer
+      
     }
 
     @Override
@@ -1193,13 +1203,33 @@ public final class Encoder implements Visitor {
 
     @Override
     public Object visitProcFuncSDeclaration(ProcFuncSDeclaration ast, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+      Frame frame = (Frame)o;
+      int extraSize1 = ((Integer)ast.D1.visit(this, frame)).intValue();
+      Frame frame1 = new Frame (frame, extraSize1);
+      int extraSize2 = ((Integer)ast.D2.visit(this, frame1)).intValue();
+      return new Integer(extraSize1 + extraSize2);
+      }
 
     @Override
-    public Object visitRecursiveDeclaration(RecursiveDeclaration aThis, Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+
+      try{
+          Integer valSize ;
+          Frame frame = (Frame) o;
+          Integer position = nextInstrAddr;
+          ast.D1.visit(this, frame);
+          valSize = (Integer) ast.D1.visit(this, frame);
+          return valSize;
+      }catch(Exception e){
+          System.out.println("Recursive not supported yet.");
+      }
+    return null;
+  }
+
+
+
+
+
 
     @Override
     public Object visitElseCaseCommand(ElseCaseCommand aThis, Object o) {
